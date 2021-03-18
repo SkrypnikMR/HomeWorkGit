@@ -1,0 +1,80 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: aliceblue;
+}
+.content {
+  background-color: white;
+  margin-top: 10%;
+}
+.info {
+  text-align: center;
+  min-height: 300px;
+}
+.rulesChoice {
+  display: flex;
+  min-height: 300px;
+}
+.rulesChoice_left,
+.rulesChoice_right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rulesChoice_left p,
+.rulesChoice_right p {
+  width: 80%;
+  min-height: 50px;
+  text-align: center;
+}
+.myRules {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.myRules_control {
+  padding: 30px;
+  text-align: center;
+  display: flex;
+}
+.myRules_control input {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  text-align: center;
+  font-size: 30px;
+}
+.myRules_control p {
+  padding: 10px;
+}
+.game {
+  padding: 20px;
+  display: flex;
+  min-height: 300px;
+  flex-direction: column;
+  align-items: center;
+}
+.gameDifficulty,
+.gameInput {
+  padding-bottom: 10px;
+  text-align: center;
+}
+.gameInput input {
+  height: 50px;
+  width: 50px;
+}
+.gameButtons {
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+}
+.gameButtons button {
+  margin-bottom: 50px;
+}
+.hide {
+  display: none;
+}
