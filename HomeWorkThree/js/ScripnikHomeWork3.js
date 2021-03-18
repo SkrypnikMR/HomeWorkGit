@@ -1,3 +1,17 @@
+/* 
+Что ещё хочу сделать:
+
+зарефачить ещё больше.
+Добавить верификацию
+
+
+ */
+
+
+
+
+
+
 var $easyButton = document.querySelector(".choise_Easy");
 var $hardButton = document.querySelector(".choise_Hard");
 var $info = document.querySelector(".info");
@@ -9,84 +23,56 @@ var $maxAttempt = document.querySelector("#maxAttempt");
 var $myRulesButton = document.querySelector(".myRulesButton");
 var $gameDifficulty = document.querySelector(".gameDifficulty");
 var $gameStart = document.querySelector(".gameStart");
-var $gameTryAgain = document.querySelector(".gameTryAgain");
+var $gameTry = document.querySelector(".gameTry");
 var $gameInput = document.querySelector(".input_input");
 
-var easy = true; //флаг выбран легкий уровень (от 1 до 100) или задают сами (false)
 var resultArray = []; //глобальный массив, где 0 элемент - начало диапозона, 1 - конец, 2 - количество попыток
 var resultNumber = 0; // номер, который нужно угадывать, дальше он загенерится рандомно
 
-$easyButton.addEventListener("click", easyChoice);
-$hardButton.addEventListener("click", hardChoice);
-$gameOver.addEventListener("click", gameOver);
-$myRulesButton.addEventListener("click", myRules);
+$easyButton.addEventListener("click", tryEasyChoice);
+$hardButton.addEventListener("click", tryHardChoice);
+$myRulesButton.addEventListener("click", tryUserRules);
 $gameStart.addEventListener("click", gameStart);
-$gameTryAgain.addEventListener("click", game);
+$gameOver.addEventListener("click", gameOver);
+$gameTry.addEventListener("click", game);
 
-function easyChoice(event) {
+function tryEasyChoice() {
   // если выбрали легкую игру
   $info.classList.add("hide");
   $game.classList.remove("hide");
-  var fromToAtempt = [1, 100, 5];
-  $gameDifficulty.innerHTML =
-    "<h3>Угадываем от " +
-    fromToAtempt[0] +
-    " до " +
-    fromToAtempt[1] +
-    "</h3> \n <p>Осталось попыток: " +
-    fromToAtempt[2] +
-    "</p>";
-  return fromToAtempt;
+  resultArray = [1, 100, 5];
+  renderGameDifficulty();
 }
 
-function hardChoice() {
+function tryHardChoice() {
   // если выбрали сложную игру
   $info.classList.add("hide");
   $myRules.classList.remove("hide");
 }
 
-function myRules() {
+function tryUserRules() {
   // задаем правила пользователем, пока без верификации
   var maxLimit = Number($maxLimit.value);
   var maxAttempt = Number($maxAttempt.value);
-  easy = false;
+  resultArray = [1, maxLimit, maxAttempt];
   $myRules.classList.add("hide");
   $game.classList.remove("hide");
-  fromToAtempt = [1, maxLimit, maxAttempt];
-  $gameDifficulty.innerHTML =
-    "<h3>Угадываем от " +
-    fromToAtempt[0] +
-    " до " +
-    fromToAtempt[1] +
-    "</h3> \n <p>Осталось попыток: " +
-    fromToAtempt[2] +
-    "</p>";
-  return fromToAtempt;
+  renderGameDifficulty();
 }
 
 function gameStart() {
   // начинаем игру
-  var fromToAtempt = [];
-  easy === true ? (fromToAtempt = easyChoice()) : (fromToAtempt = myRules());
-  var number = getRandomNumber(fromToAtempt[0], fromToAtempt[1]);
-  $gameDifficulty.innerHTML =
-    "<h3>Угадываем от " +
-    fromToAtempt[0] +
-    " до " +
-    fromToAtempt[1] +
-    "</h3> \n <p>Осталось попыток: " +
-    fromToAtempt[2] +
-    "</p>";
+  renderGameDifficulty();
   $gameStart.classList.add("hide");
-  $gameTryAgain.classList.remove("hide");
-  resultArray = fromToAtempt;
-  resultNumber = number;
-  console.log(resultNumber, resultArray);
+  $gameTry.classList.remove("hide");
   $gameInput.classList.remove("hide");
+  resultNumber = getRandomNumber(resultArray[0], resultArray[1]);
+  console.log(resultNumber);
 }
 
-function game() { 
-    //
+function game() {
+  /*   если загаданная цифра равна введенной - вывыдет победу, если нет
+   - будет уменьшать количество попыток, когда станет 0 - выведет проигрыш. */
   if (Number($gameInput.value) === resultNumber) {
     $game.innerHTML = "WIN";
   } else {
@@ -94,23 +80,29 @@ function game() {
     if (resultArray[2] === 0) {
       $game.innerHTML = "YOU LOSE";
     }
-    $gameDifficulty.innerHTML =
-      "<h3>Угадываем от " +
-      resultArray[0] +
-      " до " +
-      resultArray[1] +
-      "</h3> \n <p>Осталось попыток: " +
-      resultArray[2] +
-      "</p>";
+    renderGameDifficulty();
     $gameInput.value = "";
   }
 }
 
-function gameOver() { // если нажать кнопку over
+function gameOver() {
+  // если нажать кнопку over
   $game.classList.add("hide");
   $info.classList.remove("hide");
 }
 
-function getRandomNumber(min, max) {   // рандомайзер числа
+function getRandomNumber(min, max) {
+  // рандомайзер числа
   return Math.trunc(Math.random() * (min + max));
+}
+
+function renderGameDifficulty() {
+  $gameDifficulty.innerHTML =
+    "<h3>Угадываем от " +
+    resultArray[0] +
+    " до " +
+    resultArray[1] +
+    "</h3> \n <p>Осталось попыток: " +
+    resultArray[2] +
+    "</p>";
 }
