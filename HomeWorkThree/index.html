@@ -28,13 +28,18 @@ Web приложение, при запуске которого пользов�
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>SkripnikHomeWork3</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="content">
       <!-- all our app content -->
-      <div class="info ">
+      <div class="info">
         <h1>Игра угадай какое число Я загадал</h1>
         <!-- info about game-->
         <p>
@@ -48,50 +53,69 @@ Web приложение, при запуске которого пользов�
           </div>
           <div class="rulesChoice">
             <div class="rulesChoice_left">
-              <p>
-                Я загадываю число от 1 до 100 и у тебя будет 5 попыток отгадать
-                его.
-              </p>
-              <button class="choise_Easy">Сыграем по простому</button>
+              <div class="rulesChoice_left_text">
+                <p>
+                  Я загадываю число от <span>1</span> до <span>100</span> и у тебя будет 5 попыток
+                  отгадать его.
+                </p>
+              </div>
+              <div class="rulesChoiceButton">
+                <button class="btnStyle choise_Easy">
+                  Сыграем по простому
+                </button>
+              </div>
             </div>
             <div class="rulesChoice_right">
-              <p>
-                Ты сам выберешь от 1 и до какого числа может быть угадываемое
-                число, но и количество попыток ты выберешь сам
-              </p>
-              <button class="choise_Hard">Давай попробуем усложнить</button>
+              <div class="rulesChoice_right_text">
+                <p>
+                  Ты сам выберешь от <span>какого</span> и до <span>какого</span> числа может быть угадываемое
+                  число, но и количество попыток ты выберешь сам
+                </p>
+              </div>
+              <div class="rulesChoiceButton">
+                <button class="btnStyle choise_Hard">
+                  Давай попробуем усложнить
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="myRules hide">
         <!-- if user click button my rules -->
-        <h3>Задавай свои правила</h3>
+        <div class="myRules_text">
+          <h3>Задавай свои правила</h3>
+        </div>
         <div class="myRules_control">
-          <div class="myRules_limit">
-            <p>В пределах до какого числа будем играть?</p>
-            <input type="text" id="maxLimit" />
-          </div>
-          <div class="myRules_attempt">
-            <p>Cколько попыток тебе хватит?</p>
-            <input type="text" id="maxAttempt" />
+          <div class="myRules_inputs">
+            <div class="myRules_limit">
+              <p>В пределах от какого и до какого числа будем играть?</p>
+              <p>От</p>
+              <input type="text" class="minLimit" />
+              <p>До</p>
+              <input type="text" class="maxLimit" />
+            </div>
+            <div class="myRules_attempt">
+              <p>Cколько попыток тебе хватит?</p>
+              <input type="text" class="maxAttempt" />
+            </div>
           </div>
         </div>
-        <button class="myRulesButton">Вот мои условия</button>
+        <button class="btnStyle myRulesButton">Вот мои условия</button>
       </div>
       <div class="game hide">
         <!-- game-->
         <div class="gameDifficulty">
           <h3>Угадываем число от n до m</h3>
-          <p>Попыток осталось : </p>
+          <p>Попыток осталось :</p>
         </div>
         <div class="gameInput">
-          <input type="text" class="input_input hide"/>
+          <input type="text" class="input_input hide" />
         </div>
         <div class="gameButtons">
-          <button class="gameStart">GO</button>
-          <button class="gameTry hide">TRY AGAIN</button>
-          <button class="gameOver">OVER</button>
+          <button class="btnStyle gameStart">GO</button>
+          <button class="btnStyle gameTry hide">TRY</button>
+          <button class="btnStyle gameOver">OVER</button>
         </div>
       </div>
     </div>

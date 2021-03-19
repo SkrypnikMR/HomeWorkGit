@@ -7,24 +7,21 @@
 
  */
 
-
-
-
-
-
 var $easyButton = document.querySelector(".choise_Easy");
 var $hardButton = document.querySelector(".choise_Hard");
 var $info = document.querySelector(".info");
 var $game = document.querySelector(".game");
 var $gameOver = document.querySelector(".gameOver");
 var $myRules = document.querySelector(".myRules");
-var $maxLimit = document.querySelector("#maxLimit");
-var $maxAttempt = document.querySelector("#maxAttempt");
+var $maxLimit = document.querySelector(".maxLimit");
+var $minLimit = document.querySelector(".minLimit");
+var $maxAttempt = document.querySelector(".maxAttempt");
 var $myRulesButton = document.querySelector(".myRulesButton");
 var $gameDifficulty = document.querySelector(".gameDifficulty");
 var $gameStart = document.querySelector(".gameStart");
 var $gameTry = document.querySelector(".gameTry");
 var $gameInput = document.querySelector(".input_input");
+var $myRulesText = document.querySelector(".myRules_text");
 
 var resultArray = []; //глобальный массив, где 0 элемент - начало диапозона, 1 - конец, 2 - количество попыток
 var resultNumber = 0; // номер, который нужно угадывать, дальше он загенерится рандомно
@@ -38,10 +35,9 @@ $gameTry.addEventListener("click", game);
 
 function tryEasyChoice() {
   // если выбрали легкую игру
-  $info.classList.add("hide");
-  $game.classList.remove("hide");
   resultArray = [1, 100, 5];
   renderGameDifficulty();
+  renderGame(0);
 }
 
 function tryHardChoice() {
@@ -49,15 +45,30 @@ function tryHardChoice() {
   $info.classList.add("hide");
   $myRules.classList.remove("hide");
 }
+function verificationALert() {
+  $myRulesText.innerHTML = "НЕТ";
+}
 
 function tryUserRules() {
   // задаем правила пользователем, пока без верификации
+  var minLimit = Number($minLimit.value);
   var maxLimit = Number($maxLimit.value);
   var maxAttempt = Number($maxAttempt.value);
-  resultArray = [1, maxLimit, maxAttempt];
-  $myRules.classList.add("hide");
-  $game.classList.remove("hide");
+  resultArray = [minLimit, maxLimit, maxAttempt];
+  console.log(resultArray);
   renderGameDifficulty();
+  renderGame(1);
+}
+
+function renderGame(choise) {
+  // отрисовка нашей игры
+  if (choise === 1) {
+    $myRules.classList.add("hide");
+    $game.classList.remove("hide");
+  } else {
+    $info.classList.add("hide");
+    $game.classList.remove("hide");
+  }
 }
 
 function gameStart() {
