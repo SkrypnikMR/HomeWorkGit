@@ -148,6 +148,14 @@ function tryUserRules() {
     validation = false;
     return 0;
   }
+  if (minLimit > maxLimit) {
+    renderError(
+      "От и До",
+      "Минимальный элемент не может быть больше максимального. Пожалуйста введите корректно."
+    );
+    validation = false;
+    return 0;
+  }
   if (validation) {
     resultArray = [minLimit, maxLimit, maxAttempt];
     renderGameDifficulty(3);
