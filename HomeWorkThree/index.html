@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- Application “Guess Number”
+Web приложение, при запуске которого пользователю предлагается угадать число от 1 до 100 за 5 попыток.
+В реализации необходимо предусмотреть вариант настроек диапазона чисел (валидация: не отрицательные, без плавающей точки, минимум = 1, максимум = 200)
+и количества попыток (валидация: не отрицательные, без плавающей точки, минимум = 1, максимум = 15).
+Игра начинается с того, что пользователь видит сообщение: “Привет, я загадал число от min до max вашего диапазона.
+Попробуй угадать его за x попыток!” 
+И пользователю предлагается использовать свою первую попытку путём ввода первого числа в инпут и нажать кнопку GENERATE.
+Примечание: в любой момент времени, пользователь может прекратить игру нажав на кнопку EXIT, после чего игра моментально остановится.
+Со второй попытки для пользователя вводятся подсказки, типа: “Не угадал, но теплее!!!
+ Осталось n попыток” либо “Не угадал, холоднее… Осталось n попыток”.
+Если пользователь угадал число - выводится сообщение “Поздравляю! Ты угадал задуманное число за n попыток”.
+Остальные мелкие доработки - на усмотрение разработчика. -->
+
+<!--
+Что ещё хочу сделать:
+
+Оформить красивее
+Добавить поле для ввода минимального элемента интервала
+
+
+
+
+ -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkripnikHomeWork3</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="content">
+      <!-- all our app content -->
+      <div class="info">
+        <h1>Игра угадай какое число Я загадал</h1>
+        <!-- info about game-->
+        <p>
+          Привет, предлагаю сыграть в игру. Я загадаю число в определеннное
+          диапазоне, а ты попробуешь его угадать
+        </p>
+        <div class="rules">
+          <!-- how we play -->
+          <div class="rulesText">
+            <p>Мы можем сыграть по простому или добавить огня</p>
+          </div>
+          <div class="rulesChoice">
+            <div class="rulesChoice_left">
+              <div class="rulesChoice_left_text">
+                <p>
+                  Я загадываю число от <span>1</span> до <span>100</span> и у
+                  тебя будет 5 попыток отгадать его.
+                </p>
+              </div>
+              <div class="rulesChoiceButton">
+                <button class="btnStyle choise_Easy">
+                  Сыграем по простому
+                </button>
+              </div>
+            </div>
+            <div class="rulesChoice_right">
+              <div class="rulesChoice_right_text">
+                <p>
+                  Ты сам выберешь от <span>какого</span> и до
+                  <span>какого</span> числа может быть угадываемое число, но и
+                  количество попыток ты выберешь сам
+                </p>
+              </div>
+              <div class="rulesChoiceButton">
+                <button class="btnStyle choise_Hard">
+                  Давай попробуем усложнить
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="myRules hide">
+        <!-- if user click button my rules -->
+        <div class="myRules_text">
+          <h3>Задавай свои правила</h3>
+        </div>
+        <div class="myRules_control">
+          <div class="myRules_inputs">
+            <div class="myRules_limit">
+              <p>В пределах от какого и до какого числа будем играть?</p>
+              <p>От</p>
+              <input type="text" class="minLimit" />
+              <p>До</p>
+              <input type="text" class="maxLimit" />
+            </div>
+            <div class="myRules_attempt">
+              <p>Cколько попыток тебе хватит?</p>
+              <input type="text" class="maxAttempt" />
+            </div>
+          </div>
+        </div>
+        <button class="btnStyle myRulesButton">Вот мои условия</button>
+      </div>
+      <div class="game hide">
+        <!-- game-->
+        <div class="gameDifficulty">
+          <h3>Угадываем число от n до m</h3>
+          <p>Попыток осталось :</p>
+        </div>
+        <div class="gameInput">
+          <input type="text" class="input_input hide" />
+        </div>
+        <div class="gameButtons">
+          <button class="btnStyle gameStart">GO</button>
+          <button class="btnStyle gameTry hide">TRY</button>
+          <button class="btnStyle gameOver">EXIT</button>
+        </div>
+      </div>
+    </div>
+    <script src="js/ScripnikHomeWork3.js"></script>
+  </body>
+</html>

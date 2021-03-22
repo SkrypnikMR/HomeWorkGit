@@ -1,0 +1,135 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(119, 119, 255, 0.1);
+  font-family: "Ubuntu", sans-serif;
+  color: white;
+}
+.content {
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-top: 10%;
+  width: 80%;
+}
+h1 {
+  font-size: 50px;
+}
+.info span {
+  color: red;
+  font-size: 25px;
+}
+.info {
+  text-align: center;
+  min-height: 300px;
+}
+.rulesText p,
+.info p {
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+}
+.rulesChoice {
+  display: flex;
+  min-height: 300px;
+}
+.rulesChoice_left,
+.rulesChoice_right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rulesChoice_left p,
+.rulesChoice_right p {
+  width: 80%;
+  font-size: 20px;
+  min-height: 50px;
+  text-align: center;
+  color: white;
+}
+.rulesChoice_left_text,
+.rulesChoice_right_text {
+  min-height: 150px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+.rulesChoiceButton {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+}
+.myRules {
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.myRules_inputs {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+.myRules_control {
+  text-align: center;
+  display: flex;
+}
+.myRulesButton {
+  width: 300px;
+  align-self: center;
+}
+.game {
+  padding: 20px;
+  display: flex;
+  min-height: 300px;
+  flex-direction: column;
+  align-items: center;
+}
+.gameDifficulty,
+.gameInput {
+  padding-bottom: 10px;
+  text-align: center;
+}
+.gameInput input {
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  font-size: 30px;
+}
+.gameButtons {
+  display: flex;
+  flex-direction: column;
+}
+.btnStyle {
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  position: relative;
+  padding: 10px 40px;
+  margin: 0px 10px 10px 0px;
+  float: left;
+  border-radius: 10px;
+  font-family: "Pacifico", cursive;
+  font-size: 25px;
+  color: #fff;
+  text-decoration: none;
+  background-color: #3498db;
+  border-bottom: 5px solid #2980b9;
+  text-shadow: 0px -2px #2980b9;
+}
+.btnStyle:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  border-bottom: 1px solid;
+}
+input {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  text-align: center;
+  font-size: 30px;
+}
+.hide {
+  display: none;
+}
