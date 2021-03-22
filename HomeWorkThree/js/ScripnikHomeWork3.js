@@ -1,6 +1,3 @@
-
-//осталось добавить холодно жарко
-
 var $easyButton = document.querySelector(".choise_Easy");
 var $hardButton = document.querySelector(".choise_Hard");
 var $info = document.querySelector(".info");
@@ -30,7 +27,7 @@ $gameTry.addEventListener("click", game);
 function tryEasyChoice() {
   // если выбрали легкую игру
   resultArray = [1, 100, 5];
-  renderGameDifficulty();
+  renderGameDifficulty(3);
   renderGame(0);
 }
 
@@ -127,10 +124,35 @@ function tryUserRules() {
     validation = false;
     return 0;
   }
+  if ((minLimit ^ 0) !== minLimit) {
+    renderError(
+      "От какого числа",
+      "числo От которого начинается предел должно быть целым"
+    );
+    validation = false;
+    return 0;
+  }
+  if ((maxLimit ^ 0) !== maxLimit) {
+    renderError(
+      "До какого числа",
+      "числo на котором предел заканчивается должно быть целым"
+    );
+    validation = false;
+    return 0;
+  }
+  if ((maxAttempt ^ 0) !== maxAttempt) {
+    renderError(
+      "Количество попыток",
+      "Количество должно быть только целым числом"
+    );
+    validation = false;
+    return 0;
+  }
   if (validation) {
     resultArray = [minLimit, maxLimit, maxAttempt];
-    renderGameDifficulty();
+    renderGameDifficulty(3);
     renderGame(1);
+
     $maxLimit.value = "";
     $minLimit.value = "";
     $maxAttempt.value = "";
@@ -154,7 +176,7 @@ function renderGame(choise) {
 
 function gameStart() {
   // начинаем игру
-  renderGameDifficulty();
+  renderGameDifficulty(3);
   $gameStart.classList.add("hide");
   $gameTry.classList.remove("hide");
   $gameInput.classList.remove("hide");
@@ -166,30 +188,36 @@ function game() {
   /*   если загаданная цифра равна введенной - вывыдет победу, если нет
    - будет уменьшать количество попыток, когда станет 0 - выведет проигрыш. */
   var validation = true;
-
   if (validation) {
     if (Number($gameInput.value) === resultNumber) {
-      renderResultAndRestartButton(1);
+      renderResultAndRestartButton();
     } else {
-      resultArray[2] = resultArray[2] - 1;
+      resultArray[2] -= 1;
+      if (resultNumber < Number($gameInput.value)) {
+        renderGameDifficulty(1);
+      }
+      if (resultNumber > Number($gameInput.value)) {
+        renderGameDifficulty(2);
+      }
+
       if (resultArray[2] === 0) {
         renderResultAndRestartButton(2);
       }
-      renderGameDifficulty();
       $gameInput.value = "";
     }
   }
 }
 function renderResultAndRestartButton(result) {
   if (result === 1) {
-    $game.innerHTML = `<h1>You Win</h2> <button class="btnStyle restart">restart</button>`;
+    $game.innerHTML = `<h2>Жаль, ты проиграл , попробуй снова.</h2> <button class="btnStyle restart">try one more time</button>`;
     var $restartButton = document.querySelector(".restart");
     $restartButton.addEventListener("click", function () {
       gameOver();
       location.reload();
     });
   } else {
-    $game.innerHTML = `<h1>You Lose</h2> <button class="btnStyle restart">restart</button>`;
+    $game.innerHTML = `<h2>Поздравляю, ты выиграл и у тебя  осталось <span>${resultArray[2]}</span> попыток.
+    </h2> <button class="btnStyle restart">restart</button>`;
     var $restartButton = document.querySelector(".restart");
     $restartButton.addEventListener("click", function () {
       gameOver();
@@ -210,13 +238,37 @@ function getRandomNumber(min, max) {
   // рандомайзер числа Math.trunc(Math.random() * (max-min + 1));
   return Math.floor(min + Math.random() * (max + 1 - min));
 }
-function renderGameDifficulty() {
-  $gameDifficulty.innerHTML =
-    "<h3>Угадываем от " +
-    resultArray[0] +
-    " до " +
-    resultArray[1] +
-    "</h3> \n <p>Осталось попыток: " +
-    resultArray[2] +
-    "</p>";
+function renderGameDifficulty(mode) {
+  if (mode === 1) {
+    $gameDifficulty.innerHTML =
+      "<h3>Угадываем от " +
+      resultArray[0] +
+      " до " +
+      resultArray[1] +
+      "</h3> \n <p>Вы не угадали число меньше вашего, попробуйте ещё раз. Осталось попыток: " +
+      resultArray[2] +
+      "</p>";
+    console.log("da");
+  }
+  if (mode === 2) {
+    $gameDifficulty.innerHTML =
+      "<h3>Угадываем от " +
+      resultArray[0] +
+      " до " +
+      resultArray[1] +
+      "</h3> \n <p>Вы не угадали число больше вашего, попробуйте ещё раз. Осталось попыток: " +
+      resultArray[2] +
+      "</p>";
+    return 0;
+  }
+  if (mode === 3) {
+    $gameDifficulty.innerHTML =
+      "<h3>Угадываем от " +
+      resultArray[0] +
+      " до " +
+      resultArray[1] +
+      "</h3> \n <p>Осталось попыток: " +
+      resultArray[2] +
+      "</p>";
+  }
 }
