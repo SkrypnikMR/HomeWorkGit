@@ -14,7 +14,7 @@ body {
 h1 {
   font-size: 50px;
 }
-.info span {
+span {
   color: red;
   font-size: 25px;
 }
