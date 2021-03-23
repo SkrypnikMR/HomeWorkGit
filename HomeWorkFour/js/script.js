@@ -5,71 +5,20 @@ var $resultP = document.querySelector(".resultP"); // нода текста, к�
 var $resultPOver = document.querySelector(".resultPOver"); // нода текста, который появится, если больше чисел нельзя будет вывести
 var $minValueInMaxArea = document.querySelector(".minValueInMaxArea"); // нода текста, который появится, если пользователь введет min в max
 
-$randomizerForm.generate.addEventListener("click", genRndNumber);
+$randomizerForm.generate.addEventListener("click", genRndNumber); // listener кнопки с #generate
+$randomizerForm.reset.addEventListener("click", resetRandomizer); // listenter кнопки с #reset
 
-var genNumbers = [];
+var genNumbers = []; //
 var intervalNumbers = [];
 
 function genRndNumber(event) {
   event.preventDefault();
-
   var minValue = Number($randomizerForm.min.value);
   var maxValue = Number($randomizerForm.max.value);
-  var flag = true;
+  var flag = tryValid($randomizerForm.min.value, $randomizerForm.max.value);
   //валидация
-  if (isNaN(minValue)) {
-    //min value не число
-    printError(1);
-    $randomizerForm.min.value = "";
-    flag = false;
-    return 0;
-  }
-  if (isNaN(maxValue)) {
-    //max value не число
-    printError(2);
-    $randomizerForm.max.value = "";
-    flag = false;
-    return 0;
-  }
-  if ($randomizerForm.min.value === "") {
-    //min value пустая строка
-    printError(3);
-    flag = false;
-    return 0;
-  }
-  if ($randomizerForm.max.value === "") {
-    //min value пустая строка
-    printError(4);
-    flag = false;
-    return 0;
-  }
-  if (minValue < 0) {
-    printError(5);
-    flag = false;
-    return 0;
-  }
-  if (minValue < 0) {
-    printError(6);
-    flag = false;
-    return 0;
-  }
-  if (Number.isInteger(minValue) === false) {
-    printError(7);
-    flag = false;
-    return 0;
-  }
-  if (Number.isInteger(maxValue) === false) {
-    printError(8);
-    flag = false;
-    return 0;
-  }
-  if (minValue > maxValue) {
-    printError(9);
-    flag = false;
-    return 0;
-  }
   if (flag) {
-    changeHTMLToMyText($minValueInMaxArea , '')
+    changeHTMLToMyText($minValueInMaxArea, "");
     disableSomething($randomizerForm.min);
     disableSomething($randomizerForm.max);
     changeHTMLToMyText($minValueText, "Min");
@@ -88,6 +37,7 @@ function genRndNumber(event) {
         var summIntervalNumbers = summAllArrayElements(intervalNumbers);
         if (summGenNumbers === summIntervalNumbers) {
           disableSomething($randomizerForm.generate);
+          fadeOutEffect($randomizerForm.generate);
           printResult(result);
           printFinalResult(result);
         }
@@ -95,7 +45,21 @@ function genRndNumber(event) {
       } else result = getRandomNumber(minValue, maxValue);
     }
   }
-  console.log(result);
+}
+
+function resetRandomizer(event) {
+  event.preventDefault();
+  unDisableSomething($randomizerForm.generate);
+  unDisableSomething($randomizerForm.min);
+  unDisableSomething($randomizerForm.max);
+  changeHTMLToMyText($minValueText, "Min");
+  changeHTMLToMyText($maxValueText, "Max");
+  clearInputs();
+  printResult("restart");
+  printFinalResult("restart");
+  $randomizerForm.generate.style.opacity = 1;
+  genNumbers = [];
+  intervalNumbers = [];
 }
 
 function printError(errorNumber) {
@@ -140,7 +104,7 @@ function printError(errorNumber) {
 
 function changeHTMLToMyText(node, textWhatIneed) {
   // функция, меняет HTML ноды (аргумента 1) на аргумент 2
-  node.innerHTML = textWhatIneed;
+  return (node.innerHTML = textWhatIneed);
 }
 
 function getRandomNumber(min, max) {
@@ -149,17 +113,28 @@ function getRandomNumber(min, max) {
 }
 
 function printResult(result) {
-  $resultP.innerHTML = "GENERATED NUMBER is: " + result;
+  if (result === "restart") {
+    return ($resultP.innerHTML = "");
+  } else
+    return ($resultP.innerHTML =
+      "GENERATED NUMBER is: " + "<span>" + result + "</span> ");
 }
 function printFinalResult(result) {
-  $resultPOver.innerHTML =
-    "number " +
+  // функция вывода, выводится только, когда все числа из интервала были уже случайно выведены.
+  if (result === "restart") {
+    return ($resultPOver.innerHTML = "");
+  }
+  return ($resultPOver.innerHTML =
+    " number " +
+    "<span>" +
     result +
-    " is the last number that can be obtained randomly from a given interval";
+    "</span>" +
+    " is the last number that can be obtained randomly from a given interval" +
+    "\n Push Reset for new numbers ");
 }
 
 function summAllArrayElements(array) {
-    //функция сумирования всех елементов массива;
+  //функция сумирования всех елементов массива;
   var summ = 0;
   for (var i = 0; i < array.length; i++) {
     summ += array[i];
@@ -168,5 +143,77 @@ function summAllArrayElements(array) {
 }
 
 function disableSomething(element) {
+  element.style.color = "red";
+  element.style.cursor = "default";
   return (element.disabled = true);
+}
+function unDisableSomething(element) {
+  // элементарная функция, которая андизейблит нужный элемент
+  return (element.disabled = false);
+}
+
+function tryValid(minValue, maxValue) {
+  var NumberMinValue = Number(minValue);
+  var NumberMaxValue = Number(maxValue);
+  if (isNaN(NumberMinValue)) {
+    //min value не число
+    printError(1);
+    minValue;
+    return false;
+  }
+  if (isNaN(NumberMaxValue)) {
+    //max value не число
+    printError(2);
+    maxValue;
+    return false;
+  }
+  if (minValue === "") {
+    //min value пустая строка
+    printError(3);
+    return false;
+  }
+  if (maxValue === "") {
+    //min value пустая строка
+    printError(4);
+    return false;
+  }
+  if (NumberMinValue < 0) {
+    printError(5);
+    return false;
+  }
+  if (NumberMaxValue < 0) {
+    printError(6);
+    return false;
+  }
+  if (Number.isInteger(NumberMinValue) === false) {
+    printError(7);
+    return false;
+  }
+  if (Number.isInteger(NumberMaxValue) === false) {
+    printError(8);
+    return false;
+  }
+  if (NumberMinValue > NumberMaxValue) {
+    printError(9);
+    return false;
+  } else return true;
+}
+
+function clearInputs() {
+  $randomizerForm.min.value = "";
+  $randomizerForm.max.value = "";
+}
+
+function fadeOutEffect(element) {
+  var fadeTarget = element;
+  var fadeEffect = setInterval(function () {
+    if (!fadeTarget.style.opacity) {
+      fadeTarget.style.opacity = 1;
+    }
+    if (fadeTarget.style.opacity > 0) {
+      fadeTarget.style.opacity -= 0.1;
+    } else {
+      clearInterval(fadeEffect);
+    }
+  }, 100);
 }
