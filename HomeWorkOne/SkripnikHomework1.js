@@ -57,9 +57,7 @@ function calculateMaxPlus3(a, b, c) {
   var product = a * b * c;
   var summ = a + b + c;
 
-  if (product > summ) {
-    return product + 3;
-  } else return summ + 3; // это вернет summ + 3 даже если product === summ , но так как они равны - разницы что возвращать нет.
+  return product > summ ? product + 3 : summ + 3; // это вернет summ + 3 даже если product === summ , но так как они равны - разницы что возвращать нет.
 }
 
 // 5. Написать определения оценки студента по его рейтингу, на основе следующих правил
@@ -191,6 +189,7 @@ function getMinEl(array) {
   }
   return min;
 }
+
 //2. Найти минимальны элемент массива
 
 function getMaxEl(array) {
@@ -282,17 +281,22 @@ function changeArrayParts(array) {
 
 function bubbleSort(array) {
   for (var n = 0; n < array.length; n++) {
+    var flag = true;
     for (var i = 0; i < array.length - 1 - n; i++) {
       if (array[i] > array[i + 1]) {
         var a = array[i];
         array[i] = array[i + 1];
         array[i + 1] = a;
+        flag = false;
+      }
+      if (flag = true;) {
+        break;
       }
     }
   }
   return array;
 }
-
+console.log(bubbleSort([1, 3, 2]));
 function selectSort(array) {
   for (var n = 0; n < array.length - 1; n++) {
     var max = -Infinity;
@@ -414,7 +418,7 @@ function convertToWords(number) {
 //4. Вводим строку, которая содержит число, написанное прописью. Получить число.
 
 function convertWordToNumber(word) {
-  var wordArray = word.split(' ')
+  var wordArray = word.split(" ");
   var numbersArray = [];
   var result = 0;
   const WORDS = {
@@ -448,7 +452,7 @@ function convertWordToNumber(word) {
     one: 1,
     zero: 0,
   };
-  for(var i = 0; i <= wordArray.length; i++){
+  for (var i = 0; i <= wordArray.length; i++) {
     for (keys in WORDS) {
       if (WORDS.hasOwnProperty(wordArray[i])) {
         numbersArray.push(WORDS[wordArray[i]]);
@@ -456,12 +460,12 @@ function convertWordToNumber(word) {
       }
     }
   }
-  if(numbersArray[1] === 100){
-    numbersArray[1] = numbersArray[0] * numbersArray[1]
-    numbersArray = numbersArray.slice(1)
-  } 
-  for(var i = 0; i < numbersArray.length; i++){
-    result += numbersArray[i]
+  if (numbersArray[1] === 100) {
+    numbersArray[1] = numbersArray[0] * numbersArray[1];
+    numbersArray = numbersArray.slice(1);
+  }
+  for (var i = 0; i < numbersArray.length; i++) {
+    result += numbersArray[i];
   }
   return result;
 }
