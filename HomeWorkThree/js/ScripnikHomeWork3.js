@@ -45,117 +45,11 @@ function tryUserRules() {
   var minLimit = Number($minLimit.value);
   var maxLimit = Number($maxLimit.value);
   var maxAttempt = Number($maxAttempt.value);
-  var validation = true;
-  // валидации
-  if ($minLimit.value === "") {
-    renderError("От какого числа", "Поле пустое");
-    validation = false;
-    return 0;
-  }
-  if ($maxLimit.value === "") {
-    renderError("До какого числа", "Поле пустое");
-    validation = false;
-    return 0;
-  }
-  if ($maxAttempt.value === "") {
-    renderError("Количество попыток", "Поле пустое");
-    validation = false;
-    return 0;
-  }
-  if (isNaN(minLimit)) {
-    renderError("От какого числа", "Вы ввели не число");
-    validation = false;
-    return 0;
-  }
-  if (isNaN(maxLimit)) {
-    renderError("До какого числа", "Вы ввели не число");
-    validation = false;
-    return 0;
-  }
-  if (isNaN(maxAttempt)) {
-    renderError("Количество попыток", "Вы ввели не число");
-    validation = false;
-    return 0;
-  }
-  if (minLimit < 0) {
-    renderError(
-      "От какого числа",
-      "Число от которого начинается предел должно быть не отрицательным"
-    );
-    validation = false;
-    return 0;
-  }
-  if (maxLimit < 0) {
-    renderError(
-      "До какого числа",
-      "Число до которого предел не должно быть отрицательным"
-    );
-    validation = false;
-    return 0;
-  }
-  if (maxAttempt === 0) {
-    renderError("Количество попыток", "Должна быть хотя бы одна попытка");
-    validation = false;
-    return 0;
-  }
-  if (maxAttempt < 1) {
-    renderError(
-      "Количество попыток",
-      "Не может быть отрицательное количество попыток"
-    );
-    validation = false;
-    return 0;
-  }
-  if (maxAttempt > 15) {
-    renderError("Количество попыток", "Максимальное количество попыток: 15");
-    validation = false;
-    return 0;
-  }
-  if (
-    isNaN(minLimit) === false &&
-    isNaN(maxLimit) === false &&
-    minLimit === maxLimit
-  ) {
-    renderError(
-      "От и До",
-      "числа От и До не могут быть равны, ваше число всегда будет равно " +
-        minLimit
-    );
-    validation = false;
-    return 0;
-  }
-  if ((minLimit ^ 0) !== minLimit) {
-    renderError(
-      "От какого числа",
-      "числo От которого начинается предел должно быть целым"
-    );
-    validation = false;
-    return 0;
-  }
-  if ((maxLimit ^ 0) !== maxLimit) {
-    renderError(
-      "До какого числа",
-      "числo на котором предел заканчивается должно быть целым"
-    );
-    validation = false;
-    return 0;
-  }
-  if ((maxAttempt ^ 0) !== maxAttempt) {
-    renderError(
-      "Количество попыток",
-      "Количество должно быть только целым числом"
-    );
-    validation = false;
-    return 0;
-  }
-  if (minLimit > maxLimit) {
-    renderError(
-      "От и До",
-      "Минимальный элемент не может быть больше максимального. Пожалуйста введите корректно."
-    );
-    validation = false;
-    return 0;
-  }
+  var validation = tryValid(
+    $minLimit.value,
+    $maxLimit.value,
+    $maxAttempt.value
+  );
   if (validation) {
     resultArray = [minLimit, maxLimit, maxAttempt];
     renderGameDifficulty(3);
@@ -165,10 +59,6 @@ function tryUserRules() {
     $minLimit.value = "";
     $maxAttempt.value = "";
   }
-}
-function renderError(inputName, error) {
-  return ($myRulesText.innerHTML =
-    "<h3>Ошибка в поле: " + inputName + "</h3>" + "<p>" + error + "</p>");
 }
 
 function renderGame(choise) {
@@ -279,4 +169,109 @@ function renderGameDifficulty(mode) {
       resultArray[2] +
       "</p>";
   }
+}
+
+function renderError(inputName, error) {
+  return ($myRulesText.innerHTML =
+    "<h3>Ошибка в поле: " + inputName + "</h3>" + "<p>" + error + "</p>");
+}
+
+function tryValid(minValue, maxValue, attemptValue) {
+  if (minValue === "") {
+    renderError("До какого числа", "Поле пустое");
+    return false;
+  }
+  if (maxValue === "") {
+    renderError("До какого числа", "Поле пустое");
+    return false;
+  }
+  if (attemptValue === "") {
+    renderError("Количество попыток", "Поле пустое");
+    return false;
+  }
+  if (isNaN(Number(minValue))) {
+    renderError("От какого числа", "Вы ввели не число");
+    return false;
+  }
+  if (isNaN(Number(attemptValue))) {
+    renderError("Количество попыток", "Вы ввели не число");
+    return false;
+  }
+  if (isNaN(Number(maxValue))) {
+    renderError("До какого числа", "Вы ввели не число");
+    return false;
+  }
+  if (isNaN(Number(maxValue))) {
+    renderError("Количество попыток", "Вы ввели не число");
+    return false;
+  }
+  if (Number(minValue) < 0) {
+    renderError(
+      "От какого числа",
+      "Число от которого начинается предел должно быть не отрицательным"
+    );
+    return false;
+  }
+  if (Number(maxValue) < 0) {
+    renderError(
+      "До какого числа",
+      "Число до которого предел не должно быть отрицательным"
+    );
+    return false;
+  }
+  if (Number(attemptValue) === 0) {
+    renderError("Количество попыток", "Должна быть хотя бы одна попытка");
+    return false;
+  }
+  if (Number(attemptValue) < 1) {
+    renderError(
+      "Количество попыток",
+      "Не может быть отрицательное количество попыток"
+    );
+    return false;
+  }
+  if (attemptValue > 15) {
+    renderError("Количество попыток", "Максимальное количество попыток: 15");
+    return false;
+  }
+  if (
+    isNaN(Number(minValue)) === false &&
+    isNaN(Number(maxValue)) === false &&
+    Number(minValue) === Number(maxValue)
+  ) {
+    renderError(
+      "От и До",
+      "числа От и До не могут быть равны, ваше число всегда будет равно " +
+        Number(maxValue)
+    );
+    return false;
+  }
+  if ((Number(minValue) ^ 0) !== Number(minValue)) {
+    renderError(
+      "От какого числа",
+      "числo От которого начинается предел должно быть целым"
+    );
+    return false;
+  }
+  if ((Number(maxValue) ^ 0) !== Number(maxValue)) {
+    renderError(
+      "До какого числа",
+      "числo на котором предел заканчивается должно быть целым"
+    );
+    return false;
+  }
+  if ((Number(attemptValue) ^ 0) !== Number(attemptValue)) {
+    renderError(
+      "Количество попыток",
+      "Количество должно быть только целым числом"
+    );
+    return false;
+  }
+  if (Number(minValue) > Number(maxValue)) {
+    renderError(
+      "От и До",
+      "Минимальный элемент не может быть больше максимального. Пожалуйста введите корректно."
+    );
+    return false;
+  } else return true;
 }
