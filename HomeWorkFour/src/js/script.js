@@ -8,10 +8,11 @@ var $minValueInMaxArea = document.querySelector(".minValueInMaxArea"); // нод
 $randomizerForm.generate.addEventListener("click", genRndNumber); // listener кнопки с #generate
 $randomizerForm.reset.addEventListener("click", resetRandomizer); // listenter кнопки с #reset
 
-var genNumbers = []; //
+export var genNumbers = [];
 var intervalNumbers = [];
 
 function genRndNumber(event) {
+  console.log(a);
   event.preventDefault();
   var minValue = Number($randomizerForm.min.value);
   var maxValue = Number($randomizerForm.max.value);
@@ -47,7 +48,7 @@ function genRndNumber(event) {
   }
 }
 
-function resetRandomizer(event) {
+export function resetRandomizer(event) {
   event.preventDefault();
   unDisableSomething($randomizerForm.generate);
   unDisableSomething($randomizerForm.min);
