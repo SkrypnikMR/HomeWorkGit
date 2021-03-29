@@ -26,20 +26,7 @@ function getNumber(array) {
  разными значениями. Создайте алгоритм, который фильтрует массив, заданный как первый параметр,
   и возвращает массив объектов, которые содержат в своих заголовках заданную строку в качестве 
   второго параметра (без учета регистра). */
-var arr = [
-  {
-    title: "Some title1",
-  },
-  {
-    title: "I like JS",
-  },
-  {
-    user: "This obj doesn’t have key title js",
-  },
-  {
-    title: "Js - is the best!",
-  },
-];
+
 function findTitle(array, string) {
   var result = [];
   for (var i = 0; i < array.length; i++) {
