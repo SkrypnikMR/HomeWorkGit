@@ -12,7 +12,6 @@ export var genNumbers = [];
 var intervalNumbers = [];
 
 function genRndNumber(event) {
-  console.log(a);
   event.preventDefault();
   var minValue = Number($randomizerForm.min.value);
   var maxValue = Number($randomizerForm.max.value);
@@ -30,7 +29,9 @@ function genRndNumber(event) {
         intervalNumbers.push(i);
       }
     }
-    for (var i = 0; i <= 10; i++) {
+      if(genNumbers.includes(result)){
+        return genRndNumber(event);
+      }
       if (!genNumbers.includes(result)) {
         genNumbers.push(result);
         printResult(result);
@@ -42,8 +43,7 @@ function genRndNumber(event) {
           printResult(result);
           printFinalResult(result);
         }
-        break;
-      } else result = getRandomNumber(minValue, maxValue);
+      
     }
   }
 }
