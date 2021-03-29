@@ -34,7 +34,6 @@ Web приложение, при запуске которого пользов�
       href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="content">
@@ -92,17 +91,22 @@ Web приложение, при запуске которого пользов�
             <div class="myRules_limit">
               <p>В пределах от какого и до какого числа будем играть?</p>
               <p>От</p>
-              <input type="text" class="minLimit" placeholder="1"/>
+              <input type="text" class="minLimit" />
               <p>До</p>
-              <input type="text" class="maxLimit" placeholder="200"/>
+              <input type="text" class="maxLimit" />
             </div>
             <div class="myRules_attempt">
               <p>Cколько попыток тебе хватит?</p>
-              <input type="text" class="maxAttempt" placeholder="5"/>
+              <input type="text" class="maxAttempt" />
             </div>
           </div>
         </div>
-        <button class="btnStyle myRulesButton">Вот мои условия</button>
+        <div class="myRules_buttons">
+          <button class="btnStyle returnHomeButton">
+            Хочу вернуться обратно
+          </button>
+          <button class="btnStyle myRulesButton">Вот мои условия</button>
+        </div>
       </div>
       <div class="game hide">
         <!-- game-->
@@ -120,6 +124,5 @@ Web приложение, при запуске которого пользов�
         </div>
       </div>
     </div>
-    <script src="js/ScripnikHomeWork3.js"></script>
   </body>
 </html>
