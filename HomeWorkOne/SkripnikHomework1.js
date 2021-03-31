@@ -3,14 +3,19 @@
 //1. Если а  - четное посчитать а*б, иначе а+б
 
 function getProductOrSumm(a, b) {
+  if (typeof a !== "number" || typeof b !== "number") {
+    return false;
+  }
   if (a % 2 === 0) {
     return a * b;
   } else return a + b;
 }
-
 //2. Определить какой четверти принадлежит точка с координатами (x,y)
 
 function getPointPosition(x, y) {
+  if (typeof x !== "number" || typeof y !== "number") {
+    return false;
+  }
   if (x > 0 && y > 0) {
     return "point in I quarter";
   }
@@ -33,12 +38,13 @@ function getPointPosition(x, y) {
     return "point on the y-axis";
   }
 }
-
 // 3. Найти суммы только положительных из трех чисел
 
 function calculateSummOnlyPositive(a, b, c) {
+  if (typeof a !== "number" || typeof b !== "number" || typeof c !== "number") {
+    return false;
+  }
   var summ = 0;
-
   if (a > 0) {
     summ += a;
   }
@@ -50,10 +56,12 @@ function calculateSummOnlyPositive(a, b, c) {
   }
   return summ;
 }
-
 // 4. Посчитать выражение (макс(а*б*с , а+б+с))+ 3
 
 function calculateMaxPlus3(a, b, c) {
+  if (typeof a !== "number" || typeof b !== "number" || typeof c !== "number") {
+    return false;
+  }
   var product = a * b * c;
   var summ = a + b + c;
 
@@ -63,6 +71,15 @@ function calculateMaxPlus3(a, b, c) {
 // 5. Написать определения оценки студента по его рейтингу, на основе следующих правил
 
 function getGrade(rating) {
+  if (typeof rating !== "number") {
+    return false;
+  }
+  if (rating < 0) {
+    return "out of range";
+  }
+  if (rating > 100) {
+    return "out of range";
+  }
   if (rating === 0 || rating < 20) {
     return "F";
   }
@@ -80,7 +97,7 @@ function getGrade(rating) {
   }
   if (rating === 90 || rating <= 100) {
     return "A";
-  } else return "out of range";
+  }
 }
 
 //Циклы
@@ -102,21 +119,27 @@ function calculateSummofEvenNumbersFrom1to99() {
 // 2. Проверить простое ли число
 
 function isPrimeNumber(number) {
+  if (typeof number !== "number") {
+    return "arg is not a number, i work only with numbers";
+  }
   var count = 0;
   for (var i = 2; i <= number; i++) {
     if (number % i === 0) {
       count++;
     }
   }
-  if (count > 1) {
-    return false;
-  } else return true;
+  if (count === 1) {
+    return true;
+  } else return false;
 }
 
 // 3. Найти корень натурального числа с точностью до целого (рассмотреть вариант последовательного подбора и метод бинарного поиска)
 
 // последовательный подбор
 function getSqrt(number) {
+  if (typeof number !== "number") {
+    return "arg is not a number, i work only with numbers";
+  }
   var sqrt = 0;
   for (var i = 0; i < number; i++) {
     if (i * i <= number) {
@@ -125,7 +148,11 @@ function getSqrt(number) {
   }
   return sqrt;
 }
+
 function getBinarySqrt(number) {
+  if (typeof number !== "number") {
+    return "arg is not a number, i work only with numbers";
+  }
   var low = 0;
   var mid = 0;
   var high = number;
@@ -142,9 +169,12 @@ function getBinarySqrt(number) {
 
 // 4. Вычислить факториал числа n.
 
-function getFactorial(n) {
+function getFactorial(number) {
+  if (typeof number !== "number") {
+    return "arg is not a number, i work only with numbers";
+  }
   var factorial = 1;
-  for (var i = 1; i <= n; i++) {
+  for (var i = 1; i <= number; i++) {
     factorial *= i;
   }
   return factorial;
@@ -153,6 +183,12 @@ function getFactorial(n) {
 // 5. Посчитать сумму цифр заданного числа
 
 function calculateSummOfDigits(number) {
+  if (typeof number !== "number") {
+    return "arg is not a number, i work only with numbers";
+  }
+  if (!Number.isInteger(number)) {
+    return "only integer numbers";
+  }
   var summ = 0;
   var digit;
   while (number > 0) {
@@ -166,6 +202,9 @@ function calculateSummOfDigits(number) {
 // 6. Вывести число, которое является зеркальным отображением последовательности цифр заданного числа
 
 function reverseNumber(number) {
+  if (typeof number !== "number") {
+    return `put a number argument!`;
+  }
   var digit = 0;
   var result = 0;
 
@@ -181,6 +220,12 @@ function reverseNumber(number) {
 
 //1. Найти минимальны элемент массива
 function getMinEl(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   var min = array[0];
   for (var i = 0; i < array.length; i++) {
     if (min > array[i]) {
@@ -193,6 +238,12 @@ function getMinEl(array) {
 //2. Найти минимальны элемент массива
 
 function getMaxEl(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   var max = array[0];
   for (var i = 0; i < array.length; i++) {
     if (max < array[i]) {
@@ -205,6 +256,12 @@ function getMaxEl(array) {
 //3. Найти индекс минимального элемента массива
 
 function getMinElIndex(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   var minIndex = 0;
   var min = array[0];
   for (var i = 0; i < array.length; i++) {
@@ -219,6 +276,12 @@ function getMinElIndex(array) {
 //4. Найти индекс максимального элемента массива
 
 function getMaxElIndex(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   var maxIndex = 0;
   var max = array[0];
   for (var i = 0; i < array.length; i++) {
@@ -233,6 +296,12 @@ function getMaxElIndex(array) {
 //5. Посчитать сумму элементов массива с нечетными индексами
 
 function calculateSummOfOddIndex(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   var summ = 0;
   for (var i = 0; i < array.length; i++) {
     if (i % 2 !== 0) {
@@ -245,6 +314,12 @@ function calculateSummOfOddIndex(array) {
 //6. Сделать реверс массива
 
 function reverseArray(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   var result = [];
   for (var i = array.length - 1; i >= 0; i--) {
     result.push(array[i]);
@@ -255,6 +330,12 @@ function reverseArray(array) {
 //7. Посчитать нечетное количество элементов
 
 function getOddNumber(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   var count = 0;
   for (var i = 0; i < array.length; i++) {
     if (array[i] % 2 !== 0) {
@@ -267,6 +348,12 @@ function getOddNumber(array) {
 //8. Поменять местами первую и вторую половину массива
 
 function changeArrayParts(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   var mid = array.length / 2;
   mid = array.length % 2 === 0 ? (mid = mid - 1) : parseInt(mid);
   var part1 =
@@ -280,24 +367,35 @@ function changeArrayParts(array) {
 //9. Отсортировать массив (пузырьком (Bubble) , выбором (Select), вставками(Insert))
 
 function bubbleSort(array) {
-  for (var n = 0; n < array.length; n++) {
-    var flag = true;
-    for (var i = 0; i < array.length - 1 - n; i++) {
-      if (array[i] > array[i + 1]) {
-        var a = array[i];
-        array[i] = array[i + 1];
-        array[i + 1] = a;
-        flag = false;
-      }
-      if (flag = true;) {
-        break;
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
+  for (var i = 0; i < array.length - 1; i++) {
+    var wasSwap = false; // был ли поменян массив на данной итерации
+    for (var k = 0; k < array.length - 1 - i; k++) {
+      if (array[k] > array[k + 1]) {
+        //меняем местами елементы
+        var swap = array[k];
+        array[k] = array[k + 1];
+        array[k + 1] = swap;
+        wasSwap = true; // если был поменян меняем на true
       }
     }
+    if (!wasSwap) break; // если изменений не было выходим из цикла
   }
   return array;
 }
-console.log(bubbleSort([1, 3, 2]));
+
 function selectSort(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   for (var n = 0; n < array.length - 1; n++) {
     var max = -Infinity;
     var index = null;
@@ -315,6 +413,12 @@ function selectSort(array) {
 }
 
 function insertSort(array) {
+  if (!Array.isArray(array)) {
+    return `only array type`;
+  }
+  if (array.length < 1) {
+    return "array is empty";
+  }
   for (var i = 1; i < array.length; i++) {
     var current = array[i];
     var afterCurrent = i - 1;
@@ -332,6 +436,12 @@ function insertSort(array) {
 //1. Получить строковое название дня недели по номеру дня.
 
 function getStringDayNumber(number) {
+  if (typeof number !== "number") {
+    return false;
+  }
+  if (number < 1 || number > 7) {
+    return "wrong input, in week only 7 days";
+  }
   var week = [
     "Sunday",
     "Monday",
@@ -360,6 +470,9 @@ function getDistance(x1, y1, x2, y2) {
 //3. Вводим число(0-999), получаем строку с прописью числа.
 
 function convertToWords(number) {
+  if (typeof number !== "number") {
+    return "wrong input";
+  }
   const NUMBERS = {
     nineHundered: 900,
     eightHundered: 800,
@@ -418,6 +531,9 @@ function convertToWords(number) {
 //4. Вводим строку, которая содержит число, написанное прописью. Получить число.
 
 function convertWordToNumber(word) {
+  if (typeof word !== "string") {
+    return "wrong input";
+  }
   var wordArray = word.split(" ");
   var numbersArray = [];
   var result = 0;
@@ -469,3 +585,33 @@ function convertWordToNumber(word) {
   }
   return result;
 }
+
+module.exports = {
+  getProductOrSumm,
+  getPointPosition,
+  calculateSummOnlyPositive,
+  calculateMaxPlus3,
+  getGrade,
+  calculateSummofEvenNumbersFrom1to99,
+  isPrimeNumber,
+  getSqrt,
+  getBinarySqrt,
+  getFactorial,
+  calculateSummOfDigits,
+  reverseNumber,
+  getMinEl,
+  getMaxEl,
+  getMinElIndex,
+  getMaxElIndex,
+  calculateSummOfOddIndex,
+  reverseArray,
+  getOddNumber,
+  changeArrayParts,
+  bubbleSort,
+  selectSort,
+  insertSort,
+  getStringDayNumber,
+  getDistance,
+  convertToWords,
+  convertWordToNumber
+};
