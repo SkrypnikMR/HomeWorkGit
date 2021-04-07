@@ -157,27 +157,37 @@ let complexFunction = function (arg1,arg2) {
 cachedFunc(‘foo’, ‘baz’) // complexFunction должна выполнится
 //потому что метод не вызывался раньше с этими аргументами */
 
-function complexFunction(arg1, arg2){
-  console.log('raz');
-  return arg1+arg2;
+function complexFunction(arg1, arg2) {
+  console.log(`Вызвал функцию с аргументами ${arguments[0]} ${arguments[1]}`);
+  return arg1 + arg2;
 }
 
-function cache(func){
-  var cache = '';
+function cache(func) {
+  var cache = [];
 
-  return function(arg1,arg2){
-    if(cache === arg1 + arg2){
-      return cache;
+  return function (arg1, arg2) {
+    for (var i = 0; i < cache.length; i++) {
+      if (arguments[0] === cache[i].arg1 && arguments[1] === cache[i].arg2) {
+        return cache[i].arg1 + cache[i].arg2;
+      }
     }
-    else return cache = func(arg1, arg2);
-  }
-
+    cache.push({ arg1: arguments[0], arg2: arguments[1] });
+    return func(arg1, arg2);
+  };
 }
 
 var cachedFunc = cache(complexFunction);
 
-console.log(cachedFunc('foo', 'bar'));
-console.log(cachedFunc('foo', 'bar'));
-console.log(cachedFunc('foo', 'baz'));
+console.log(cachedFunc("foo", "bar"));
+console.log(cachedFunc("foo", "baz"));
+console.log(cachedFunc("foo", "bar"));
+console.log(cachedFunc("foo", "baz"));
+console.log(cachedFunc("foo", "bar"));
+console.log(cachedFunc(1, 1));
+console.log(cachedFunc(1, 1));
+console.log(cachedFunc());
+console.log(cachedFunc());
+console.log(cachedFunc(undefined, undefined));
+console.log(cachedFunc(undefined, undefined));
 
 
