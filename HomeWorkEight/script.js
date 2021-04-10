@@ -1,25 +1,16 @@
-/* Новый фильм "Как натренировать своего дракона” только выпустили! В кассах кинотеатра много людей, 
-стоящих в огромную очередь. У каждого из них есть банкнота в 100, 50 или 25 долларов. Билет на «Бэтмен против Супермена:
- На заре справедливости» стоит 25 долларов. Вася в настоящее время работает клерком. Он хочет продать билет каждому человеку
-  в этой очереди. Может ли Вася продать каждому билет и отдать сдачу, если у него изначально нет денег и он продает билеты строго 
-  в том порядке, в котором люди следуют в очереди? Верните YES, если Вася может продать каждому билет и отдать сдачу. В противном 
-  случае верните NO. Может ли Вася продать каждому билет и отдать сдачу?
-Условия:
-* принимает массив из очереди людей
-* возвращает строку */
-
+// Vasya Clerk
 function isVasyaGiveChange(array) {
   var cash25 = 0;
   var cash50 = 0;
-  for (var greenback of array) {
-    if (greenback === 25) {
+  for (var money of array) {
+    if (money === 25) {
       cash25++;
     }
-    if (greenback === 50) {
+    if (money === 50) {
       cash50++;
       cash25--;
     }
-    if (greenback === 100) {
+    if (money === 100) {
       cash25--;
       cash50 > 0 ? cash50-- : (cash25 -= 2);
     }
@@ -27,9 +18,32 @@ function isVasyaGiveChange(array) {
   }
   return "YES";
 }
-/* Создайте функцию, которая получает два аргумента: первый - это массив объектов, второй - строка
- (имя автора). Ваша функция должна возвращать количество сообщений с автором из аргумента функции и комментариев
-  с тем же автором. Пример массива: */
+// function with recursion to  get quntity posts and comments by author
+function getQuntityPostsAndCommentsByAuthor(array, authorName) {
+  var postsCounter = 0;
+  var commentsCounter = 0;
+  function counters(array, authorName) {
+    for (var i = 0; i < array.length; i++) {
+      if (
+        !array[i].hasOwnProperty("comment") &&
+        array[i].author === authorName
+      ) {
+        postsCounter++;
+      }
+      if (
+        array[i].hasOwnProperty("comment") &&
+        array[i].author === authorName
+      ) {
+        commentsCounter++;
+      }
+      if (array[i].comments) {
+        counters(array[i].comments, authorName);
+      }
+    }
+  }
+  counters(array, authorName);
+  return [postsCounter, commentsCounter];
+}
 let listOfPosts2 = [
   {
     id: 1,
@@ -91,33 +105,7 @@ let listOfPosts2 = [
   },
 ];
 
-// cerebral palsy options
-function getQuntityPostsByAuthor(array, authorName) {
-  var postsCounter = 0;
-  var commentsCounter = 0;
-  function counters(array, authorName) {
-    for (var i = 0; i < array.length; i++) {
-      if (
-        !array[i].hasOwnProperty("comment") &&
-        array[i].author === authorName
-      ) {
-        postsCounter++;
-      }
-      if (
-        array[i].hasOwnProperty("comment") &&
-        array[i].author === authorName
-      ) {
-        commentsCounter++;
-      }
-      if (array[i].comments) {
-        counters(array[i].comments, authorName);
-      }
-    }
-  }
-  counters(array, authorName);
-  return [postsCounter, commentsCounter];
-}
-
+// summ without math
 function getSum(str1, str2) {
   var sum = "",
     rememberNum = 0;
@@ -145,20 +133,9 @@ function getSum(str1, str2) {
   return sum;
 }
 
-/* console.log(getSum('9  999', '9999')) */
-
-/* 4.Напишите функцию кеш
-let complexFunction = function (arg1,arg2) {
-	rerurn arg1+arg2; //just for example (any logic can be here)
-	}
-	let cachedFunc = cache(complexFunction);
-	 cachedFunc(‘foo’, ‘bar’) // complexFunction должна выполнится
- cachedFunc(‘foo’, ‘bar’) // complexFunction не должна выполняться  				// снова,должен вернуться кеш
-cachedFunc(‘foo’, ‘baz’) // complexFunction должна выполнится
-//потому что метод не вызывался раньше с этими аргументами */
+// cache
 
 function complexFunction(arg1, arg2) {
-  console.log(`Вызвал функцию с аргументами ${arguments[0]} ${arguments[1]}`);
   return arg1 + arg2;
 }
 
@@ -169,7 +146,7 @@ function cache(func) {
 
     for (var i = 0; i < cache.length; i++) {
       if (arguments[0] === cache[i].arg1 && arguments[1] === cache[i].arg2) {
-        return `Это есть в cache, держи ${cache[i].result}`
+        return cache[i].result
       }
     }
     var result = func(arg1, arg2);
@@ -177,19 +154,6 @@ function cache(func) {
     return result;
   };
 }
-
 var cachedFunc = cache(complexFunction);
-
-console.log(cachedFunc("foo", "bar"));
-console.log(cachedFunc("foo", "baz"));
-console.log(cachedFunc("foo", "bar"));
-console.log(cachedFunc("foo", "baz"));
-console.log(cachedFunc("foo", "bar"));
-console.log(cachedFunc(1, 1));
-console.log(cachedFunc(1, 1));
-console.log(cachedFunc());
-console.log(cachedFunc());
-console.log(cachedFunc(undefined, undefined));
-console.log(cachedFunc(undefined, undefined));
 
 
