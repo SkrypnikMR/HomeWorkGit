@@ -1,5 +1,8 @@
 // Vasya Clerk
 function isVasyaGiveChange(array) {
+  if(!Array.isArray(array)){
+    return false;
+  }
   var cash25 = 0;
   var cash50 = 0;
   for (var money of array) {
@@ -20,6 +23,9 @@ function isVasyaGiveChange(array) {
 }
 // function with recursion to  get quntity posts and comments by author
 function getQuntityPostsAndCommentsByAuthor(array, authorName) {
+  if(!Array.isArray(array) || typeof authorName !== 'string'){
+    return 'invalid arguments'
+  }
   var postsCounter = 0;
   var commentsCounter = 0;
   function counters(array, authorName) {
@@ -105,33 +111,8 @@ let listOfPosts2 = [
   },
 ];
 
-// summ without math
-function getSum(str1, str2) {
-  var sum = "",
-    rememberNum = 0;
-  for (var i = str1.length - 1; i >= 0; i--) {
-    if (i < str1.length - str2.length) {
-      if (+str1[i] + rememberNum >= 10) {
-        sum += +str1[i] + rememberNum - 10;
-        rememberNum = 1;
-      } else {
-        sum += +str1[i] + rememberNum;
-        rememberNum = 0;
-      }
-    } else if (+str1[i] + +str2[i - (str1.length - str2.length)] >= 10) {
-      sum +=
-        +str1[i] + +str2[i - (str1.length - str2.length)] - 10 + rememberNum;
-      rememberNum = 1;
-    } else {
-      sum += +str1[i] + +str2[i - (str1.length - str2.length)] + rememberNum;
-      rememberNum = 0;
-    }
-  }
 
-  sum = rememberNum === 0 ? sum : sum + rememberNum;
-  sum = sum.split("").reverse().join("");
-  return sum;
-}
+
 
 // cache
 
@@ -143,17 +124,21 @@ function cache(func) {
   var cache = [];
 
   return function (arg1, arg2) {
-
     for (var i = 0; i < cache.length; i++) {
       if (arguments[0] === cache[i].arg1 && arguments[1] === cache[i].arg2) {
-        return cache[i].result
+        return cache[i].result;
       }
     }
     var result = func(arg1, arg2);
-    cache.push({ arg1: arguments[0], arg2: arguments[1], result});
+    cache.push({ arg1: arguments[0], arg2: arguments[1], result });
     return result;
   };
 }
 var cachedFunc = cache(complexFunction);
 
-
+module.exports = {
+  complexFunction,
+  cache,
+  isVasyaGiveChange,
+  getQuntityPostsAndCommentsByAuthor
+};
