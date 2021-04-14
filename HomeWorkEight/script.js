@@ -1,6 +1,6 @@
 // Vasya Clerk
 function isVasyaGiveChange(array) {
-  if(!Array.isArray(array)){
+  if (!Array.isArray(array)) {
     return false;
   }
   var cash25 = 0;
@@ -23,8 +23,8 @@ function isVasyaGiveChange(array) {
 }
 // function with recursion to  get quntity posts and comments by author
 function getQuntityPostsAndCommentsByAuthor(array, authorName) {
-  if(!Array.isArray(array) || typeof authorName !== 'string'){
-    return 'invalid arguments'
+  if (!Array.isArray(array) || typeof authorName !== "string") {
+    return "invalid arguments";
   }
   var postsCounter = 0;
   var commentsCounter = 0;
@@ -111,8 +111,58 @@ let listOfPosts2 = [
   },
 ];
 
+// get summ without math
 
+function getSum(a, b) {
+  let sumsTable = [
+    ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+    ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
+    ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+    ["4", "5", "6", "7", "8", "9", "10", "11", "12", "13"],
+    ["5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
+    ["6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
+    ["7", "8", "9", "10", "11", "12", "13", "14", "15", "16"],
+    ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17"],
+    ["9", "10", "11", "12", "13", "14", "15", "16", "17", "18"],
+  ];
+  if (a.length < b.length) {
+    var i = 0;
+    while (a.length < b.length) {
+      a = "0" + a;
+      i++;
+    }
+  } else {
+    var i = 0;
+    while (b.length < a.length) {
+      b = "0" + b;
+      i++;
+    }
+  }
+  var result = [];
+  function getTableSum(i) {
+    if (i <= 0) {
+      return result;
+    } else {
+      result.unshift(sumsTable[a[i - 1]][b[i - 1]]);
+      getTableSum(i - 1);
+    }
+  }
 
+  getTableSum(a.length);
+  for (let j = 0; j < result.length; j++) {
+    if (result[j].length == 2) {
+      if (result[j - 1] == undefined) {
+        result.unshift(result[j][0]);
+        result.splice(j + 1, 1, result[j + 1][1]);
+      } else {
+        result.splice(j - 1, 1, sumsTable[result[j - 1]][1]);
+        result.splice(j, 1, result[j][1]);
+      }
+    }
+  }
+  return result.join('');
+}
 
 // cache
 
@@ -140,5 +190,6 @@ module.exports = {
   complexFunction,
   cache,
   isVasyaGiveChange,
-  getQuntityPostsAndCommentsByAuthor
+  getQuntityPostsAndCommentsByAuthor,
+  getSum,
 };
