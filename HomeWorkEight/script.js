@@ -114,7 +114,10 @@ let listOfPosts2 = [
 // get summ without math
 
 function getSum(a, b) {
-  let sumsTable = [
+  if(typeof a === 'undefined' || typeof b === 'undefined'){
+    return 'invalid arguments'
+  }
+  var sumsTable = [
     ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
     ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
@@ -192,4 +195,5 @@ module.exports = {
   isVasyaGiveChange,
   getQuntityPostsAndCommentsByAuthor,
   getSum,
+  cachedFunc
 };

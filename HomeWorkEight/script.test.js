@@ -3,6 +3,7 @@ var {
   cache,
   isVasyaGiveChange,
   getQuntityPostsAndCommentsByAuthor,
+  getSum
 } = require("./script");
 
 describe("complexFunction", function () {
@@ -41,16 +42,24 @@ describe("cache", function () {
   it("should be without arguments", function () {
     expect(typeof cache()).toBe("function"); //просто проверили что вернули функцию
   });
-  it("should be with function arguments", function () {
-    function func(arg1, arg2) {
-      return arg1, arg2;
-    }
-    function test2(arg1, arg2) {
-      return arg1 - arg2;
-    }
-    expect(typeof cache(func)).toBe("function");
-    expect(typeof cache(test2)).toBe("function");
-  });
+  it('if arguments in cache', function () {
+    var complexFunction = jest.fn()
+    var func = cache(complexFunction)
+    func('1', 2)
+    func('1', 2)
+    func('1', 2)
+    func('1', 2)
+    expect(complexFunction).toBeCalledTimes(1);
+  })
+  it('if diffrent arguments', function () {
+    var complexFunction = jest.fn()
+    var func = cache(complexFunction)
+    func('1', 2)
+    func('1', 2)
+    func('1', 3)
+    func('1', 2)
+    expect(complexFunction).toBeCalledTimes(2);
+  })
 });
 describe("isVasyaGiveChange", function () {
   it("should be defined ", function () {
@@ -72,6 +81,9 @@ describe("isVasyaGiveChange", function () {
     expect(isVasyaGiveChange([25, 50, 100])).toBe("NO");
   });
   it("vasya doesn`t have change", function () {
+    expect(isVasyaGiveChange([100, 25, 25, 25, 25])).toBe("NO");
+  });
+  it("vasya doesn`t have change", function () {
     expect(isVasyaGiveChange([25, 50, 100])).not.toBe("YES");
   });
   it("vasya doesn`t have change", function () {
@@ -88,6 +100,7 @@ describe("isVasyaGiveChange", function () {
   });
 });
 describe("getQuntityPostsAndCommentsByAuthor", function () {
+  
   var listOfPosts2 = [
     {
       id: 1,
@@ -168,5 +181,34 @@ describe("getQuntityPostsAndCommentsByAuthor", function () {
   });
   it("should not invalid arguments", function () {
     expect(getQuntityPostsAndCommentsByAuthor(listOfPosts2, 'Rimus')).not.toBe('invalid arguments');
+  })
+});
+
+describe("getSum", function () {
+  it("should be defined ", function () {
+    expect(getSum).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof getSum).toBe("function");
+  });
+  it("should be without arguments", function () {
+    expect(getSum()).toBe('invalid arguments');
+  });
+  it("should be only with one argument", function () {
+    expect(getSum('1')).toBe('invalid arguments');
+  });
+  it("should be with two string arguments", function(){
+    expect(getSum('1','2')).toBe('3');
+  })
+  it("should be with two string arguments with different length", function(){
+    expect(getSum('1','22')).toBe('23');
+  })
+  it("should be with two string arguments with different length", function(){
+    expect(getSum('1','22')).toBe('23');
+    expect(getSum('122','22')).toBe('144');
+  })
+  it("should be with two string arguments, and them elements after addition become more than 10", function(){
+    expect(getSum('99','99')).toBe('198');
+    expect(getSum('4444','7777')).toBe('12221');
   })
 });
