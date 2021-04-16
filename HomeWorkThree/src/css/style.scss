@@ -5,137 +5,142 @@ body {
   background: rgba(119, 119, 255, 0.1);
   font-family: "Ubuntu", sans-serif;
   color: white;
-  .content {
-    background-color: rgba(0, 0, 0, 0.2);
-    margin-top: 10%;
-    width: 80%;
-  }
-  h1 {
-    font-size: 50px;
-  }
+}
+.wrapper {
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-top: 6%;
+  width: 80%;
   span {
     color: red;
-    font-size: 25px;
   }
-  .info {
-    text-align: center;
-    min-height: 300px;
-  }
-  .rulesText p,
-  .info p {
-    font-size: 20px;
-    color: rgb(255, 255, 255);
-  }
-  .rulesChoice {
-    display: flex;
-    min-height: 300px;
-  }
-  .rulesChoice_left,
-  .rulesChoice_right {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .rulesChoice_left p,
-  .rulesChoice_right p {
-    width: 80%;
-    font-size: 20px;
-    min-height: 50px;
-    text-align: center;
-    color: white;
-  }
-  .rulesChoice_left_text,
-  .rulesChoice_right_text {
-    min-height: 150px;
-    padding-bottom: 10px;
-    display: flex;
-    justify-content: center;
-  }
-  .rulesChoiceButton {
-    display: flex;
-    justify-self: center;
-    justify-content: center;
-    align-items: center;
-  }
-  .myRules {
-    font-size: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    .myRules_buttons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+}
+.info {
+  text-align: center;
+  min-height: 500px;
+  .info__header {
+    h1 {
+      font-size: 50px;
+    }
+    span {
+      color: red;
+      font-size: 25px;
     }
   }
-  .myRules_inputs {
+  .info__body {
+    &__title {
+      font-size: 20px;
+      color: rgb(255, 255, 255);
+    }
+    .body__content {
+      display: flex;
+      min-height: 300px;
+      .content__item {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p {
+          width: 80%;
+          font-size: 20px;
+          min-height: 50px;
+          text-align: center;
+          color: white;
+        }
+        .item__text {
+          min-height: 150px;
+          padding-bottom: 10px;
+          display: flex;
+          justify-content: center;
+        }
+        .item__button {
+          display: flex;
+          justify-self: center;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+.custom {
+  font-size: 20px;
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .custom__body {
     width: 100%;
     padding: 30px;
     display: flex;
-    justify-content: space-around;
-  }
-  .myRules_control {
-    text-align: center;
-    display: flex;
-  }
-  .myRulesButton {
-    width: 300px;
-    align-self: center;
-  }
-  .game {
-    padding: 20px;
-    display: flex;
-    min-height: 300px;
     flex-direction: column;
+    .body__content {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+  .custom__footer {
+    display: flex;
+    justify-content: center;
     align-items: center;
   }
-  .gameDifficulty,
-  .gameInput {
-    padding-bottom: 10px;
+}
+
+.game {
+  min-height: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .game__header {
+    padding: 30px;
     text-align: center;
-  }
-  .gameInput input {
-    height: 50px;
-    width: 50px;
-    text-align: center;
-    font-size: 30px;
-  }
-  .gameButtons {
-    display: flex;
-    flex-direction: column;
-  }
-  .btnStyle {
-    transition: all 0.1s;
-    -webkit-transition: all 0.1s;
-    position: relative;
-    padding: 10px 40px;
-    margin: 0px 10px 10px 0px;
-    float: left;
-    border-radius: 10px;
-    font-family: "Pacifico", cursive;
     font-size: 25px;
-    color: #fff;
-    text-decoration: none;
-    background-color: #3498db;
-    border-bottom: 5px solid #2980b9;
-    text-shadow: 0px -2px #2980b9;
   }
-  .btnStyle:active {
-    transform: translate(0px, 5px);
-    -webkit-transform: translate(0px, 5px);
-    border-bottom: 1px solid;
+  .game__body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .body__input {
+      padding-bottom: 80px;
+      input{
+        width: 100px;
+        height: 100px;
+      }
+    }
   }
-  input {
-    width: 50px;
-    height: 50px;
-    padding: 10px;
-    text-align: center;
-    font-size: 30px;
-  }
-  .hide {
-    display: none;
-  }
-  
+}
+.btnStyle {
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  position: relative;
+  padding: 10px 40px;
+  margin: 0px 10px 10px 0px;
+  float: left;
+  border-radius: 10px;
+  font-family: "Pacifico", cursive;
+  font-size: 25px;
+  color: #fff;
+  text-decoration: none;
+  background-color: #3498db;
+  border-bottom: 5px solid #2980b9;
+  text-shadow: 0px -2px #2980b9;
+}
+.btnStyle:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  border-bottom: 1px solid;
+}
+input {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  text-align: center;
+  font-size: 30px;
+}
+.hide {
+  display: none;
 }

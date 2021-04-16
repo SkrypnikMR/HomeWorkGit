@@ -1,28 +1,4 @@
 <!DOCTYPE html>
-<!-- Application “Guess Number”
-Web приложение, при запуске которого пользователю предлагается угадать число от 1 до 100 за 5 попыток.
-В реализации необходимо предусмотреть вариант настроек диапазона чисел (валидация: не отрицательные, без плавающей точки, минимум = 1, максимум = 200)
-и количества попыток (валидация: не отрицательные, без плавающей точки, минимум = 1, максимум = 15).
-Игра начинается с того, что пользователь видит сообщение: “Привет, я загадал число от min до max вашего диапазона.
-Попробуй угадать его за x попыток!” 
-И пользователю предлагается использовать свою первую попытку путём ввода первого числа в инпут и нажать кнопку GENERATE.
-Примечание: в любой момент времени, пользователь может прекратить игру нажав на кнопку EXIT, после чего игра моментально остановится.
-Со второй попытки для пользователя вводятся подсказки, типа: “Не угадал, но теплее!!!
- Осталось n попыток” либо “Не угадал, холоднее… Осталось n попыток”.
-Если пользователь угадал число - выводится сообщение “Поздравляю! Ты угадал задуманное число за n попыток”.
-Остальные мелкие доработки - на усмотрение разработчика. -->
-
-<!--
-Что ещё хочу сделать:
-
-Оформить красивее
-Добавить поле для ввода минимального элемента интервала
-
-
-
-
- -->
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -36,44 +12,56 @@ Web приложение, при запуске которого пользов�
     />
   </head>
   <body>
-    <div class="content">
-      <!-- all our app content -->
+    <div class="wrapper">
+      <!-- content -->
       <div class="info">
-        <h1>Игра угадай какое число Я загадал</h1>
-        <!-- info about game-->
-        <p>
-          Привет, предлагаю сыграть в игру. Я загадаю число в определеннное
-          диапазоне, а ты попробуешь его угадать
-        </p>
-        <div class="rules">
-          <!-- how we play -->
-          <div class="rulesText">
+        <!-- info -->
+        <div class="info__header">
+          <h1>Игра угадай какое число Я загадал</h1>
+          <p>
+            Привет, предлагаю сыграть в игру. Я загадаю число в определеннное
+            диапазоне, а ты попробуешь его угадать
+          </p>
+        </div>
+        <div class="info__body">
+          <!-- rules-->
+          <div class="body__title">
+            <!-- rulesText-->
             <p>Мы можем сыграть по простому или добавить огня</p>
           </div>
-          <div class="rulesChoice">
-            <div class="rulesChoice_left">
-              <div class="rulesChoice_left_text">
+          <div class="body__content">
+            <!-- rulesChoice-->
+            <div class="content__item">
+              <!-- rulesChoice_left-->
+              <div class="item__text">
+                <!-- rulesChoice_left_text-->
                 <p>
                   Я загадываю число от <span>1</span> до <span>100</span> и у
                   тебя будет 5 попыток отгадать его.
                 </p>
               </div>
-              <div class="rulesChoiceButton">
-                <button class="btnStyle choise_Easy">
+              <div class="item__button">
+                <!-- rulesChoiceButton-->
+                <button class="btnStyle item__button-link" id="left__choice">
+                  <!-- btnStyle choise_Easy-->
                   Сыграем по простому
                 </button>
               </div>
             </div>
-            <div class="rulesChoice_right">
-              <div class="rulesChoice_right_text">
+            <div class="content__item">
+              <!-- rulesChoice_right-->
+              <div class="item__text">
+                <!-- rulesChoice_right_text-->
                 <p>
                   Ты сам выберешь от <span>какого</span> и до
                   <span>какого</span> числа может быть угадываемое число, но и
                   количество попыток ты выберешь сам
                 </p>
               </div>
-              <div class="rulesChoiceButton">
-                <button class="btnStyle choise_Hard">
+              <div class="item__button">
+                <!-- rulesChoiceButton-->
+                <button class="btnStyle item__button-link" id="right__choice">
+                  <!-- btnStyle choise_Hard-->
                   Давай попробуем усложнить
                 </button>
               </div>
@@ -81,46 +69,70 @@ Web приложение, при запуске которого пользов�
           </div>
         </div>
       </div>
-      <div class="myRules hide">
-        <!-- if user click button my rules -->
-        <div class="myRules_text">
+      <div class="custom hide">
+        <!-- myRules hide-->
+        <div class="custom__header">
+          <!-- myRules_text-->
           <h3>Задавай свои правила</h3>
         </div>
-        <div class="myRules_control">
-          <div class="myRules_inputs">
-            <div class="myRules_limit">
-              <p>В пределах от какого и до какого числа будем играть?</p>
+        <div class="custom__body">
+          <!-- myRules_control-->
+          <div class="body__content">
+            <!-- myRules_inputs-->
+            <div class="content__item">
+              <!-- myRules_limit-->
+              <div class="item__title">
+                <p>В пределах от какого и до какого числа будем играть?</p>
+              </div>
               <p>От</p>
-              <input type="text" class="minLimit" />
+              <input type="text" class="item__input" id="minLimit" />
+              <!-- minLimit-->
               <p>До</p>
-              <input type="text" class="maxLimit" />
+              <input type="text" class="item__input" id="maxLimit" />
+              <!-- maxLimit-->
             </div>
-            <div class="myRules_attempt">
+            <div class="content__item">
+              <!-- myRules_attempt-->
               <p>Cколько попыток тебе хватит?</p>
-              <input type="text" class="maxAttempt" />
+              <input type="text" class="item__input" id="maxAttempt" />
+              <!-- maxAttempt-->
             </div>
           </div>
         </div>
-        <div class="myRules_buttons">
-          <button class="btnStyle returnHomeButton">
-            Хочу вернуться обратно
+        <div class="custom__footer">
+          <!-- myRules_buttons-->
+          <button class="btnStyle footer__item" id="returnHomeButton">
+            <!-- btnStyle returnHomeButton-->
+            Вернуться обратно
           </button>
-          <button class="btnStyle myRulesButton">Вот мои условия</button>
+          <button class="btnStyle footer__item" id="myRulesButton">
+            Вот мои условия
+          </button>
+          <!-- btnStyle myRulesButton-->
         </div>
       </div>
       <div class="game hide">
-        <!-- game-->
-        <div class="gameDifficulty">
+        <!-- game hide-->
+        <div class="game__header">
+          <!-- gameDifficulty-->
           <h3>Угадываем число от n до m</h3>
           <p>Попыток осталось :</p>
         </div>
-        <div class="gameInput">
-          <input type="text" class="input_input hide" />
-        </div>
-        <div class="gameButtons">
-          <button class="btnStyle gameStart">ГЕНЕРИРУЕМ ЧИСЛО</button>
-          <button class="btnStyle gameTry hide">ДУМАЮ ЭТО</button>
-          <button class="btnStyle gameOver">ВЫЙТИ ИЗ ИГРЫ</button>
+        <div class="game__body">
+          <div class="body__input">
+            <!-- gameInput-->
+            <input type="text" class="input__item " disabled />
+            <!-- input_input hide-->
+          </div>
+          <div class="body__button">
+            <!-- gameButtons-->
+            <button class="btnStyle button__item" id="gameStart">ГЕНЕРИРУЕМ ЧИСЛО</button>
+            <!-- btnStyle gameStart-->
+            <button class="btnStyle button__item hide" id="gameTry">ДУМАЮ ЭТО</button>
+            <!-- btnStyle gameTry hide-->
+            <button class="btnStyle button__item" id="gameOver">ВЫЙТИ ИЗ ИГРЫ</button>
+            <!-- btnStyle gameOver-->
+          </div>
         </div>
       </div>
     </div>

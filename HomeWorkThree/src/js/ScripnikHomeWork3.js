@@ -1,19 +1,22 @@
-var $easyButton = document.querySelector(".choise_Easy");
-var $hardButton = document.querySelector(".choise_Hard");
-var $info = document.querySelector(".info");
-var $game = document.querySelector(".game");
-var $gameOver = document.querySelector(".gameOver");
-var $myRules = document.querySelector(".myRules");
-var $maxLimit = document.querySelector(".maxLimit");
-var $minLimit = document.querySelector(".minLimit");
-var $maxAttempt = document.querySelector(".maxAttempt");
-var $myRulesButton = document.querySelector(".myRulesButton");
-var $gameDifficulty = document.querySelector(".gameDifficulty");
-var $gameStart = document.querySelector(".gameStart");
-var $gameTry = document.querySelector(".gameTry");
-var $gameInput = document.querySelector(".input_input");
-var $myRulesText = document.querySelector(".myRules_text");
-var $returnHomeButton = document.querySelector(".returnHomeButton");
+var $info = document.querySelector(".info"); // стартовая
+var $myRules = document.querySelector(".custom"); // свои правила
+var $game = document.querySelector(".game"); // игра
+var $easyButton = document.querySelector("#left__choice"); // кнопка игры 1 - 100
+var $hardButton = document.querySelector("#right__choice"); // кнопка перехода на игру по своим правилам
+var $minLimit = document.querySelector("#minLimit");  // мин предел
+var $maxLimit = document.querySelector("#maxLimit");  // макс предел
+var $maxAttempt = document.querySelector("#maxAttempt"); // кол-во попыток
+var $myRulesButton = document.querySelector("#myRulesButton"); // го по моим правилам
+var $returnHomeButton = document.querySelector("#returnHomeButton"); // вернулись назад
+var $gameDifficulty = document.querySelector(".game__header"); // табло со сложностью игры
+var $gameStart = document.querySelector("#gameStart"); // кнопка старта игры
+var $gameOver = document.querySelector("#gameOver"); // выйти из игры
+var $gameTry = document.querySelector("#gameTry");  // кнопка проверки варианта 
+var $gameInput = document.querySelector(".input__item"); // инпут куда мы вводим варианты
+
+
+var $myRulesText = document.querySelector(".custom__header"); // табло для ошибок при вводе своих правил
+
 var resultArray = []; //глобальный массив, где 0 элемент - начало диапозона, 1 - конец, 2 - количество попыток
 var resultNumber; // номер, который нужно угадывать, дальше он загенерится рандомно
 
@@ -81,7 +84,7 @@ function gameStart() {
   renderGameDifficulty(3);
   $gameStart.classList.add("hide");
   $gameTry.classList.remove("hide");
-  $gameInput.classList.remove("hide");
+  $gameInput.disabled = false;
   resultNumber = getRandomNumber(resultArray[0], resultArray[1]);
   console.log(resultNumber);
 }
@@ -369,9 +372,5 @@ function gameValidation(min, max, input) {
 }
 
 function returnHomePage() {
-  $game.classList.add("hide");
-  $info.classList.remove("hide");
-  $gameTry.classList.add("hide");
-  $gameStart.classList.remove("hide");
-  $gameInput.classList.add("hide");
+  location.reload();
 }
