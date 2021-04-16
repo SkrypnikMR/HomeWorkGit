@@ -13,9 +13,7 @@
   </head>
   <body>
     <div class="wrapper">
-      <!-- content -->
       <div class="info">
-        <!-- info -->
         <div class="info__header">
           <h1>Игра угадай какое число Я загадал</h1>
           <p>
@@ -24,34 +22,25 @@
           </p>
         </div>
         <div class="info__body">
-          <!-- rules-->
           <div class="body__title">
-            <!-- rulesText-->
             <p>Мы можем сыграть по простому или добавить огня</p>
           </div>
           <div class="body__content">
-            <!-- rulesChoice-->
             <div class="content__item">
-              <!-- rulesChoice_left-->
               <div class="item__text">
-                <!-- rulesChoice_left_text-->
                 <p>
                   Я загадываю число от <span>1</span> до <span>100</span> и у
                   тебя будет 5 попыток отгадать его.
                 </p>
               </div>
               <div class="item__button">
-                <!-- rulesChoiceButton-->
                 <button class="btnStyle item__button-link" id="left__choice">
-                  <!-- btnStyle choise_Easy-->
                   Сыграем по простому
                 </button>
               </div>
             </div>
             <div class="content__item">
-              <!-- rulesChoice_right-->
               <div class="item__text">
-                <!-- rulesChoice_right_text-->
                 <p>
                   Ты сам выберешь от <span>какого</span> и до
                   <span>какого</span> числа может быть угадываемое число, но и
@@ -59,9 +48,7 @@
                 </p>
               </div>
               <div class="item__button">
-                <!-- rulesChoiceButton-->
                 <button class="btnStyle item__button-link" id="right__choice">
-                  <!-- btnStyle choise_Hard-->
                   Давай попробуем усложнить
                 </button>
               </div>
@@ -70,68 +57,55 @@
         </div>
       </div>
       <div class="custom hide">
-        <!-- myRules hide-->
         <div class="custom__header">
-          <!-- myRules_text-->
           <h3>Задавай свои правила</h3>
         </div>
         <div class="custom__body">
-          <!-- myRules_control-->
           <div class="body__content">
-            <!-- myRules_inputs-->
             <div class="content__item">
-              <!-- myRules_limit-->
               <div class="item__title">
                 <p>В пределах от какого и до какого числа будем играть?</p>
               </div>
               <p>От</p>
               <input type="text" class="item__input" id="minLimit" />
-              <!-- minLimit-->
+
               <p>До</p>
               <input type="text" class="item__input" id="maxLimit" />
-              <!-- maxLimit-->
             </div>
             <div class="content__item">
-              <!-- myRules_attempt-->
               <p>Cколько попыток тебе хватит?</p>
               <input type="text" class="item__input" id="maxAttempt" />
-              <!-- maxAttempt-->
             </div>
           </div>
         </div>
         <div class="custom__footer">
-          <!-- myRules_buttons-->
           <button class="btnStyle footer__item" id="returnHomeButton">
-            <!-- btnStyle returnHomeButton-->
             Вернуться обратно
           </button>
           <button class="btnStyle footer__item" id="myRulesButton">
             Вот мои условия
           </button>
-          <!-- btnStyle myRulesButton-->
         </div>
       </div>
       <div class="game hide">
-        <!-- game hide-->
         <div class="game__header">
-          <!-- gameDifficulty-->
           <h3>Угадываем число от n до m</h3>
           <p>Попыток осталось :</p>
         </div>
         <div class="game__body">
           <div class="body__input">
-            <!-- gameInput-->
-            <input type="text" class="input__item " disabled />
-            <!-- input_input hide-->
+            <input type="text" class="input__item" disabled />
           </div>
           <div class="body__button">
-            <!-- gameButtons-->
-            <button class="btnStyle button__item" id="gameStart">ГЕНЕРИРУЕМ ЧИСЛО</button>
-            <!-- btnStyle gameStart-->
-            <button class="btnStyle button__item hide" id="gameTry">ДУМАЮ ЭТО</button>
-            <!-- btnStyle gameTry hide-->
-            <button class="btnStyle button__item" id="gameOver">ВЫЙТИ ИЗ ИГРЫ</button>
-            <!-- btnStyle gameOver-->
+            <button class="btnStyle button__item" id="gameStart">
+              ГЕНЕРИРУЕМ ЧИСЛО
+            </button>
+            <button class="btnStyle button__item hide" id="gameTry">
+              ДУМАЮ ЭТО
+            </button>
+            <button class="btnStyle button__item" id="gameOver">
+              ВЫЙТИ ИЗ ИГРЫ
+            </button>
           </div>
         </div>
       </div>
