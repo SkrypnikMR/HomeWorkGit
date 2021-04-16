@@ -1,14 +1,14 @@
-var $randomizerForm = document.forms.randomizerForm; // нода формы рандомайзер
-var $minValueText = document.querySelector(".pTextMinValue"); // нода текста над minValue input'ом
-var $maxValueText = document.querySelector(".pTextMaxValue"); // нода текста над maxValue input'ом
-var $resultP = document.querySelector(".resultP"); // нода текста, который будет выводом результата генерации рандомног числа
-var $resultPOver = document.querySelector(".resultPOver"); // нода текста, который появится, если больше чисел нельзя будет вывести
-var $minValueInMaxArea = document.querySelector(".minValueInMaxArea"); // нода текста, который появится, если пользователь введет min в max
-
-$randomizerForm.generate.addEventListener("click", genRndNumber); // listener кнопки с #generate
-$randomizerForm.reset.addEventListener("click", resetRandomizer); // listenter кнопки с #reset
-
-export var genNumbers = [];
+var $randomizerForm = document.forms.app__body; // нода формы рандомайзер
+var $minValueText = document.querySelector("#pTextMinValue"); // нода текста над minValue input'ом
+var $maxValueText = document.querySelector("#pTextMaxValue"); // нода текста над maxValue input'ом
+var $resultP = document.querySelector("#resultP"); // нода текста, который будет выводом результата генерации рандомног числа
+var $resultPOver = document.querySelector("#resultPOver"); // нода текста, который появится, если больше чисел нельзя будет вывести
+var $minValueInMaxArea = document.querySelector("#minValueInMaxArea"); // нода текста, который появится, если пользователь введет min в max
+var $generate = document.querySelector("#generate"); // нода  кнопки с #generate
+var $reset = document.querySelector("#reset"); // кнопки с #reset
+$generate.addEventListener("click", genRndNumber); // listener кнопки с #generate
+$reset.addEventListener("click", resetRandomizer); // listenter кнопки с #reset
+var genNumbers = [];
 var intervalNumbers = [];
 
 function genRndNumber(event) {
@@ -29,26 +29,25 @@ function genRndNumber(event) {
         intervalNumbers.push(i);
       }
     }
-      if(genNumbers.includes(result)){
-        return genRndNumber(event);
-      }
-      if (!genNumbers.includes(result)) {
-        genNumbers.push(result);
+    if (genNumbers.includes(result)) {
+      return genRndNumber(event);
+    }
+    if (!genNumbers.includes(result)) {
+      genNumbers.push(result);
+      printResult(result);
+      var summGenNumbers = summAllArrayElements(genNumbers);
+      var summIntervalNumbers = summAllArrayElements(intervalNumbers);
+      if (summGenNumbers === summIntervalNumbers) {
+        disableSomething($randomizerForm.generate);
+        fadeOutEffect($randomizerForm.generate);
         printResult(result);
-        var summGenNumbers = summAllArrayElements(genNumbers);
-        var summIntervalNumbers = summAllArrayElements(intervalNumbers);
-        if (summGenNumbers === summIntervalNumbers) {
-          disableSomething($randomizerForm.generate);
-          fadeOutEffect($randomizerForm.generate);
-          printResult(result);
-          printFinalResult(result);
-        }
-      
+        printFinalResult(result);
+      }
     }
   }
 }
 
-export function resetRandomizer(event) {
+function resetRandomizer(event) {
   event.preventDefault();
   unDisableSomething($randomizerForm.generate);
   unDisableSomething($randomizerForm.min);

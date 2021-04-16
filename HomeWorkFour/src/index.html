@@ -8,29 +8,29 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="AppName">
+    <div class="app">
+      <div class="app__header">
         <h1>RANDOMIZER</h1>
       </div>
-      <form name="randomizerForm">
-        <div class="minValue">
-          <p class="minValueInMaxArea"></p>
-          <p class="pTextMinValue">Min</p>
-          <input type="text" id="min" />
+      <form name="app__body" class="app__body">
+        <div class="body__minimal">
+          <p class="minimal__item-text" id="minValueInMaxArea"></p>
+          <p class="minimal__item-text" id="pTextMinValue">Min</p>
+          <input class="minimal__item-input" type="text" id="min" />
         </div>
-        <div class="maxValue">
-          <p class="pTextMaxValue">Max</p>
-          <input type="text" id="max" />
+        <div class="body__maximal">
+          <p class="maximal__item-text" id="pTextMaxValue">Max</p>
+          <input class="minimal__item-input" type="text" id="max" />
         </div>
-        <div class="generateButton">
-          <button id="generate">GENERATE</button>
+        <div class="body__generate">
+          <button class="generate__item-button" id="generate">GENERATE</button>
         </div>
-        <div class="result">
-          <p class="resultP"></p>
-          <p class="resultPOver"></p>
+        <div class="body__result">
+          <p class="result__item-text" id="resultP"></p>
+          <p class="result__item-text" id="resultPOver"></p>
         </div>
-        <div class="resetButton">
-          <button id="reset">RESET</button>
+        <div class="body__reset">
+          <button class="reset__item-button" id="reset">RESET</button>
         </div>
       </form>
     </div>
