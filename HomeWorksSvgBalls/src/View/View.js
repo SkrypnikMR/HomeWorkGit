@@ -1,44 +1,67 @@
-import { FULL_HEIGHT, FULL_WIDTH } from "../constants";
+import { MAX_HEIGHT, MAX_WIDTH, TIMER } from "../constants";
+import { Circle } from "../model";
 
-export class View {
+export default class View {
   constructor() {
-    this.root = null;
-    this.ctx = null;
-    this.onClickCanvas = null;
-
-    this.init();
+    this.circle = null;
+    this.allCircles = [];
   }
 
-  init = () => {
-    this.root = document.getElementById("root");
-    const canvas = document.createElement("canvas");
-    canvas.width = FULL_WIDTH;
-    canvas.height = FULL_HEIGHT;
-    canvas.addEventListener("click", (event) => {
-      this.onClickCanvas && this.onClickCanvas(event.offsetX, event.offsetY);
+  drawOnClick = (el, cb) => {
+    el.addEventListener("click", cb);
+  };
+
+  drawCircle = (e) => {
+    this.circle = new Circle(e.offsetX, e.offsetY);
+    this.circle.init();
+    this.allCircles.push(this.circle);
+  };
+
+  rerender = () => {
+    this.allCircles.forEach((el,i,arr) => {
+      const newX = el.x + ((el.speed * TIMER) / 1000) * el.dx,
+        newY = el.y + ((el.speed * TIMER) / 1000) * el.dy;
+      el.setX(newX);
+      el.setY(newY);
+
+      this.allCircles.forEach((element, index, array) => {
+        if (element.x === el.x) {
+          return;
+        }
+        console.log(arr === array)
+        if (
+          !(
+            el.x - el.radius <= element.x - el.radius ||
+            el.x + el.radius >= element.x + element.radius
+          )
+        ) {
+          el.setDx(el.x + ((el.speed * TIMER) / 1000) * el.dx);
+        }
+        if (
+          !(
+            el.y - el.radius <= element.y - el.radius ||
+            el.y + el.radius >= element.y + element.radius
+          )
+        ) {
+          el.setDy(el.y + ((el.speed * TIMER) / 1000) * el.dy);
+        }
+      });
+      this.fixHorizontal(el);
+      this.fixVertical(el);
     });
-    canvas.style = "border: 2px solid magenta";
-
-    this.root.appendChild(canvas);
-    this.ctx = canvas.getContext("2d");
   };
 
-  drawCircle = (circle) => {
-    const { x, y, radius, color } = circle;
-
-    this.ctx.beginPath();
-    this.ctx.fillStyle = color;
-    this.ctx.strokeStyle = color;
-    this.ctx.arc(x, y, radius, 0, 2 * Math.PI);
-    this.ctx.fill();
-    this.ctx.closePath();
+  fixHorizontal = (el) => {
+    const { x, dx, radius } = el;
+    if (x - radius <= 0 || x + radius >= MAX_WIDTH) {
+      el.setDx(dx * -1);
+    }
   };
 
-  clear = () => {
-    this.ctx.clearRect(0, 0, FULL_WIDTH, FULL_HEIGHT);
-  };
-
-  setOnClickCanvas = (callback) => {
-    this.onClickCanvas = callback;
+  fixVertical = (el) => {
+    const { y, dy, radius } = el;
+    if (y - radius <= 0 || y + radius >= MAX_HEIGHT) {
+      el.setDy(dy * -1);
+    }
   };
 }

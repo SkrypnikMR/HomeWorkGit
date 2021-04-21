@@ -1,12 +1,14 @@
-import { Model } from "./Model/Model";
-import { View } from "./View";
-import { Controller } from "./Controller";
+import { Controller } from './controller'
+import { Circle } from './model'
+import { View } from './view'
 
-const init = () => {
-  const model = new Model();
-  const view = new View();
-  const controller = new Controller(model, view);
-};
+window.addEventListener('DOMContentLoaded', () => {
 
-init();
+  const view = new View()
+  const circle = new Circle()
+  view.drawOnClick(circle.svg, view.drawCircle)
 
+  const controller = new Controller(view)
+  controller.move()
+
+})

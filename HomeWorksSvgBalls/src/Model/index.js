@@ -1,1 +1,3 @@
-export * from './Model';
+import Circle from './Circle'
+
+export { Circle }
