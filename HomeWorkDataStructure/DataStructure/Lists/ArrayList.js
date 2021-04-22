@@ -1,4 +1,4 @@
-var IList = require("../../Interfaces/InterfaceList");
+var InterfaceList = require("../../Interfaces/InterfaceList");
 
 function ArrayList(capacity) {
   this.size = 0;
@@ -25,9 +25,7 @@ function ArrayList(capacity) {
     this.array = enlargedArray;
   };
 }
-var a = new ArrayList();
-
-ArrayList.prototype = Object.create(IList.prototype);
+ArrayList.prototype = Object.create(InterfaceList.prototype);
 ArrayList.constructor = ArrayList;
 ArrayList.prototype.getSize = function () {
   return this.size;
@@ -50,7 +48,7 @@ ArrayList.prototype.add = function (value) {
 };
 ArrayList.prototype.set = function (value, index) {
   if (index < 0 || index > this.array.length - 1) {
-    throw new Error(`AList don't have this index`);
+    throw new Error(`ArrayList don't have this index`);
   }
   this.array[index] = value;
 };
