@@ -1,0 +1,14 @@
+{
+  "name": "homeworkdatastructure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jest --coverage"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
