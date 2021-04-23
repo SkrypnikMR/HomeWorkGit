@@ -50,7 +50,44 @@ ArrayList.prototype.set = function (value, index) {
   if (index < 0 || index > this.array.length - 1) {
     throw new Error(`ArrayList don't have this index`);
   }
-  this.array[index] = value;
+  if (!this.array[index]) {
+    this.array[index] = value;
+    this.size++;
+  } else {
+    this.array[index] = value;
+  }
+};
+ArrayList.prototype.get = function (index) {
+  if (!this.array[index]) {
+    throw new Error("Element in collection on this position is not defined");
+  }
+  return this.array[index];
+};
+ArrayList.prototype.toArray = function () {
+  var result = [];
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] !== undefined) {
+      result.push(this.array[i]);
+    }
+  }
+  return result;
+};
+ArrayList.prototype.toString = function () {
+  var result = "";
+
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] !== undefined) {
+      this.array[i] !== this.array[this.array.length - 1]
+        ? (result += `${this.array[i]}, `)
+        : (result += `${this.array[i]}`);
+    }
+  }
+  return result;
 };
 
+var a = new ArrayList(3);
+a.add(2);
+a.add(3);
+a.add(4);
+console.log(a.toString());
 module.exports = ArrayList;
