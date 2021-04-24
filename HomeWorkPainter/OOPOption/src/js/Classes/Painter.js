@@ -1,6 +1,9 @@
 export default class Painter {
   constructor() {}
   drawIfPressed = (event, context, coordsArray) => {
+    if(!event || !context || !coordsArray){
+      throw new Error('work only with all arguments')
+    }
     const x = event.offsetX;
     const y = event.offsetY;
     const dx = event.movementX;

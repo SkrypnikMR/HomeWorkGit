@@ -1,5 +1,5 @@
 import "../css/style.css";
-import Painter from "./Classes/Pointer";
+import Painter from "./Classes/Painter";
 import Cleaner from "./Classes/Cleaner";
 import Changer from "./Classes/Changer";
 import DownloadMaster from "./Classes/DownloadMaster";
@@ -22,7 +22,6 @@ const init = () => {
   sessionStorage.setItem("canvas", JSON.stringify([])); // empty canvas array to sessionStorage
   changer.changeColor(colors.value, context); // set standart color for brash from input color type value
   changer.setStandartInterval(slider, 1, 50); // set standart interval of input type range for brash size;
-
   canvas.addEventListener("mousemove", (event) => {
     painter.drawIfPressed(event, context, coordsArray);
   });
