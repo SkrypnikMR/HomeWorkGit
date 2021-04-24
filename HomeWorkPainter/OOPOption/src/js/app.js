@@ -20,15 +20,14 @@ const init = () => {
   const downloadMaster = new DownloadMaster(); // DownloadMaster class instance for help with download canvas image in JSON or PNG
   var coordsArray = []; // array to downloadMaster
   sessionStorage.setItem("canvas", JSON.stringify([])); // empty canvas array to sessionStorage
-  changer.setStandartColor(colors.value, context); // set standart color for brash from input color type value
+  changer.changeColor(colors.value, context); // set standart color for brash from input color type value
   changer.setStandartInterval(slider, 1, 50); // set standart interval of input type range for brash size;
-  changer.setLineCap(context, "round");
 
   canvas.addEventListener("mousemove", (event) => {
     painter.drawIfPressed(event, context, coordsArray);
   });
   colors.addEventListener("change", (event) => {
-    changer.changeColor(event, context);
+    changer.changeColor(event.target.value, context);
   });
   slider.addEventListener("change", (event) => {
     changer.changeSize(event, context, sliderTittle);
