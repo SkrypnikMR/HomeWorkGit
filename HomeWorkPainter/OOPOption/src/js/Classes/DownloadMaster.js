@@ -1,6 +1,9 @@
 export default class DownloadMaster {
   constructor() {}
   downloadCanvasAsImg = (canvas) => {
+    if (!canvas) {
+      throw new Error("work only with argument");
+    }
     const link = document.createElement("a");
     link.setAttribute("download", "canvas.png");
     link.setAttribute(
@@ -10,6 +13,9 @@ export default class DownloadMaster {
     link.click();
   };
   downloadCanvasAsJSON = (array) => {
+    if (!array) {
+      throw new Error("work only with argument");
+    }
     const dataStr =
       "data:text/json;charset=utf-8," +
       encodeURIComponent(JSON.stringify(array));

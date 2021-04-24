@@ -19,17 +19,17 @@ export default class Changer {
     node.min = min;
     node.max = max;
   }
-  changeSizeText = (event, node) => {
-    if (!node || !value) {
+  changeSizeText = (text, node) => {
+    if (!text || !node) {
       throw new Error("work only with all arguments");
     }
-    node.textContent = `Brash size: ${event.target.value} px`;
+    node.textContent = `Brash size: ${text} px`;
   };
-  changeSize = (event, context, sliderTittle) => {
-    this.changeSizeText(event, sliderTittle);
-    context.lineWidth = event.target.value / 10;
-  };
-  changeSizeText = (event, sliderTittle) => {
-    sliderTittle.textContent = `Brash size: ${event.target.value} px`;
+  changeSize = (size, context, node) => {
+    if (!size || !context || !node) {
+      throw new Error("work only with all arguments");
+    }
+    this.changeSizeText(size, node);
+    context.lineWidth = size / 10;
   };
 }

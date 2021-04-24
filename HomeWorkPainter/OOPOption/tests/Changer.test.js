@@ -76,25 +76,52 @@ describe("Changer setStandartInterval", () => {
   });
 });
 describe("Changer changeSizeText", () => {
-    const changer = new Changer();
-    it("should to be defined", () => {
-      expect(changer.changeSizeText).toBeDefined();
-    });
-    it("should to be function", () => {
-      expect(typeof changer.changeSizeText).toBeDefined();
-    });
-    it("should called without arguments", () => {
-      try {
-        changer.changeSizeText();
-      } catch (e) {
-        expect(e.message).toBe("work only with all arguments");
-      }
-    });
-    it("should change textContent of node", () => {
-        
-      const node = { LineCap: "" };
-      const testValue = "lolkek";
-      changer.setLineCap(node, testValue);
-      expect(node.LineCap).toBe(testValue);
-    });
+  const changer = new Changer();
+  it("should to be defined", () => {
+    expect(changer.changeSizeText).toBeDefined();
   });
+  it("should to be function", () => {
+    expect(typeof changer.changeSizeText).toBeDefined();
+  });
+  it("should called without arguments", () => {
+    try {
+      changer.changeSizeText();
+    } catch (e) {
+      expect(e.message).toBe("work only with all arguments");
+    }
+  });
+  it("should change textContent of node", () => {
+    const node = { textContent: "" };
+    const testText = "kek";
+    changer.changeSizeText(testText, node);
+    expect(node.textContent).toBe(`Brash size: kek px`);
+  });
+});
+describe("Changer changeSize", () => {
+  const changer = new Changer();
+  const context = { lineWidth: 10 };
+  const node = {};
+  const size = 50;
+  changer.changeSizeText = jest.fn();
+  it("should to be defined", () => {
+    expect(changer.changeSize).toBeDefined();
+  });
+  it("should to be function", () => {
+    expect(typeof changer.changeSize).toBeDefined();
+  });
+  it("should called without arguments", () => {
+    try {
+      changer.changeSize();
+    } catch (e) {
+      expect(e.message).toBe("work only with all arguments");
+    }
+  });
+  it("should call a help function changeSizeText", () => {
+    changer.changeSize(size, context, node);
+    expect(changer.changeSizeText).toHaveBeenCalledTimes(1);
+  });
+  it("should change context lineWidth", () => {
+    changer.changeSize(size, context, node);
+    expect(context.lineWidth).toBe(size / 10);
+  });
+});

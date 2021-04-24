@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
     "start": "webpack serve --mode development --open",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "author": "Skripnik Maxim",
   "license": "ISC",

@@ -30,7 +30,7 @@ const init = () => {
     changer.changeColor(event.target.value, context);
   });
   slider.addEventListener("change", (event) => {
-    changer.changeSize(event, context, sliderTittle);
+    changer.changeSize(event.target.value, context, sliderTittle);
   });
   clearButton.addEventListener("click", () => {
     cleaner.clearCanvas(context, canvas);
