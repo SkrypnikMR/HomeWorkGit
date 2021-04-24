@@ -74,20 +74,104 @@ ArrayList.prototype.toArray = function () {
 };
 ArrayList.prototype.toString = function () {
   var result = "";
-
   for (var i = 0; i < this.array.length; i++) {
     if (this.array[i] !== undefined) {
-      this.array[i] !== this.array[this.array.length - 1]
-        ? (result += `${this.array[i]}, `)
-        : (result += `${this.array[i]}`);
+      result += this.array[i] + ",";
     }
   }
-  return result;
+  var fullestResult = result.substr(0, result.length - 1);
+  return fullestResult;
+};
+ArrayList.prototype.remove = function (value) {
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] === value) {
+      var deleteValue = this.array[i];
+      delete this.array[i];
+      this.size--;
+      return deleteValue;
+    }
+  }
+  throw new Error(`don't have this value in collection`);
+};
+ArrayList.prototype.contains = function (value) {
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] === value) {
+      return true;
+    }
+  }
+  return false;
+};
+ArrayList.prototype.minValue = function () {
+  if (this.getSize() === 0) {
+    throw new Error("collection is empty");
+  }
+  var minValue = this.array[0];
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] < minValue) {
+      minValue = this.array[i];
+    }
+  }
+  return minValue;
+};
+ArrayList.prototype.maxValue = function () {
+  if (this.getSize() === 0) {
+    throw new Error("collection is empty");
+  }
+  var maxValue = this.array[0];
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] > maxValue) {
+      maxValue = this.array[i];
+    }
+  }
+  return maxValue;
+};
+ArrayList.prototype.minIndex = function () {
+  if (this.getSize() === 0) {
+    throw new Error("collection is empty");
+  }
+  var minValue = this.array[0];
+  var minIndex;
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] < minValue) {
+      minValue = this.array[i];
+      minIndex = i;
+    }
+  }
+  return minIndex;
+};
+ArrayList.prototype.maxIndex = function () {
+  if (this.getSize() === 0) {
+    throw new Error("collection is empty");
+  }
+  var maxValue = this.array[0];
+  var maxIndex;
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] > maxValue) {
+      maxValue = this.array[i];
+      maxIndex = i;
+    }
+  }
+  return maxIndex;
+};
+ArrayList.prototype.reverse = function () {
+  if (this.getSize() === 0) {
+    throw new Error("collection is empty");
+  }
+  var newArray = [];
+  var undef = [];
+  for (var i = this.array.length - 1; i >= 0; i--) {
+    if (this.array[i] === undefined) {
+      undef.push(this.array[i]);
+      continue;
+    }
+    newArray.push(this.array[i]);
+  }
+  this.array = newArray.concat(undef);
+};
+ArrayList.prototype.halfReverse = function () {
+  if (this.getSize() === 0) {
+    throw new Error("collection is empty");
+  }
 };
 
-var a = new ArrayList(3);
-a.add(2);
-a.add(3);
-a.add(4);
-console.log(a.toString());
 module.exports = ArrayList;
