@@ -12,6 +12,7 @@
   "author": "Skripnik Maxim",
   "license": "ISC",
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env-standalone": "^7.8.3",
     "webpack-cli": "^4.5.0",
