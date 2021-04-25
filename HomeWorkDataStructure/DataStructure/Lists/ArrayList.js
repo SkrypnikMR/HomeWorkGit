@@ -158,19 +158,121 @@ ArrayList.prototype.reverse = function () {
     throw new Error("collection is empty");
   }
   var newArray = [];
-  var undef = [];
+  var undef = 0;
   for (var i = this.array.length - 1; i >= 0; i--) {
     if (this.array[i] === undefined) {
-      undef.push(this.array[i]);
+      undef++;
       continue;
     }
     newArray.push(this.array[i]);
   }
-  this.array = newArray.concat(undef);
+  this.array = newArray.concat(new Array(undef));
 };
 ArrayList.prototype.halfReverse = function () {
   if (this.getSize() === 0) {
     throw new Error("collection is empty");
+  }
+  var undef = this.array.length - this.size;
+  var array = this.toArray(this.array);
+  var firstPartLen = Math.floor(array.length / 2),
+    secondPartLen = array.length - firstPartLen,
+    newArr = [];
+  for (i = 0; i < secondPartLen; i++) {
+    newArr[i] = array[i + firstPartLen];
+  }
+  for (i = 0; i < firstPartLen; i++) {
+    newArr[i + secondPartLen] = array[i];
+  }
+  this.array = newArr.concat(new Array(undef));
+};
+ArrayList.prototype.retainAll = function (retainArray) {
+  if (this.getSize() === 0) {
+    throw new Error("Collection is empty");
+  }
+  if (!Array.isArray(retainArray)) {
+    throw new Error("Work only with array argument");
+  }
+  var array = [];
+  for (var m = 0; m < retainArray.length; m++) {
+    if (array.includes(retainArray[m])) continue;
+    array.push(retainArray[m]);
+  }
+  var newArr = [];
+  var newSize = 0;
+
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] === undefined) {
+      continue;
+    }
+    for (var k = 0; k < array.length; k++) {
+      if (this.array[i] === array[k]) {
+        newArr.push(this.array[i]);
+        newSize++;
+        break;
+      }
+    }
+  }
+  this.array = newArr.concat(new Array(this.array.length - newSize));
+  this.size = newSize;
+};
+ArrayList.prototype.removeAll = function (removeArray) {
+  if (this.getSize() === 0) {
+    throw new Error("Collection is empty");
+  }
+  if (!Array.isArray(removeArray)) {
+    throw new Error("Work only with array argument");
+  }
+  var array = [];
+  for (var m = 0; m < removeArray.length; m++) {
+    if (array.includes(removeArray[m])) continue;
+    array.push(removeArray[m]);
+  }
+  var newArr = [];
+  var undef = 0;
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] === undefined) {
+      undef++;
+      continue;
+    }
+    var count = 0;
+    for (var j = 0; j < array.length; j++) {
+      if (this.array[i] === array[j]) {
+        this.size--;
+        undef++;
+        count = 0;
+        break;
+      } else {
+        count++;
+      }
+    }
+    if (count !== 0) newArr.push(this.array[i]);
+  }
+  this.array = newArr.concat(new Array(undef));
+};
+ArrayList.prototype.sort = function () {
+  /*   if (this.getSize() === 0) {
+    throw new Error("Collection is empty");
+  }
+  if (this.array.length < 2) {
+    return;
+  }
+  var undef = 0;
+  var result = [];
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i] === undefined) {
+      undef++;
+      continue;
+    }
+    result.push(this.array)
+  } */
+};
+ArrayList.prototype.print = function () {
+  if (this.getSize() === 0) {
+    throw new Error("Collection is empty");
+  }
+  for (var i = 0; i < this.array.length; i++) {
+    if(this.array[i] === undefined) continue;
+    console.log(this.array[i]);
   }
 };
 
