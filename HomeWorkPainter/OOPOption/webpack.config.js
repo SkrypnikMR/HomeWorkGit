@@ -2,7 +2,7 @@ const HTMLPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: ["@babel/polyfill", "./src/js/app.js"],
+  entry: ["@babel/polyfill", "./src/js/init/index.js"],
   output: {
     path: __dirname + "/dist",
     filename: "bundle.js",

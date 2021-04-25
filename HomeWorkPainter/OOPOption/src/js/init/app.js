@@ -1,8 +1,7 @@
-import "../css/style.css";
-import Painter from "./Classes/Painter";
-import Cleaner from "./Classes/Cleaner";
-import Changer from "./Classes/Changer";
-import DownloadMaster from "./Classes/DownloadMaster";
+import Painter from "../Classes/Painter";
+import Cleaner from "../Classes/Cleaner";
+import Changer from "../Classes/Changer";
+import DownloadMaster from "../Classes/DownloadMaster";
 
 const init = () => {
   const canvas = document.querySelector("canvas"); // canvas node
