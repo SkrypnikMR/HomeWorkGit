@@ -64,3 +64,53 @@ describe("Painter drawIfPressed", () => {
     ]);
   });
 });
+describe("Painter drawLikeUser", () => {
+  it("should to be defined", () => {
+    expect(painter.drawLikeUser).toBeDefined();
+  });
+  it("should to be function", () => {
+    expect(typeof painter.drawLikeUser).toBeDefined();
+  });
+  it("should called without arguments", () => {
+    try{
+      const testPainter = new Painter();
+      testPainter.drawLikeUser();
+    }catch(e){
+      expect(e.message).toBe('work only with all arguments')
+    }
+  });
+  it("should all context methods has called, all context properties has changed.", () => {
+    const painter = new Painter();
+    const testDrowObject = {
+      x: 10,
+      y: 20,
+      dx: 10,
+      dy: 10,
+      color: "red",
+      brash: 10,
+    };
+    const context = {
+      beginPath: jest.fn(),
+      strokeStyle: "black",
+      lineWidth: 5,
+      moveTo: jest.fn(),
+      lineTo: jest.fn(),
+      stroke: jest.fn(),
+      closePath: jest.fn(),
+    };
+    painter.drawLikeUser(testDrowObject, context);
+    expect(context.beginPath).toHaveBeenCalled();
+    expect(context.strokeStyle).toBe(testDrowObject.color);
+    expect(context.lineWidth).toBe(testDrowObject.brash);
+    expect(context.moveTo).toHaveBeenCalledWith(
+      testDrowObject.x,
+      testDrowObject.y
+    );
+    expect(context.lineTo).toHaveBeenCalledWith(
+      testDrowObject.x - testDrowObject.dx,
+      testDrowObject.y - testDrowObject.dy
+    );
+    expect(context.stroke).toHaveBeenCalled();
+    expect(context.closePath).toHaveBeenCalled();
+  });
+});

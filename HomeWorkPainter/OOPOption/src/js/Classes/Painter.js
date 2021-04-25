@@ -35,6 +35,9 @@ export default class Painter {
     }
   };
   drawLikeUser = (drowObject, context) => {
+    if(!drowObject || !context){
+      throw new Error('work only with all arguments')
+    }
     const { x, y, dx, dy, color, brash } = drowObject;
     context.beginPath();
     context.strokeStyle = color;
