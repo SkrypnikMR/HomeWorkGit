@@ -24,6 +24,20 @@ function ArrayList(capacity) {
     }
     this.array = enlargedArray;
   };
+  this.__privateSort = function (array) {
+    if (array.length < 2) {
+      return array;
+    } else {
+      var center = array[Math.floor(Math.random() * array.length)];
+      var less = [];
+      var greater = [];
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] < center) less.push(array[i]);
+        else if (array[i] > center) greater.push(array[i]);
+      }
+    }
+    return this.__privateSort(less).concat(center).concat(this.__privateSort(greater));
+  };
 }
 ArrayList.prototype = Object.create(InterfaceList.prototype);
 ArrayList.constructor = ArrayList;
@@ -250,28 +264,30 @@ ArrayList.prototype.removeAll = function (removeArray) {
   this.array = newArr.concat(new Array(undef));
 };
 ArrayList.prototype.sort = function () {
-  /*   if (this.getSize() === 0) {
+  if (this.getSize() === 0) {
     throw new Error("Collection is empty");
   }
-  if (this.array.length < 2) {
-    return;
-  }
   var undef = 0;
-  var result = [];
+  var sortArray = [];
   for (var i = 0; i < this.array.length; i++) {
     if (this.array[i] === undefined) {
       undef++;
       continue;
     }
-    result.push(this.array)
-  } */
+    else {
+      sortArray.push(this.array[i]);
+    }
+  }
+  var result = this.__privateSort(sortArray);
+  this.array = result.concat(new Array(undef));
+
 };
 ArrayList.prototype.print = function () {
   if (this.getSize() === 0) {
     throw new Error("Collection is empty");
   }
   for (var i = 0; i < this.array.length; i++) {
-    if(this.array[i] === undefined) continue;
+    if (this.array[i] === undefined) continue;
     console.log(this.array[i]);
   }
 };

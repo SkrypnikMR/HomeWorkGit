@@ -35,7 +35,40 @@ describe("AList init", function () {
     }
   });
 });
-
+describe("ArrayList __privateSort", function () {
+  it("should be defined ", function () {
+    expect(new ArrayList().ensureCapacity).toBeDefined();
+  });
+  it("should be defined ", function () {
+    expect(typeof new ArrayList().ensureCapacity).toBe("function");
+  });
+  it("should this.array.length === testArray.length ", function () {
+    var testArray = new Array(3);
+    testArray.fill(3);
+    var a = new ArrayList(testArray);
+    a.ensureCapacity();
+    expect(a.array).toHaveLength(7);
+  });
+  it("should this.array = enlargedArray with empty slots", function () {
+    var testArray = [1, 2, 3, undefined, undefined, undefined, undefined];
+    var a = new ArrayList([1, 2, 3]);
+    a.ensureCapacity();
+    expect(a.array).toEqual(testArray);
+  });
+});
+describe("ArrayList __privateSort", function () {
+  it("should be defined ", function () {
+    expect(new ArrayList().__privateSort).toBeDefined();
+  });
+  it("should be defined ", function () {
+    expect(typeof new ArrayList().__privateSort).toBe("function");
+  });
+  it("should return sorted array", function(){
+    var testArray = [3,4,8,1];
+    var testArrayList = new ArrayList();
+    expect(testArrayList.__privateSort(testArray)).toEqual([1,3,4,8]);
+  })
+});
 describe("ArrayList getSize", function () {
   it("should be defined ", function () {
     var a = new ArrayList();
@@ -67,27 +100,6 @@ describe("ArrayList clear", function () {
     a.clear();
     expect(a.getSize()).toBe(0);
     expect(a.array).toHaveLength(10);
-    expect(a.array).toEqual(testArray);
-  });
-});
-describe("ArrayList esnureCapacity", function () {
-  it("should be defined ", function () {
-    expect(new ArrayList().ensureCapacity).toBeDefined();
-  });
-  it("should be defined ", function () {
-    expect(typeof new ArrayList().ensureCapacity).toBe("function");
-  });
-  it("should this.array.length === testArray.length ", function () {
-    var testArray = new Array(3);
-    testArray.fill(3);
-    var a = new ArrayList(testArray);
-    a.ensureCapacity();
-    expect(a.array).toHaveLength(7);
-  });
-  it("should this.array = enlargedArray with empty slots", function () {
-    var testArray = [1, 2, 3, undefined, undefined, undefined, undefined];
-    var a = new ArrayList([1, 2, 3]);
-    a.ensureCapacity();
     expect(a.array).toEqual(testArray);
   });
 });
@@ -642,5 +654,58 @@ describe("ArrayList print", function () {
     expect(console.log).toHaveBeenCalledWith(testvalue2);
     expect(console.log).toHaveBeenCalledWith(testvalue3);
     expect(console.log).not.toHaveBeenCalledWith();
+  });
+});
+describe("ArrayList sort", function () {
+  var test = new ArrayList();
+  it("should be defined ", function () {
+    expect(test.sort).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof test.sort).toBe("function");
+  });
+  it("should throw error if argument is no array or undefined", function () {
+    try {
+      var sad = new ArrayList();
+      sad.sort();
+    } catch (e) {
+      expect(e.message).toBe("Collection is empty");
+    }
+  });
+  it("should call help private Sort function ", function () {
+    var test = new ArrayList();
+    test.add(1);
+    test.add(10);
+    test.add(40);
+    test.add(2);
+    test.add(3);
+    test.__privateSort = jest.fn().mockReturnValue([]);
+    test.sort();
+    expect(test.__privateSort).toHaveBeenCalled();
+  });
+  it("should called with without undefined array help private Sort function ", function () {
+    var test1 = new ArrayList();
+    var test1Array = [1, 10, 40, 2, 3];
+    test1.add(1);
+    test1.add(10);
+    test1.add(40);
+    test1.add(2);
+    test1.add(3);
+    test1.__privateSort = jest.fn().mockReturnValue([]);
+    test1.sort();
+    expect(test1.__privateSort).toHaveBeenCalledWith(test1Array);
+  });
+  it("should sort collection ", function () {
+    var test2 = new ArrayList();
+    var mockReturn = [1, 2, 3, 10, 40];
+    var collection = mockReturn.concat(new Array(5));
+    test2.add(1);
+    test2.add(10);
+    test2.add(40);
+    test2.add(2);
+    test2.add(3);
+    test2.__privateSort = jest.fn().mockReturnValue(mockReturn);
+    test2.sort();
+    expect(test2.array).toEqual(collection);
   });
 });
