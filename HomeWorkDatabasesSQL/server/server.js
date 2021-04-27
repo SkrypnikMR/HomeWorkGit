@@ -39,62 +39,62 @@ app.listen(PORT, () => {
 });
 
 function watch(option) {
-  return new Promise((reject, resolve) => {
+  return new Promise((resolve, reject) => {
     const connection = mySQL.createConnection(dbConfig);
     switch (option) {
       case "1":
         connection.query(residentsCount, function (err, result) {
           if (err) throw err;
-          reject(result);
+          resolve(result);
         });
         connection.end();
         break;
       case "2":
         connection.query(averageAge, function (err, result) {
           if (err) throw err;
-          reject(result);
+          resolve(result);
         });
         connection.end();
         break;
       case "3":
         connection.query(noRepeatListOfLastnames, function (err, result) {
           if (err) throw err;
-          reject(result);
+          resolve(result);
         });
         connection.end();
         break;
       case "4":
         connection.query(listWithRepeatedCount , function (err, result) {
           if (err) throw err;
-          reject(result);
+          resolve(result);
         });
         connection.end();
         break;
       case "5":
         connection.query(letterBInCenter, function (err, result) {
           if (err) throw err;
-          reject(result);
+          resolve(result);
         });
         connection.end();
         break;
       case "6":
         connection.query(withoutHomeBoys, function (err, result) {
           if (err) throw err;
-          reject(result);
+          resolve(result);
         });
         connection.end();
         break;
       case "7":
         connection.query(underAgedFromTrue , function (err, result) {
           if (err) throw err;
-          reject(result);
+          resolve(result);
         });
         connection.end();
         break;
       case "8":
         connection.query(alphabetStreetsWithResidentsCount, function (err, result) {
           if (err) throw err;
-          reject(result);
+          resolve(result);
         });
         connection.end();
         break;
@@ -103,7 +103,7 @@ function watch(option) {
           ,
           function (err, result) {
             if (err) throw err;
-            reject(result);
+            resolve(result);
           }
         );
         connection.end();
@@ -113,7 +113,7 @@ function watch(option) {
           listOfstreetsResidentLessThree,
           function (err, result) {
             if (err) throw err;
-            reject(result);
+            resolve(result);
           }
         );
         connection.end();

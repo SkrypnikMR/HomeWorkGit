@@ -277,7 +277,6 @@ const render_consists_six_letters = (data, node) => {
 };
 const render_streets_less_then_three_residents = (data, node) => {
   node.innerHTML = "";
-  console.log(data);
   const newDiv = document.createElement("div");
   const newUl = document.createElement("ul");
   const newH1 = document.createElement("h1");
