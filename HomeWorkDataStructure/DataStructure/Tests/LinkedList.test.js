@@ -12,12 +12,37 @@ describe("LinkedList init", function () {
     expect(linkedList.root).toBe(null);
     expect(linkedList.size).toBe(0);
   });
-  it("should without argument", function () {
-    try {
-      var linkedList = new LinkedList(1);
-    } catch (e) {
-      expect(e.message).toBe("Initialization without arguments");
-    }
+});
+describe("LinkedList __reverseList", function () {
+  var test = new LinkedList();
+  it("should be defined ", function () {
+    expect(test.__reverseList).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof test.__reverseList).toBe("function");
+  });
+  it("should return reversed argument LinkedList", function () {
+    var testRoot = {
+      value: 3,
+      next: {
+        value: 2,
+        next: {
+          value: 1,
+          next: null,
+        },
+      },
+    };
+    var expectResult = {
+      value: 1,
+      next: {
+        value: 2,
+        next: {
+          value: 3,
+          next: null,
+        },
+      },
+    };
+    expect(test.__reverseList(testRoot)).toEqual(expectResult);
   });
 });
 describe("LinkedList clear", function () {
@@ -130,11 +155,7 @@ describe("LinkedList toArray", function () {
     expect(typeof linkedList.toArray).toBe("function");
   });
   it("should empty LinkedList", function () {
-    try {
-      linkedList.toArray();
-    } catch (e) {
-      expect(e.message).toBe("LinkedList is empty");
-    }
+    expect(linkedList.toArray()).toEqual([]);
   });
   it("should returned array of LinkedList elements values", function () {
     linkedList.add(2);
@@ -172,13 +193,6 @@ describe("LinkedList set", function () {
       linkedList.set(1, "1");
     } catch (e) {
       expect(e.message).toBe("work only with number value and number index");
-    }
-  });
-  it("should empty Linked list", function () {
-    try {
-      linkedList.set(1, 1);
-    } catch (e) {
-      expect(e.message).toBe("Linked list is empty");
     }
   });
   it("should empty Linked list", function () {
@@ -227,13 +241,6 @@ describe("LinkedList get", function () {
       linkedList.get(1, 1);
     } catch (e) {
       expect(e.message).toBe("work only with one number argument");
-    }
-  });
-  it("should empty linked list", function () {
-    try {
-      linkedList.get(1);
-    } catch (e) {
-      expect(e.message).toBe("LinkedList is empty!");
     }
   });
   it("should index out of range", function () {
@@ -286,14 +293,6 @@ describe("LinkedList remove", function () {
       expect(e.message).toBe("work only with one number argument");
     }
   });
-  it("should empty LinkedList call ", function () {
-    try {
-      var linkedList1 = new LinkedList();
-      linkedList1.remove(1);
-    } catch (e) {
-      expect(e.message).toBe("LinkedList is empty");
-    }
-  });
   it("should remove item by value, and not drop links", function () {
     var testArray = [1, 5];
     linkedList.remove(2);
@@ -333,13 +332,9 @@ describe("LinkedList toString", function () {
   it("should be function", function () {
     expect(typeof linkedList.toString).toBe("function");
   });
-  it("should throw error", function () {
-    var emptyLinkedList = new LinkedList();
-    try {
-      emptyLinkedList.toString();
-    } catch (e) {
-      expect(e.message).toBe("LinkedList is empty");
-    }
+  it("should empty linkedList", function () {
+    var exp = new LinkedList();
+    expect(exp.toString()).toBe("");
   });
   it("should return string of linkedList items values", function () {
     var testString = "1,2,3,4,5";
@@ -359,13 +354,9 @@ describe("LinkedList contains", function () {
   it("should be function", function () {
     expect(typeof linkedList.contains).toBe("function");
   });
-  it("should throw error", function () {
-    var emptyLinkedList = new LinkedList();
-    try {
-      emptyLinkedList.contains();
-    } catch (e) {
-      expect(e.message).toBe("LinkedList is empty");
-    }
+  it("shold return false in empty LinkedLits", function () {
+    var exp = new LinkedList();
+    expect(exp.contains()).toBe(false);
   });
   it("should return true because contain", function () {
     expect(linkedList.contains(4)).toBe(true);
@@ -387,13 +378,9 @@ describe("LinkedList minValue", function () {
   it("should be function", function () {
     expect(typeof linkedList.minValue).toBe("function");
   });
-  it("should throw error", function () {
+  it("should empty LinkedList", function () {
     var emptyLinkedList = new LinkedList();
-    try {
-      emptyLinkedList.minValue();
-    } catch (e) {
-      expect(e.message).toBe("LinkedList is empty");
-    }
+    expect(emptyLinkedList.minValue()).toBe(-1);
   });
   it("should return minValue from LinkedList, minValue first Element", function () {
     expect(linkedList.minValue()).toBe(1);
@@ -538,5 +525,105 @@ describe("LinkedList maxIndex", function () {
     linkedListTurboTestExtra.add(200);
     linkedListTurboTestExtra.add(8000);
     expect(linkedListTurboTestExtra.maxIndex()).toBe(4);
+  });
+});
+describe("LinkedList reverse", function () {
+  var linkedList = new LinkedList();
+  it("should be defined ", function () {
+    expect(linkedList.reverse).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof linkedList.reverse).toBe("function");
+  });
+  it("should empty LinkedList", function () {
+    expect(linkedList.reverse()).toBe();
+    expect(linkedList.root).toBe(null);
+  });
+  it("should reverse Linked List", function () {
+    var test = new LinkedList();
+    var testArray = [3, 2, 1];
+    var testRoot = {
+      value: 3,
+      next: {
+        value: 2,
+        next: {
+          value: 1,
+          next: null,
+        },
+      },
+    };
+    test.__reverseList = jest.fn().mockReturnValue(testRoot);
+    test.add(1);
+    test.add(2);
+    test.add(3);
+    var oldArray = test.toArray();
+    test.reverse();
+    expect(test.__reverseList).toHaveBeenCalledTimes(1);
+    expect(test.toArray()).toEqual(testArray);
+    expect(test.toArray()).not.toEqual(oldArray);
+    expect(test.root).toEqual(testRoot);
+  });
+});
+describe("LinkedList halfReverse", function () {
+  var linkedList = new LinkedList();
+  it("should be defined ", function () {
+    expect(linkedList.halfReverse).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof linkedList.halfReverse).toBe("function");
+  });
+  it("should empty LinkedList", function () {
+    expect(linkedList.halfReverse()).toBe();
+  });
+  it("should linked list of 2 elements", function () {
+    var test = new LinkedList();
+    var testArray = [2, 1];
+    test.add(1);
+    test.add(2);
+    test.halfReverse();
+    expect(test.toArray()).toEqual(testArray);
+  });
+  it("should two parts of linked list will be swapped", function () {
+    var testArray = [4, 5, 6, 1, 2, 3];
+    linkedList.add(1);
+    linkedList.add(2);
+    linkedList.add(3);
+    linkedList.add(4);
+    linkedList.add(5);
+    linkedList.add(6);
+    linkedList.halfReverse();
+    expect(linkedList.toArray()).toEqual(testArray);
+  });
+  it("should two parts of linked list will be swapped", function () {
+    var testArray = [3, 4, 5, 1, 2];
+    var extraTest = new LinkedList();
+    extraTest.add(1);
+    extraTest.add(2);
+    extraTest.add(3);
+    extraTest.add(4);
+    extraTest.add(5);
+    extraTest.halfReverse();
+    expect(extraTest.toArray()).toEqual(testArray);
+  });
+});
+describe("LinkedList print", function () {
+  var testLinkedList = new LinkedList();
+  it("should be defined ", function () {
+    expect(testLinkedList.print).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof testLinkedList.print).toBe("function");
+  });
+  it("should call console.log with not wrong arguments ", function () {
+    var testValue1 = 1;
+    var testValue2 = 2;
+    var testString =
+      "1" + "\n" + "\u2193" + "\n" + "2" + "\n" + "\u2193" + "\n" + "null";
+    testLinkedList.add(testValue1);
+    testLinkedList.add(testValue2);
+    console.log = jest.fn();
+    testLinkedList.print();
+    expect(console.log).toHaveBeenCalled();
+    expect(console.log).toHaveBeenCalledWith(testString);
   });
 });
