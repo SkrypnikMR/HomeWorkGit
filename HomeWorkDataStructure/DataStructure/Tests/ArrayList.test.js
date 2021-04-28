@@ -35,7 +35,7 @@ describe("AList init", function () {
     }
   });
 });
-describe("ArrayList __privateSort", function () {
+describe("ArrayList ensureCapacity", function () {
   it("should be defined ", function () {
     expect(new ArrayList().ensureCapacity).toBeDefined();
   });

@@ -16,6 +16,22 @@ function LinkedList() {
     root.next = null;
     return newRoot;
   };
+  this.__privateSort = function (array) {
+    if (array.length < 2) {
+      return array;
+    } else {
+      var center = array[Math.floor(Math.random() * array.length)];
+      var less = [];
+      var greater = [];
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] < center) less.push(array[i]);
+        else if (array[i] > center) greater.push(array[i]);
+      }
+    }
+    return this.__privateSort(less)
+      .concat(center)
+      .concat(this.__privateSort(greater));
+  };
 }
 
 LinkedList.prototype = Object.create(InterfaceList.prototype);
@@ -243,6 +259,56 @@ LinkedList.prototype.print = function () {
   printString += "null";
   console.log(printString);
 };
+LinkedList.prototype.removeAll = function (array) {
+  if (array.length < 1 || !Array.isArray(array)) {
+    return;
+  }
+  for (var i = 0; i < array.length; i++) {
+    if (!this.contains(array[i]) || array[i] === undefined) {
+      continue;
+    }
+    var tempNode = this.root;
+    while (tempNode !== null) {
+      if (tempNode.value === array[i]) {
+        this.remove(array[i]);
+      }
+      tempNode = tempNode.next;
+    }
+  }
+};
+LinkedList.prototype.retainAll = function (array) {
+  if (array.length < 1 || !Array.isArray(array)) {
+    return;
+  }
+  var size = this.size > array.length ? this.size : array.length;
+  var tempArray = [];
+  for (var i = 0; i < size; i++) {
+    var tempNode = this.root;
+    while (tempNode !== null) {
+      if (tempNode.value !== array[i]) {
+        tempArray.push(tempNode.value);
+      }
+      tempNode = tempNode.next;
+    }
+  }
+  for (var j = 0; j < tempArray.length; j++) {
+    for (var k = 0; k < array.length; k++) {
+      if (array[k] === tempArray[j]) {
+        tempArray[j] = undefined;
+      }
+    }
+  }
+  this.removeAll(tempArray);
+};
+LinkedList.prototype.sort = function(){
+  var oldArray = this.toArray(this.root);
+  var newArray = this.__privateSort(oldArray);
+  var newLinkedList = new LinkedList();
+  for(var i = 0; i < newArray.length; i++){
+    newLinkedList.add(newArray[i]);
+  }
+  this.root = newLinkedList.root;
+}
 
 
 module.exports = LinkedList;

@@ -13,6 +13,19 @@ describe("LinkedList init", function () {
     expect(linkedList.size).toBe(0);
   });
 });
+describe("LinkedList __privateSort", function () {
+  it("should be defined ", function () {
+    expect(new LinkedList().__privateSort).toBeDefined();
+  });
+  it("should be defined ", function () {
+    expect(typeof new LinkedList().__privateSort).toBe("function");
+  });
+  it("should return sorted array", function(){
+    var testArray = [3,4,8,1];
+    var testLinkedList = new LinkedList();
+    expect(testLinkedList.__privateSort(testArray)).toEqual([1,3,4,8]);
+  })
+});
 describe("LinkedList __reverseList", function () {
   var test = new LinkedList();
   it("should be defined ", function () {
@@ -625,5 +638,124 @@ describe("LinkedList print", function () {
     testLinkedList.print();
     expect(console.log).toHaveBeenCalled();
     expect(console.log).toHaveBeenCalledWith(testString);
+  });
+});
+describe("LinkedList removeAll", function () {
+  var testLinkedList = new LinkedList();
+  it("should be defined ", function () {
+    expect(testLinkedList.removeAll).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof testLinkedList.removeAll).toBe("function");
+  });
+  it("should argument not array or empty", function () {
+    var test1 = new LinkedList();
+    test1.add(1);
+    test1.add(2);
+    expect(test1.removeAll([])).toBe();
+    expect(test1.removeAll({})).toBe();
+  });
+  it("should call helpers like this.contains, this.remove", function () {
+    testLinkedList.add(1);
+    testLinkedList.add(2);
+    testLinkedList.add(3);
+    testLinkedList.contains = jest.fn().mockReturnValue(true);
+    testLinkedList.remove = jest.fn();
+    testLinkedList.removeAll([1, 2, 3]);
+    expect(testLinkedList.contains).toHaveBeenCalledTimes(3);
+    expect(testLinkedList.remove).toHaveBeenCalledWith(1);
+    expect(testLinkedList.remove).toHaveBeenCalledWith(2);
+    expect(testLinkedList.remove).toHaveBeenCalledWith(3);
+  });
+  it("should remove all nodes from array arguments", function () {
+    var firstLinkedList = new LinkedList();
+    var testArray = [1, 2, 3, 4];
+    firstLinkedList.add(1);
+    firstLinkedList.add(2);
+    firstLinkedList.add(3);
+    firstLinkedList.add(5);
+    firstLinkedList.removeAll(testArray);
+    expect(firstLinkedList.getSize()).toBe(1);
+    expect(firstLinkedList.root).toEqual({ value: 5, next: null });
+    expect(firstLinkedList.toArray()).toEqual([5]);
+  });
+  it("should remove nothing, because values not contain in LinkedList", function () {
+    var secondLinkedList = new LinkedList();
+    var testArray = [6, 7, 8, 9];
+    secondLinkedList.add(1);
+    secondLinkedList.add(2);
+    secondLinkedList.add(3);
+    secondLinkedList.add(5);
+    var expectRoot = secondLinkedList.root;
+    secondLinkedList.removeAll(testArray);
+    expect(secondLinkedList.getSize()).toBe(4);
+    expect(secondLinkedList.root).toEqual(expectRoot);
+  });
+});
+describe("LinkedList retainAll", function () {
+  var testLinkedList = new LinkedList();
+  it("should be defined ", function () {
+    expect(testLinkedList.retainAll).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof testLinkedList.retainAll).toBe("function");
+  });
+  it("should argument not array or empty", function () {
+    var test1 = new LinkedList();
+    test1.add(1);
+    test1.add(2);
+    expect(test1.retainAll([])).toBe();
+    expect(test1.retainAll({})).toBe();
+  });
+  it("should only elements that exist in the linkedList will remain", function () {
+    testLinkedList.add(1);
+    testLinkedList.add(2);
+    testLinkedList.add(3);
+    testLinkedList.retainAll([2]);
+    expect(testLinkedList.getSize()).toBe(1);
+    expect(testLinkedList.toArray()).toEqual([2]);
+    expect(testLinkedList.root).toEqual({ value: 2, next: null });
+  });
+  it("should empty LinkedList", function () {
+    var test = new LinkedList();
+    test.add(1);
+    test.add(2);
+    test.add(3);
+    test.retainAll([4, 5, 6]);
+    expect(test.getSize()).toBe(0);
+    expect(test.toArray()).toEqual([]);
+    expect(test.root).toEqual(null);
+  });
+});
+describe("LinkedList sort", function () {
+  var linkedList = new LinkedList();
+  it("should be defined ", function () {
+    expect(linkedList.sort).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof linkedList.sort).toBe("function");
+  });
+  it("should sort linkedList", function () {
+    var test1 = new LinkedList();
+    test1.add(1);
+    test1.add(8);
+    test1.add(10);
+    test1.add(2);
+    test1.reverse();
+    test1.sort();
+    expect(test1.toArray()).toEqual([1, 2, 8, 10]);
+  });
+  it("should call methods", function () {
+    var test2 = new LinkedList();
+    test2.toArray = jest.fn();
+    test2.__privateSort = jest.fn().mockReturnValue([1,2,8,10]);
+    test2.add(1);
+    test2.add(8);
+    test2.add(10);
+    test2.add(2);
+    test2.reverse();
+    test2.sort();
+    expect(test2.toArray).toHaveBeenCalledTimes(1);
+    expect(test2.__privateSort).toHaveBeenCalledTimes(1);
   });
 });
