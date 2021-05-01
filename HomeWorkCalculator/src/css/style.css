@@ -1,0 +1,78 @@
+body {
+  background-color: rgba(198, 198, 240, 0.2);
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  background-color: black;
+  padding: 4px;
+  border-radius: 25px;
+  max-width: 350px;
+  font-family: "Tahoma";
+  color: white;
+}
+.content__item {
+  background-color: rgb(68, 66, 66);
+  padding: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+.content__item:active {
+  background-color: gray;
+}
+.content__item-tablo {
+  grid-column: 1/-1;
+  background-color: black;
+  width: 300px;
+  height: 100%;
+}
+.content__item-gray {
+  color: black;
+  background-color: rgb(182, 182, 182);
+}
+.content__item-gray:ative {
+  background-color: rgb(230, 224, 224);
+}
+.content__item-zero {
+  grid-column: 1/3;
+  border-radius: 50px;
+  width: 80%;
+}
+.content__item-ingeneer {
+  grid-column: 1/4;
+  background-color: gray;
+  border-radius: 25px;
+  width: 85%;
+}
+.content__item-ingeneer:active {
+  background-color: black;
+}
+
+.content__item-orange {
+  background-color: rgb(243, 100, 10);
+}
+.content__item-orange:active {
+  background-color: orange;
+}
+.content__item-tablo input {
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding-top:80px;
+  border: none;
+  outline: none;
+  text-align: right;
+  font-size: 45px;
+}
