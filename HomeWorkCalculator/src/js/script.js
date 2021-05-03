@@ -1,103 +1,4 @@
-import "../css/style.css";
-
-const init = () => {
-  //main
-  const displayWrapper = document.querySelector(".content__item-tablo");
-  const content = document.querySelector(".content");
-  const hided = document.querySelectorAll(".hided");
-  const display = document.querySelector("#tablo");
-  const clear = document.querySelector("#clear");
-  const backspace = document.querySelector("#backspace");
-  const ingeneer = document.querySelector("#ingeneer");
-  const leftBkt = document.querySelector("#leftBkt");
-  const rightBkt = document.querySelector("#rightBkt");
-  const division = document.querySelector("#division");
-  const multiplication = document.querySelector("#multiplication");
-  const minus = document.querySelector("#minus");
-  const plus = document.querySelector("#plus");
-  const result = document.querySelector("#result");
-  const coma = document.querySelector("#coma");
-  const zero = document.querySelector("#zero");
-  const one = document.querySelector("#one");
-  const two = document.querySelector("#two");
-  const three = document.querySelector("#three");
-  const four = document.querySelector("#four");
-  const five = document.querySelector("#five");
-  const six = document.querySelector("#six");
-  const seven = document.querySelector("#seven");
-  const eight = document.querySelector("#eight");
-  const nine = document.querySelector("#nine");
-
-  zero.addEventListener("click", (event) => sendToDisplay(event, display));
-  one.addEventListener("click", (event) => sendToDisplay(event, display));
-  two.addEventListener("click", (event) => sendToDisplay(event, display));
-  three.addEventListener("click", (event) => sendToDisplay(event, display));
-  four.addEventListener("click", (event) => sendToDisplay(event, display));
-  five.addEventListener("click", (event) => sendToDisplay(event, display));
-  six.addEventListener("click", (event) => sendToDisplay(event, display));
-  seven.addEventListener("click", (event) => sendToDisplay(event, display));
-  eight.addEventListener("click", (event) => sendToDisplay(event, display));
-  nine.addEventListener("click", (event) => sendToDisplay(event, display));
-  minus.addEventListener("click", (event) => sendToDisplay(event, display));
-  plus.addEventListener("click", (event) => sendToDisplay(event, display));
-  division.addEventListener("click", (event) => sendToDisplay(event, display));
-  coma.addEventListener("click", (event) => sendToDisplay(event, display));
-  multiplication.addEventListener("click", (event) =>
-    sendToDisplay(event, display)
-  );
-  clear.addEventListener("click", (event) => clearDisplay(display));
-  backspace.addEventListener("click", (event) =>
-    useBackspaceOnDisplay(display)
-  );
-  result.addEventListener("click", (event) => printResult(display));
-  leftBkt.addEventListener("click", (event) => sendToDisplay(event, display));
-  rightBkt.addEventListener("click", (event) => sendToDisplay(event, display));
-  ingeneer.addEventListener("click", (event) =>
-    showIngeneerCalc(event, content, displayWrapper, hided, zero)
-  );
-  // ingeeneer calc
-  const ln = document.querySelector("#ln");
-  const minusOne = document.querySelector("#minusOne");
-  ln.addEventListener("click", (event) => takeLn(display));
-  minusOne.addEventListener("click", (event) =>
-    reversePositivityOrNegativity(display)
-  );
-  const pi = document.querySelector("#pi");
-  pi.addEventListener("click", () => takePI(display));
-  const oneDeleteX = document.querySelector("#oneDeleteX");
-  oneDeleteX.addEventListener("click", () => takeOneDeleteX(display));
-  const module = document.querySelector("#module");
-  module.addEventListener("click", () => takeModule(display));
-  const squared = document.querySelector("#squared");
-  squared.addEventListener("click", () => takePower(display, 2));
-  const sqrt = document.querySelector("#sqrt");
-  sqrt.addEventListener("click", () => takeSqrt(display));
-  const mod = document.querySelector("#mod");
-  mod.addEventListener("click", (event) => sendToDisplay(event, display));
-  const e = document.querySelector("#e");
-  e.addEventListener("click", (event) => takeE(display));
-  const exp = document.querySelector("#exp");
-  exp.addEventListener("click", (event) => sendToDisplay(event, display));
-  const log = document.querySelector("#log");
-  log.addEventListener("click", (event) => sendToDisplay(event, display));
-  const random = document.querySelector("#random");
-  random.addEventListener("click", () => takeRND(display));
-  const factorial = document.querySelector("#factorial");
-  factorial.addEventListener("click", () =>
-    takeFactorial(display, getFactorial)
-  );
-  const tenPower = document.querySelector("#tenPower");
-  tenPower.addEventListener("click", () => takePower(display, 10));
-  const xPowerY = document.querySelector("#xPowerY");
-  xPowerY.addEventListener("click", (event) => sendToDisplay(event, display));
-  const stanadart = document.querySelector("#standart");
-  stanadart.addEventListener("click", (event) =>
-    showStandartCalc(event, content, displayWrapper, hided, zero, ingeneer)
-  );
-};
-init();
-
-const sendToDisplay = (event, display) => {
+export const sendToDisplay = (event, display) => {
   if (event.target.textContent === "x^y") {
     event.target.textContent = "^";
   }
@@ -145,10 +46,15 @@ const sendToDisplay = (event, display) => {
       )}))`;
     } else if (inBracket.includes("log")) {
       newInBracket = `${inBracket.replace("log", "*Math.log10(")})`;
-    } else {
+    } else if (
+      !inBracket.includes("Mod") &&
+      !inBracket.includes("exp") &&
+      !inBracket.includes("log")
+    ) {
       newInBracket = inBracket;
     }
     const res = eval(newInBracket);
+
     if (lastIndexOfLeftBracket !== 0) {
       display.value = display.value.substr(0, lastIndexOfLeftBracket) + res;
       return -1;
@@ -170,10 +76,6 @@ const sendToDisplay = (event, display) => {
     event.target.textContent === "(";
   const option5 = display.value === "0" && event.target.textContent === ".";
   if (optionBkt1 || optionBkt2 || optionBkt3 || optionBkt4 || option5) {
-    display.value += event.target.textContent;
-    return -1;
-  }
-  if (display.value.substr(display.value.length - 1) === ")") {
     display.value += event.target.textContent;
     return -1;
   }
@@ -200,17 +102,10 @@ const sendToDisplay = (event, display) => {
   display.value += event.target.textContent;
 };
 
-const clearDisplay = (display) => {
+export const clearDisplay = (display) => {
   display.value = 0;
 };
-
-const useBackspaceOnDisplay = (display) => {
-  display.value.length === 1
-    ? (display.value = 0)
-    : (display.value = display.value.substr(0, display.value.length - 1));
-};
-
-const printResult = (display) => {
+export const printResult = (display) => {
   const symbols = ["/", "+", "-", "*", "g", "d", "p", "^"];
   for (let i = 0; i < symbols.length; i++) {
     if (display.value.substr(display.value.length - 1) === symbols[i]) {
@@ -223,26 +118,30 @@ const printResult = (display) => {
     const result = eval(display.value);
     if (result.toString().length > 12) {
       display.value = parseFloat(result.toFixed(5).toString());
-      return;
+      return -2;
     }
     display.value = result;
-    return;
+    return -1;
   }
   if (display.value.includes("Mod")) {
     display.value = display.value.replace("Mod", "%");
     const result = eval(display.value);
     if (result.toString().length > 12) {
       display.value = parseFloat(result.toFixed(5).toString());
-      return;
+      return -2;
     }
+    display.value = result;
+    return -1;
   }
   if (display.value.includes("^")) {
     display.value = display.value.replace("^", "**");
     const result = eval(display.value);
     if (result.toString().length > 12) {
       display.value = parseFloat(result.toFixed(5).toString());
-      return;
+      return -2;
     }
+    display.value = result;
+    return -1;
   }
   if (display.value.includes("exp")) {
     display.value = `Number(${display.value.replace(
@@ -252,27 +151,37 @@ const printResult = (display) => {
     const result = eval(display.value);
     if (result.toString().length > 12) {
       display.value = result;
-      return;
+      return -2;
     }
     display.value = result;
-    return 1;
+    return -1;
   }
   const result = eval(display.value);
   if (result.toString().length > 12) {
     display.value = parseFloat(result.toFixed(5).toString());
-    return;
+    return -2;
   }
   display.value = result;
 };
-
-const showIngeneerCalc = (event, content, displayWrapper, hided, zero) => {
+export const useBackspaceOnDisplay = (display) => {
+  display.value.length === 1
+    ? (display.value = 0)
+    : (display.value = display.value.substr(0, display.value.length - 1));
+};
+export const showIngeneerCalc = (
+  event,
+  content,
+  displayWrapper,
+  hided,
+  zero
+) => {
   content.classList.add("vibro");
   content.classList.add("disappear");
   const timeOut = setTimeout(() => {
     content.classList.remove("vibro");
     content.classList.remove("disappear");
-    content.classList.add("content__big");
     displayWrapper.classList.add("tablo__big");
+    content.classList.add("content__big");
     zero.classList.add("zero__big");
     event.target.classList.add("hide");
     for (let i = 0; i < hided.length; i++) {
@@ -281,7 +190,14 @@ const showIngeneerCalc = (event, content, displayWrapper, hided, zero) => {
     clearTimeout(timeOut);
   }, 3000);
 };
-const showStandartCalc = (event, content, displayWrapper, hided, zero, ingeneer) =>  {
+export const showStandartCalc = (
+  event,
+  content,
+  displayWrapper,
+  hided,
+  zero,
+  ingeneer
+) => {
   content.classList.add("vibro");
   content.classList.add("disappear");
   const timeOut = setTimeout(() => {
@@ -291,19 +207,19 @@ const showStandartCalc = (event, content, displayWrapper, hided, zero, ingeneer)
     displayWrapper.classList.remove("tablo__big");
     zero.classList.remove("zero__big");
     event.target.classList.add("hide");
-    ingeneer.classList.remove('hide');
+    ingeneer.classList.remove("hide");
     for (let i = 0; i < hided.length; i++) {
       hided[i].classList.add("hide");
     }
     clearTimeout(timeOut);
   }, 3000);
-}
+};
 
-const takeLn = (display) => {
+export const takeLn = (display) => {
   if (display.value === "0") {
     return -1;
   }
-  const accept = ["+", "-", "/", "*", "(", "d"];
+  const accept = ["+", "-", "/", "*", "(", "d", "p", "g", "^"];
   for (let i = 0; i < accept.length; i++) {
     if (display.value.substr(display.value.length - 1, 1) === accept[i]) {
       return -1;
@@ -344,11 +260,11 @@ const takeLn = (display) => {
   }
   display.value = Math.log(eval(display.value));
 };
-const reversePositivityOrNegativity = (display) => {
+export const reversePositivityOrNegativity = (display) => {
   if (display.value === "0") {
     return -1;
   }
-  const accept = ["+", "-", "/", "*", "(", "d"];
+  const accept = ["+", "-", "/", "*", "(", "d", "p", "g", "^"];
   for (let i = 0; i < accept.length; i++) {
     if (display.value.substr(display.value.length - 1, 1) === accept[i]) {
       return -1;
@@ -361,13 +277,6 @@ const reversePositivityOrNegativity = (display) => {
     display.value = display.value.substr(0, lastIndexOfPlus + 1) + result;
     return -1;
   }
-  /*   if (display.value.includes("-")) {
-    const lastIndexOfMinus = display.value.lastIndexOf("-");
-    const result =
-      display.value.substr(lastIndexOfMinus + 1, display.value.length) * -1;
-    display.value = display.value.substr(0, lastIndexOfMinus + 1) + result;
-    return -1;
-  } */
   if (display.value.includes("/")) {
     const lastIndexOfDelete = display.value.lastIndexOf("/");
     const result =
@@ -384,12 +293,12 @@ const reversePositivityOrNegativity = (display) => {
   }
   display.value = eval(display.value) * -1;
 };
-const takePI = (display) => {
+export const takePI = (display) => {
   if (display.value === "0") {
     display.value = Math.PI;
     return -1;
   }
-  const accept = ["+", "-", "/", "*", "(", "d"];
+  const accept = ["+", "-", "/", "*", "(", "d", "p", "g", "^"];
   for (let i = 0; i < accept.length; i++) {
     if (display.value.substr(display.value.length - 1, 1) === accept[i]) {
       display.value += Math.PI;
@@ -398,7 +307,7 @@ const takePI = (display) => {
   }
 };
 
-const takeOneDeleteX = (display) => {
+export const takeOneDeleteX = (display) => {
   if (display.value === "0") {
     return -1;
   }
@@ -451,10 +360,10 @@ const takeOneDeleteX = (display) => {
   display.value = 1 / eval(display.value);
 };
 
-const takeModule = (display) => {
+export const takeModule = (display) => {
   if (
     display.value === "0" ||
-    display.value.charAt(display.value.length - 1) == "("
+    display.value.charAt(display.value.length - 1) === "("
   ) {
     return -1;
   }
@@ -484,14 +393,18 @@ const takeModule = (display) => {
   }
   display.value = Math.abs(display.value);
 };
-const takePower = (display, mode) => {
+export const takePower = (display, mode) => {
   if (
     display.value === "0" ||
-    display.value.charAt(display.value.length - 1) == "(" ||
-    display.value.charAt(display.value.length - 1) == "+" ||
-    display.value.charAt(display.value.length - 1) == "*" ||
-    display.value.charAt(display.value.length - 1) == "/" ||
-    display.value.charAt(display.value.length - 1) == "-"
+    display.value.charAt(display.value.length - 1) === "(" ||
+    display.value.charAt(display.value.length - 1) === "+" ||
+    display.value.charAt(display.value.length - 1) === "*" ||
+    display.value.charAt(display.value.length - 1) === "/" ||
+    display.value.charAt(display.value.length - 1) === "-" ||
+    display.value.charAt(display.value.length - 1) === "d" ||
+    display.value.charAt(display.value.length - 1) === "g" ||
+    display.value.charAt(display.value.length - 1) === "p" ||
+    display.value.charAt(display.value.length - 1) === "^"
   ) {
     return -1;
   }
@@ -549,25 +462,13 @@ const takePower = (display, mode) => {
     display.value = display.value.substr(0, lastIndexOfMult + 1) + result;
     return -1;
   }
-  if (display.value.includes("(")) {
-    const lastIndexOfLeftBracket = display.value.lastIndexOf("(");
-    const result = Math.pow(
-      eval(
-        display.value.substr(lastIndexOfLeftBracket + 1, display.value.length)
-      ),
-      mode
-    );
-    display.value =
-      display.value.substr(0, lastIndexOfLeftBracket + 1) + result;
-    return -1;
-  }
   if (mode === 10) {
     display.value = Math.pow(10, display.value);
     return -1;
   }
   display.value = Math.pow(display.value, mode);
 };
-const takeE = (display) => {
+export const takeE = (display) => {
   if (
     display.value === "0" ||
     display.value.charAt(display.value.length - 1) == "(" ||
@@ -610,26 +511,15 @@ const takeE = (display) => {
     display.value = display.value.substr(0, lastIndexOfMult + 1) + result;
     return -1;
   }
-  if (display.value.includes("(")) {
-    const lastIndexOfLeftBracket = display.value.lastIndexOf("(");
-    const result = Math.exp(
-      eval(
-        display.value.substr(lastIndexOfLeftBracket + 1, display.value.length)
-      )
-    );
-    display.value =
-      display.value.substr(0, lastIndexOfLeftBracket + 1) + result;
-    return -1;
-  }
   display.value = Math.exp(display.value);
 };
 
-const takeRND = (display) => {
+export const takeRND = (display) => {
   if (display.value === "0") {
     display.value = Math.random() * 10;
     return -1;
   }
-  const accept = ["+", "-", "/", "*", "(", "d"];
+  const accept = ["+", "-", "/", "*", "(", "d", "p", "^", "g"];
   for (let i = 0; i < accept.length; i++) {
     if (display.value.substr(display.value.length - 1, 1) === accept[i]) {
       display.value += Math.random() * 10;
@@ -637,10 +527,18 @@ const takeRND = (display) => {
     }
   }
 };
-const takeFactorial = (display, callback) => {
+export const takeFactorial = (display, callback) => {
   if (
     display.value === "0" ||
-    display.value.charAt(display.value.length - 1) == "("
+    display.value.charAt(display.value.length - 1) === "(" ||
+    display.value.charAt(display.value.length - 1) === "+" ||
+    display.value.charAt(display.value.length - 1) === "-" ||
+    display.value.charAt(display.value.length - 1) === "/" ||
+    display.value.charAt(display.value.length - 1) === "*" ||
+    display.value.charAt(display.value.length - 1) === "d" ||
+    display.value.charAt(display.value.length - 1) === "g" ||
+    display.value.charAt(display.value.length - 1) === "p" ||
+    display.value.charAt(display.value.length - 1) === "^"
   ) {
     return -1;
   }
@@ -654,7 +552,6 @@ const takeFactorial = (display, callback) => {
   }
   if (display.value.includes("/")) {
     const lastIndexOfDelete = display.value.lastIndexOf("/");
-    console.log("kek");
     const result = callback(
       display.value.substr(lastIndexOfDelete + 1, display.value.length)
     );
@@ -672,16 +569,24 @@ const takeFactorial = (display, callback) => {
   display.value = callback(display.value);
 };
 
-const getFactorial = (x) => {
+export const getFactorial = (x) => {
   if (x === 0) {
     return 1;
   }
   return x * getFactorial(x - 1);
 };
-const takeSqrt = (display) => {
+export const takeSqrt = (display) => {
   if (
     display.value === "0" ||
-    display.value.charAt(display.value.length - 1) == "("
+    display.value.charAt(display.value.length - 1) == "(" ||
+    display.value.charAt(display.value.length - 1) == "+" ||
+    display.value.charAt(display.value.length - 1) == "-" ||
+    display.value.charAt(display.value.length - 1) == "*" ||
+    display.value.charAt(display.value.length - 1) == "/" ||
+    display.value.charAt(display.value.length - 1) == "d" ||
+    display.value.charAt(display.value.length - 1) == "p" ||
+    display.value.charAt(display.value.length - 1) == "g" ||
+    display.value.charAt(display.value.length - 1) == "^"
   ) {
     return -1;
   }
@@ -695,7 +600,6 @@ const takeSqrt = (display) => {
   }
   if (display.value.includes("/")) {
     const lastIndexOfDelete = display.value.lastIndexOf("/");
-    console.log("kek");
     const result = Math.sqrt(
       display.value.substr(lastIndexOfDelete + 1, display.value.length)
     );
