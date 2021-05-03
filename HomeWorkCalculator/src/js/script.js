@@ -69,21 +69,47 @@ const init = () => {
   const module = document.querySelector("#module");
   module.addEventListener("click", () => takeModule(display));
   const squared = document.querySelector("#squared");
-  squared.addEventListener("click", () => takeSquared(display, 2));
+  squared.addEventListener("click", () => takePower(display, 2));
+  const sqrt = document.querySelector("#sqrt");
+  sqrt.addEventListener("click", () => takeSqrt(display));
   const mod = document.querySelector("#mod");
-  mod.addEventListener("click", (event) => sendToDisplay(event, display)) ;
+  mod.addEventListener("click", (event) => sendToDisplay(event, display));
   const e = document.querySelector("#e");
   e.addEventListener("click", (event) => takeE(display));
+  const exp = document.querySelector("#exp");
+  exp.addEventListener("click", (event) => sendToDisplay(event, display));
+  const log = document.querySelector("#log");
+  log.addEventListener("click", (event) => sendToDisplay(event, display));
+  const random = document.querySelector("#random");
+  random.addEventListener("click", () => takeRND(display));
+  const factorial = document.querySelector("#factorial");
+  factorial.addEventListener("click", () =>
+    takeFactorial(display, getFactorial)
+  );
+  const tenPower = document.querySelector("#tenPower");
+  tenPower.addEventListener("click", () => takePower(display, 10));
+  const xPowerY = document.querySelector("#xPowerY");
+  xPowerY.addEventListener("click", (event) => sendToDisplay(event, display));
+  const stanadart = document.querySelector("#standart");
+  stanadart.addEventListener("click", (event) =>
+    showStandartCalc(event, content, displayWrapper, hided, zero, ingeneer)
+  );
 };
-
 init();
 
 const sendToDisplay = (event, display) => {
+  if (event.target.textContent === "x^y") {
+    event.target.textContent = "^";
+  }
   const accept = ["+", "-", "/", "*"];
   for (let i = 0; i < accept.length; i++) {
     if (
-      event.target.textContent === "Mod" &&
-      display.value.substr(display.value.length - 1) === accept[i]
+      (event.target.textContent === "Mod" &&
+        display.value.substr(display.value.length - 1) === accept[i]) ||
+      (event.target.textContent === "exp" &&
+        display.value.substr(display.value.length - 1) === accept[i]) ||
+      (event.target.textContent === "^" &&
+        display.value.substr(display.value.length - 1) === accept[i])
     ) {
       return -1;
     }
@@ -109,18 +135,25 @@ const sendToDisplay = (event, display) => {
     let newInBracket;
     if (inBracket.includes("Mod")) {
       newInBracket = inBracket.replace("Mod", "%");
+    }
+    if (inBracket.includes("^")) {
+      newInBracket = inBracket.replace("^", "**");
+    } else if (inBracket.includes("exp")) {
+      newInBracket = `Number(${inBracket.replace(
+        "exp",
+        ").toExponential(Number("
+      )}))`;
+    } else if (inBracket.includes("log")) {
+      newInBracket = `${inBracket.replace("log", "*Math.log10(")})`;
     } else {
       newInBracket = inBracket;
     }
     const res = eval(newInBracket);
-    const result = parseInt(res) === res ? res : res.toFixed(5);
     if (lastIndexOfLeftBracket !== 0) {
-      display.value =
-        display.value.substr(0, lastIndexOfLeftBracket) +
-        parseFloat(result.toString());
+      display.value = display.value.substr(0, lastIndexOfLeftBracket) + res;
       return -1;
     }
-    display.value = result;
+    display.value = res;
     return -1;
   }
   const optionBkt1 =
@@ -178,16 +211,57 @@ const useBackspaceOnDisplay = (display) => {
 };
 
 const printResult = (display) => {
+  const symbols = ["/", "+", "-", "*", "g", "d", "p", "^"];
+  for (let i = 0; i < symbols.length; i++) {
+    if (display.value.substr(display.value.length - 1) === symbols[i]) {
+      return -1;
+    }
+  }
+  if (display.value.includes("log")) {
+    display.value = display.value.replace("log", "*Math.log10(");
+    display.value += ")";
+    const result = eval(display.value);
+    if (result.toString().length > 12) {
+      display.value = parseFloat(result.toFixed(5).toString());
+      return;
+    }
+    display.value = result;
+    return;
+  }
   if (display.value.includes("Mod")) {
     display.value = display.value.replace("Mod", "%");
+    const result = eval(display.value);
+    if (result.toString().length > 12) {
+      display.value = parseFloat(result.toFixed(5).toString());
+      return;
+    }
+  }
+  if (display.value.includes("^")) {
+    display.value = display.value.replace("^", "**");
+    const result = eval(display.value);
+    if (result.toString().length > 12) {
+      display.value = parseFloat(result.toFixed(5).toString());
+      return;
+    }
+  }
+  if (display.value.includes("exp")) {
+    display.value = `Number(${display.value.replace(
+      "exp",
+      ").toExponential(Number("
+    )}))`;
+    const result = eval(display.value);
+    if (result.toString().length > 12) {
+      display.value = result;
+      return;
+    }
+    display.value = result;
+    return 1;
   }
   const result = eval(display.value);
-
   if (result.toString().length > 12) {
     display.value = parseFloat(result.toFixed(5).toString());
     return;
   }
-
   display.value = result;
 };
 
@@ -200,14 +274,30 @@ const showIngeneerCalc = (event, content, displayWrapper, hided, zero) => {
     content.classList.add("content__big");
     displayWrapper.classList.add("tablo__big");
     zero.classList.add("zero__big");
-    event.target.textContent = "Standart Version🐵🐵🐵🐵🐵\n";
-    event.target.classList.add("ingeneer__big");
+    event.target.classList.add("hide");
     for (let i = 0; i < hided.length; i++) {
       hided[i].classList.remove("hide");
     }
     clearTimeout(timeOut);
-  }, 0);
+  }, 3000);
 };
+const showStandartCalc = (event, content, displayWrapper, hided, zero, ingeneer) =>  {
+  content.classList.add("vibro");
+  content.classList.add("disappear");
+  const timeOut = setTimeout(() => {
+    content.classList.remove("vibro");
+    content.classList.remove("disappear");
+    content.classList.remove("content__big");
+    displayWrapper.classList.remove("tablo__big");
+    zero.classList.remove("zero__big");
+    event.target.classList.add("hide");
+    ingeneer.classList.remove('hide');
+    for (let i = 0; i < hided.length; i++) {
+      hided[i].classList.add("hide");
+    }
+    clearTimeout(timeOut);
+  }, 3000);
+}
 
 const takeLn = (display) => {
   if (display.value === "0") {
@@ -394,7 +484,7 @@ const takeModule = (display) => {
   }
   display.value = Math.abs(display.value);
 };
-const takeSquared = (display) => {
+const takePower = (display, mode) => {
   if (
     display.value === "0" ||
     display.value.charAt(display.value.length - 1) == "(" ||
@@ -407,34 +497,52 @@ const takeSquared = (display) => {
   }
   if (display.value.includes("+")) {
     const lastIndexOfPlus = display.value.lastIndexOf("+");
-    const result = Math.pow(
+    let result = Math.pow(
       eval(display.value.substr(lastIndexOfPlus + 1, display.value.length)),
       mode
     );
+    if (mode === 10) {
+      result = Math.pow(
+        10,
+        eval(display.value.substr(lastIndexOfPlus + 1, display.value.length))
+      );
+    }
     display.value = display.value.substr(0, lastIndexOfPlus + 1) + result;
     return -1;
   }
   if (display.value.includes("-")) {
     const lastIndexOfMinus = display.value.lastIndexOf("-");
-    const result = Math.pow(
+    let result = Math.pow(
       eval(display.value.substr(lastIndexOfMinus + 1, display.value.length)),
       mode
     );
+    if (mode === 10) {
+      result = Math.pow(
+        10,
+        eval(display.value.substr(lastIndexOfMinus + 1, display.value.length))
+      );
+    }
     display.value = display.value.substr(0, lastIndexOfMinus + 1) + result;
     return -1;
   }
   if (display.value.includes("/")) {
     const lastIndexOfDelete = display.value.lastIndexOf("/");
-    const result = Math.pow(
+    let result = Math.pow(
       eval(display.value.substr(lastIndexOfDelete + 1, display.value.length)),
       mode
     );
+    if (mode === 10) {
+      result = Math.pow(
+        10,
+        eval(display.value.substr(lastIndexOfDelete + 1, display.value.length))
+      );
+    }
     display.value = display.value.substr(0, lastIndexOfDelete + 1) + result;
     return -1;
   }
   if (display.value.includes("*")) {
     const lastIndexOfMult = display.value.lastIndexOf("*");
-    const result = Math.pow(
+    let result = Math.pow(
       eval(display.value.substr(lastIndexOfMult + 1, display.value.length)),
       mode
     );
@@ -451,6 +559,10 @@ const takeSquared = (display) => {
     );
     display.value =
       display.value.substr(0, lastIndexOfLeftBracket + 1) + result;
+    return -1;
+  }
+  if (mode === 10) {
+    display.value = Math.pow(10, display.value);
     return -1;
   }
   display.value = Math.pow(display.value, mode);
@@ -510,4 +622,93 @@ const takeE = (display) => {
     return -1;
   }
   display.value = Math.exp(display.value);
+};
+
+const takeRND = (display) => {
+  if (display.value === "0") {
+    display.value = Math.random() * 10;
+    return -1;
+  }
+  const accept = ["+", "-", "/", "*", "(", "d"];
+  for (let i = 0; i < accept.length; i++) {
+    if (display.value.substr(display.value.length - 1, 1) === accept[i]) {
+      display.value += Math.random() * 10;
+      return -1;
+    }
+  }
+};
+const takeFactorial = (display, callback) => {
+  if (
+    display.value === "0" ||
+    display.value.charAt(display.value.length - 1) == "("
+  ) {
+    return -1;
+  }
+  if (display.value.includes("+")) {
+    const lastIndexOfPlus = display.value.lastIndexOf("+");
+    const result = callback(
+      display.value.substr(lastIndexOfPlus + 1, display.value.length)
+    );
+    display.value = display.value.substr(0, lastIndexOfPlus + 1) + result;
+    return -1;
+  }
+  if (display.value.includes("/")) {
+    const lastIndexOfDelete = display.value.lastIndexOf("/");
+    console.log("kek");
+    const result = callback(
+      display.value.substr(lastIndexOfDelete + 1, display.value.length)
+    );
+    display.value = display.value.substr(0, lastIndexOfDelete + 1) + result;
+    return -1;
+  }
+  if (display.value.includes("*")) {
+    const lastIndexOfMult = display.value.lastIndexOf("*");
+    const result = callback(
+      display.value.substr(lastIndexOfMult + 1, display.value.length)
+    );
+    display.value = display.value.substr(0, lastIndexOfMult + 1) + result;
+    return -1;
+  }
+  display.value = callback(display.value);
+};
+
+const getFactorial = (x) => {
+  if (x === 0) {
+    return 1;
+  }
+  return x * getFactorial(x - 1);
+};
+const takeSqrt = (display) => {
+  if (
+    display.value === "0" ||
+    display.value.charAt(display.value.length - 1) == "("
+  ) {
+    return -1;
+  }
+  if (display.value.includes("+")) {
+    const lastIndexOfPlus = display.value.lastIndexOf("+");
+    const result = Math.sqrt(
+      display.value.substr(lastIndexOfPlus + 1, display.value.length)
+    );
+    display.value = display.value.substr(0, lastIndexOfPlus + 1) + result;
+    return -1;
+  }
+  if (display.value.includes("/")) {
+    const lastIndexOfDelete = display.value.lastIndexOf("/");
+    console.log("kek");
+    const result = Math.sqrt(
+      display.value.substr(lastIndexOfDelete + 1, display.value.length)
+    );
+    display.value = display.value.substr(0, lastIndexOfDelete + 1) + result;
+    return -1;
+  }
+  if (display.value.includes("*")) {
+    const lastIndexOfMult = display.value.lastIndexOf("*");
+    const result = Math.sqrt(
+      display.value.substr(lastIndexOfMult + 1, display.value.length)
+    );
+    display.value = display.value.substr(0, lastIndexOfMult + 1) + result;
+    return -1;
+  }
+  display.value = Math.sqrt(display.value);
 };
