@@ -223,13 +223,6 @@ const render_minors_Pravdy_Avenue = (data, node) => {
 };
 const render_alphabetical_streets_with_how_many_residents = (data, node) => {
   node.innerHTML = "";
-  data.sort((a, b) => {
-    var nameA = a.NAME.toLowerCase(),
-      nameB = b.NAME.toLowerCase();
-    if (nameA < nameB) return -1;
-    if (nameA > nameB) return 1;
-    return 0;
-  });
   const newDiv = document.createElement("div");
   const newUl = document.createElement("ul");
   const newH1 = document.createElement("h1");

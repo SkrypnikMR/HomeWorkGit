@@ -23,7 +23,7 @@ const underAgedFromTrue = `SELECT FIRSTNAME,LASTNAME,AGE,NAME FROM persons INNER
 const alphabetStreetsWithResidentsCount = `SELECT NAME,count(persons.ID) as NUMBER_NAME 
 FROM persons INNER JOIN streets 
 ON persons.ID_streets = streets.ID 
-GROUP BY NAME`;
+GROUP BY NAME ORDER BY NAME`;
 
 const listOfstreetsLengthSix = `SELECT NAME FROM streets WHERE NAME LIKE '______'`;
 
