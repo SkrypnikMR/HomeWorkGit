@@ -16,7 +16,7 @@ import {
   takeRND,
   takeFactorial,
   takeSqrt,
-} from "../src/js/script";
+} from "./script";
 export const init = () => {
   //main nodes
   const displayWrapper = document.querySelector(".content__item-tablo");
