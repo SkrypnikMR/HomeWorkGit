@@ -7,20 +7,37 @@ function BinaryTree() {
     this.left = null;
     this.right = null;
   };
-  this.insertNode = function (node, newNode) {
+  this.insertNode = function (node, newNode,mode) {
+   if(mode === 'standartMode'){
     if (newNode.value < node.value) {
       if (node.left === null) {
         node.left = newNode;
       } else {
-        this.insertNode(node.left, newNode);
+        this.insertNode(node.left, newNode, 'standartMode');
       }
     } else {
       if (node.right === null) {
         node.right = newNode;
       } else {
-        this.insertNode(node.right, newNode);
+        this.insertNode(node.right, newNode, 'standartMode');
       }
     }
+   } if(mode === 'reverseMode') { 
+    if (newNode.value > node.value) {
+      if (node.left === null) {
+        node.left = newNode;
+      } else {
+        this.insertNode(node.left, newNode, 'reverseMode');
+      }
+    } else {
+      if (node.right === null) {
+        node.right = newNode;
+  
+      } else {
+        this.insertNode(node.right, newNode, 'reverseMode');
+      }
+    }
+   }
   };
   this.inOrderTraverse = function (node, callback) {
     if (node) {
@@ -32,6 +49,8 @@ function BinaryTree() {
   this.array = [];
   this.searchValue = null;
   this.secretArray = [];
+  this.secretReverseArray = [];
+  this.reverseCallsCount = 0;
   this.privateRun = function (node, mode, value) {
     if (node) {
       if (mode === "arrayMode") {
@@ -85,7 +104,15 @@ function BinaryTree() {
     }
     return 0;
   };
-  
+  this.reverseInsert = function (value) {
+    var newNode = new this.Node(value);
+    if (this.root === null) {
+      this.root = newNode;
+    } else {
+      this.insertNode(this.root, newNode, 'reverseMode');
+    }
+    this.secretReverseArray.push(value);
+  };
 }
 
 BinaryTree.prototype = Object.create(InterfaceTree.prototype);
@@ -102,11 +129,14 @@ BinaryTree.prototype.clear = function () {
   this.root = null;
 };
 BinaryTree.prototype.insert = function (value) {
+  if(this.reverseCallsCount%2 !==0){
+    return -1;
+  }
   var newNode = new this.Node(value);
   if (this.root === null) {
     this.root = newNode;
   } else {
-    this.insertNode(this.root, newNode);
+    this.insertNode(this.root, newNode, 'standartMode');
   }
   this.secretArray.push(value);
 };
@@ -223,9 +253,33 @@ BinaryTree.prototype.height = function () {
   var result = this.privateRun(this.root, "heightCountMode");
   return result -1;
 };
-
+BinaryTree.prototype.reverse = function(){
+  if(this.root === null){
+    return -1;
+  }
+  this.reverseCallsCount++;
+  this.root = null;
+  if(this.reverseCallsCount%2 !== 0){
+    for(var i = 0; i < this.secretArray.length; i++){
+      this.reverseInsert(this.secretArray[i])
+    }
+  }
+  if(this.reverseCallsCount%2 === 0){
+    this.init(this.secretReverseArray);
+  }
+}
 /* var b = new BinaryTree();
-b.init([40, 15, 31, 55, 42, 41, 61, 21, 56, 11, 28, 67, 2, 5, 39,85,86,87,88]);
-console.log(b.height()); */
+b.init([40, 15, 45,10]);
+console.log(b.toArray());
+b.reverse();
+b.insert(32);
+console.log(b.toArray());
+b.reverse();
+b.insert(32);
+console.log(b.toArray()); */
 
 module.exports = BinaryTree;
+
+
+
+

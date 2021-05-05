@@ -81,7 +81,7 @@ describe("BinaryTree insert", function () {
     expect(bTreeOne.root.left).toBe(null);
     expect(bTreeOne.root.right).toBe(null);
   });
-  it("should this.inserNode to haveBeenCalledWith our root and newNode ", function () {
+  it("should this.inserNode to haveBeenCalledWith our root and newNode and standartMode", function () {
     var bTreeTwo = new BinaryTree();
     var testValue = 25;
     var testValue1 = 26;
@@ -89,11 +89,21 @@ describe("BinaryTree insert", function () {
     bTreeTwo.insertNode = mockInsertNode;
     bTreeTwo.insert(testValue);
     bTreeTwo.insert(testValue1);
-    expect(mockInsertNode).toHaveBeenCalledWith(bTreeTwo.root, {
-      value: testValue1,
-      left: null,
-      right: null,
-    });
+    expect(mockInsertNode).toHaveBeenCalledWith(
+      bTreeTwo.root,
+      {
+        value: testValue1,
+        left: null,
+        right: null,
+      },
+      "standartMode"
+    );
+  });
+  it("should return -1 if we try to insert in reversed tree", function () {
+    var test1 = new BinaryTree();
+    test1.init([1,3,4,5]);
+    test1.reverse();
+    expect(test1.insert(32)).toBe(-1);
   });
 });
 describe("BinaryTree toArray", function () {
@@ -109,7 +119,7 @@ describe("BinaryTree toArray", function () {
     bTree.privateRun = mockPrivateRun;
     bTree.init([25, -25, 35]);
     bTree.toArray();
-    expect(mockPrivateRun).toHaveBeenCalledWith(bTree.root, 'arrayMode');
+    expect(mockPrivateRun).toHaveBeenCalledWith(bTree.root, "arrayMode");
   });
   it("should set array.length a 0 ", function () {
     var bTreeOne = new BinaryTree();
@@ -140,7 +150,11 @@ describe("BinaryTree search", function () {
     var testValue = 1;
     bTree.privateRun = mockPrivateRun;
     bTree.search(testValue);
-    expect(bTree.privateRun).toHaveBeenCalledWith(bTree.root, 'searchMode', testValue);
+    expect(bTree.privateRun).toHaveBeenCalledWith(
+      bTree.root,
+      "searchMode",
+      testValue
+    );
   });
   it("should return -1 if serchValue === 0", function () {
     var bTreeTest1 = new BinaryTree();
@@ -213,7 +227,10 @@ describe("BinaryTree minNode", function () {
     var privateRunMock = jest.fn();
     bTreeTest1.privateRun = privateRunMock;
     expect(bTreeTest1.minNode()).toBe(-1);
-    expect(bTreeTest1.privateRun).toHaveBeenCalledWith(bTreeTest1.root, 'minNodeMode');
+    expect(bTreeTest1.privateRun).toHaveBeenCalledWith(
+      bTreeTest1.root,
+      "minNodeMode"
+    );
   });
   it("should return min value and set searchValue to null", function () {
     var b = new BinaryTree();
@@ -240,7 +257,10 @@ describe("BinaryTree maxNode", function () {
     var privateRunMock = jest.fn();
     bTreeTest1.privateRun = privateRunMock;
     expect(bTreeTest1.maxNode()).toBe(-1);
-    expect(bTreeTest1.privateRun).toHaveBeenCalledWith(bTreeTest1.root, 'maxNodeMode');
+    expect(bTreeTest1.privateRun).toHaveBeenCalledWith(
+      bTreeTest1.root,
+      "maxNodeMode"
+    );
   });
   it("should return max value and set searchValue to null", function () {
     var b = new BinaryTree();
@@ -273,7 +293,10 @@ describe("BinaryTree leaves", function () {
     var mockPrivateRun = jest.fn();
     test2Tree.privateRun = mockPrivateRun;
     test2Tree.leaves();
-    expect(test2Tree.privateRun).toHaveBeenCalledWith(test2Tree.root, 'leavesCountMode');
+    expect(test2Tree.privateRun).toHaveBeenCalledWith(
+      test2Tree.root,
+      "leavesCountMode"
+    );
   });
   it("should ", function () {
     var test3Tree = new BinaryTree();
@@ -301,7 +324,10 @@ describe("BinaryTree nodes", function () {
     var mockPrivateRun = jest.fn();
     test2Tree.privateRun = mockPrivateRun;
     test2Tree.nodes();
-    expect(test2Tree.privateRun).toHaveBeenCalledWith(test2Tree.root, 'nodesCountMode');
+    expect(test2Tree.privateRun).toHaveBeenCalledWith(
+      test2Tree.root,
+      "nodesCountMode"
+    );
   });
   it("should ", function () {
     var test3Tree = new BinaryTree();
@@ -334,7 +360,7 @@ describe("BinaryTree size", function () {
     expect(test3.size()).toBe(15);
     expect(test3.size()).toBe(test3.secretArray.length);
   });
-}); 
+});
 describe("BinaryTree height", function () {
   var bTree = new BinaryTree();
   it("should be defined ", function () {
@@ -351,9 +377,12 @@ describe("BinaryTree height", function () {
     var testPrivateRun = new BinaryTree();
     var mockPrivateRun = jest.fn();
     testPrivateRun.privateRun = mockPrivateRun;
-    testPrivateRun.init([1,2,3])
-    testPrivateRun.height()
-    expect(mockPrivateRun).toHaveBeenCalledWith(testPrivateRun.root, 'heightCountMode');
+    testPrivateRun.init([1, 2, 3]);
+    testPrivateRun.height();
+    expect(mockPrivateRun).toHaveBeenCalledWith(
+      testPrivateRun.root,
+      "heightCountMode"
+    );
   });
   it("should return 1 if we have only root in tree", function () {
     var test2 = new BinaryTree();
@@ -363,7 +392,106 @@ describe("BinaryTree height", function () {
   });
   it("should return height of the tree", function () {
     var test3 = new BinaryTree();
-    test3.init([40, 15, 31, 55, 42, 41, 61, 21, 56, 11, 28, 67, 2, 5, 39,85,86,87,88]);
+    test3.init([
+      40,
+      15,
+      31,
+      55,
+      42,
+      41,
+      61,
+      21,
+      56,
+      11,
+      28,
+      67,
+      2,
+      5,
+      39,
+      85,
+      86,
+      87,
+      88,
+    ]);
     expect(test3.height()).toBe(7);
   });
-}); 
+});
+describe("BinaryTree reverse", function () {
+  var bTree = new BinaryTree();
+  it("should be defined ", function () {
+    expect(bTree.reverse).toBeDefined();
+  });
+  it("should be function", function () {
+    expect(typeof bTree.reverse).toBe("function");
+  });
+  it("should return -1 if we call with this.root === null", function () {
+    var test1 = new BinaryTree();
+    expect(test1.reverse()).toBe(-1);
+  });
+  it("should change reverseCallsCount to +1 , change root to null ", function () {
+    var test2 = new BinaryTree();
+    test2.init([1, 2, 3]);
+    test2.reverseCallsCount = -1.5;
+    var oldRoot = test2.root;
+    test2.reverse();
+    expect(test2.reverseCallsCount).toBe(-0.5);
+    expect(test2.root).not.toEqual(oldRoot);
+  });
+  it("should call methods ", function () {
+    var test10 = new BinaryTree();
+    var reverseInsertMock = jest.fn();
+    test10.reverseInsert = reverseInsertMock;
+    test10.init([1,123,213]);
+    test10.reverse();
+    expect(reverseInsertMock).toBeCalledTimes(3);
+    expect(reverseInsertMock).toHaveBeenCalledWith(1);
+    expect(reverseInsertMock).toHaveBeenCalledWith(123);
+    expect(reverseInsertMock).toHaveBeenCalledWith(213);
+  
+  });
+  it("should call methods ", function () {
+    var test10 = new BinaryTree();
+    var reverseInsertMock = jest.fn();
+    var initMock = jest.fn();
+    test10.init = initMock;
+    test10.insert(1);
+    test10.insert(2);
+    test10.insert(100);
+    test10.reverse();
+    test10.reverse();
+    expect(initMock).toHaveBeenCalledWith(test10.secretReverseArray);
+  });
+  it("should reverse tree", function () {
+    var test3 = new BinaryTree();
+    var expectRoot = {
+      value: 40,
+      left: { left: null, right: null, value: 45 },
+      right: {
+        left: null,
+        right: { left: null, right: null, value: 10 },
+        value: 15,
+      },
+    };
+    test3.init([40, 15, 45, 10]);
+    test3.reverse();
+    expect(test3.root).toEqual(expectRoot);
+    expect(test3.reverseCallsCount).toBe(1);
+  });
+  it("should double reverse tree", function () {
+    var test3 = new BinaryTree();
+    var expectRoot = {
+      value: 40,
+      left: { left: {left:null, right:null, value:10}, right: null, value: 15 },
+      right: {
+        left: null,
+        right: null,
+        value: 45,
+      },
+    };
+    test3.init([40, 15, 45, 10]);
+    test3.reverse();
+    test3.reverse();
+    expect(test3.root).toEqual(expectRoot);
+    expect(test3.reverseCallsCount).toBe(2);
+  });
+});
