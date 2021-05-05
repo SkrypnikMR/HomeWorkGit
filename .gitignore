@@ -3,3 +3,4 @@ dist
 vs
 .vs
 coverage
+.nyc_output
