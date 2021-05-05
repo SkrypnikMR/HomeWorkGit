@@ -34,49 +34,58 @@ function BinaryTree() {
   this.secretArray = [];
   this.privateRun = function (node, mode, value) {
     if (node) {
-      if (mode === 1) {
-        this.privateRun(node.left, 1);
+      if (mode === "arrayMode") {
+        this.privateRun(node.left, "arrayMode");
         this.array.push(node.value);
-        this.privateRun(node.right, 1);
+        this.privateRun(node.right, "arrayMode");
       }
-      if (mode === 2) {
+      if (mode === "searchMode") {
         if (node.value === value) {
           this.searchValue = node;
           return true;
         }
         if (node.value > value) {
-          this.privateRun(node.left, 2, value);
+          this.privateRun(node.left, "searchMode", value);
         }
         if (node.value < value) {
-          this.privateRun(node.right, 2, value);
+          this.privateRun(node.right, "searchMode", value);
         }
       }
-      if (mode === 3) {
+      if (mode === "minNodeMode") {
         this.searchValue = node;
-        this.privateRun(node.left, 3);
+        this.privateRun(node.left, "minNodeMode");
       }
-      if (mode === 4) {
+      if (mode === "maxNodeMode") {
         this.searchValue = node;
-        this.privateRun(node.right, 4);
+        this.privateRun(node.right, "maxNodeMode");
       }
-      if(mode === 5){
-        if(node.left === null && node.right === null){
+      if (mode === "leavesCountMode") {
+        if (node.left === null && node.right === null) {
           this.searchValue++;
         }
-        this.privateRun(node.left, 5);
-        this.privateRun(node.right, 5);
+        this.privateRun(node.left, "leavesCountMode");
+        this.privateRun(node.right, "leavesCountMode");
       }
-      if(mode === 6){
-        if(node.left !== null || node.right !== null){
+      if (mode === "nodesCountMode") {
+        if (node.left !== null || node.right !== null) {
           this.searchValue++;
         }
-        this.privateRun(node.left, 6);
-        this.privateRun(node.right, 6);
+        this.privateRun(node.left, "nodesCountMode");
+        this.privateRun(node.right, "nodesCountMode");
       }
-      
+      if (mode === "heightCountMode") {
+        return (
+          1 +
+          Math.max(
+            this.privateRun(node.left, "heightCountMode"),
+            this.privateRun(node.right, "heightCountMode")
+          )
+        );
+      }
     }
-    return -1;
+    return 0;
   };
+  
 }
 
 BinaryTree.prototype = Object.create(InterfaceTree.prototype);
@@ -112,7 +121,7 @@ BinaryTree.prototype.print = function (type, callback) {
   }
 };
 BinaryTree.prototype.toArray = function () {
-  this.privateRun(this.root, 1);
+  this.privateRun(this.root, "arrayMode");
   var array = new Array(this.array.length);
   for (var i = 0; i < this.array.length; i++) {
     array[i] = this.array[i];
@@ -121,7 +130,7 @@ BinaryTree.prototype.toArray = function () {
   return array;
 };
 BinaryTree.prototype.search = function (value) {
-  this.privateRun(this.root, 2, value);
+  this.privateRun(this.root, "searchMode", value);
   if (this.searchValue === null) {
     return -1;
   }
@@ -163,7 +172,7 @@ BinaryTree.prototype.remove = function (value) {
   this.init(newArr);
 };
 BinaryTree.prototype.minNode = function () {
-  this.privateRun(this.root, 3);
+  this.privateRun(this.root, "minNodeMode");
   if (this.searchValue === null) {
     return -1;
   }
@@ -172,7 +181,7 @@ BinaryTree.prototype.minNode = function () {
   return result;
 };
 BinaryTree.prototype.maxNode = function () {
-  this.privateRun(this.root, 4);
+  this.privateRun(this.root, "maxNodeMode");
   if (this.searchValue === null) {
     return -1;
   }
@@ -181,36 +190,42 @@ BinaryTree.prototype.maxNode = function () {
   return result;
 };
 BinaryTree.prototype.leaves = function () {
-  if(this.root && this.root.left === null && this.root.right === null){
+  if (this.root && this.root.left === null && this.root.right === null) {
     return 0;
   }
-  this.privateRun(this.root, 5);
+  this.privateRun(this.root, "leavesCountMode");
   var result = this.searchValue;
   this.searchValue = null;
   return result;
 };
 BinaryTree.prototype.nodes = function () {
-  if(this.root && this.root.left === null && this.root.right === null){
+  if (this.root && this.root.left === null && this.root.right === null) {
     return 1;
   }
-  this.privateRun(this.root, 6);
+  this.privateRun(this.root, "nodesCountMode");
   var result = this.searchValue;
   this.searchValue = null;
   return result;
 };
-BinaryTree.prototype.size = function(){
-  if(this.root === null){
+BinaryTree.prototype.size = function () {
+  if (this.root === null) {
     return 0;
   }
-  if(this.root && this.root.left === null && this.root.right === null){
+  if (this.root && this.root.left === null && this.root.right === null) {
     return 1;
   }
   return this.nodes() + this.leaves();
-}
+};
+BinaryTree.prototype.height = function () {
+  if (this.root && this.root.left === null && this.root.right === null) {
+    return 0;
+  }
+  var result = this.privateRun(this.root, "heightCountMode");
+  return result -1;
+};
 
-/* var b = new BinaryTree(); 
-b.init([40]);
-console.log(b.nodes()); */
-
+/* var b = new BinaryTree();
+b.init([40, 15, 31, 55, 42, 41, 61, 21, 56, 11, 28, 67, 2, 5, 39,85,86,87,88]);
+console.log(b.height()); */
 
 module.exports = BinaryTree;
