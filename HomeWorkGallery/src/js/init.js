@@ -25,14 +25,9 @@ export const init = async () => {
   intervalButton.addEventListener(
     "click",
     (event) =>
-      (lastInterval = intrevalChangeImage(
-        modal,
-        data,
-        modalTitle,
-        lastImage
-      ))
+      (lastInterval = intrevalChangeImage(modal, data, modalTitle, lastImage))
   );
   xButton.addEventListener("click", (event) => {
-    hideModal(event, lastInterval, modal, bigImage);
+    hideModal(lastInterval, modal, bigImage);
   });
 };
