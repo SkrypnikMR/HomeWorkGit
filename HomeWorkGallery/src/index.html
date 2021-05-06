@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HomeWork gallery</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="gallery">
-        <div class="gallery__title" id="bigPhoto"></div>
-        <div class="gallery__button" ><button id="intervalButton">Click me</button></div>
-        <div class="gallery__button hide" ><button id="x">X</button></div>
-        <div class="gallery__body"id="smallPhoto"></div>
+      <div class="gallery__title" id="bigPhoto"></div>
+      <div class="gallery__button">
+        <button id="intervalButton">Click me</button>
+      </div>
+      <div class="gallery__body" id="smallPhoto"></div>
     </div>
-</body>
+    <div class="modal hide">
+      <div class="modal__title" id="bigPhotoModal">
+        <div class="title__photo" id="item">
+          <img class="modal__photo" />
+        </div>
+      </div>
+      <div class="modal__button"><button id="x">X</button></div>
+    </div>
+  </body>
 </html>

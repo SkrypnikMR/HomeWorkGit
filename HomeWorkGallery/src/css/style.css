@@ -1,20 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: rgba(198, 198, 240, 0.2);
   font-family: Tahoma;
 }
 
 .gallery {
+  margin-top: 10px;
   width: 100%;
   display: grid;
   grid-template-columns: auto 1fr;
   justify-items: center;
 }
-.gallery__title {
+.gallery__title,
+.modal__title {
   width: 60%;
   height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.modal__title {
+  width: 100%;
 }
 .title__photo {
   width: 100%;
@@ -51,12 +61,66 @@ body {
   width: 150px;
   height: 150px;
 }
-.gallery__button, .gallery__button-x {
+.gallery__button,
+.gallery__button-x {
   width: 100%;
 }
-.gallery__button button, .gallery__button-x button {
+.gallery__button button,
+.gallery__button-x button {
   width: 100px;
   height: 50px;
+}
+.modal {
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.modal__button {
+  float: right;
+  margin-right: 30px;
+  margin-top: -450px;
+  z-index: 3;
+}
+.modal img {
+  width: 70%;
+  height: 70%;
+  position: absolute;
+  top: 100px;
+  left: 15%;
+  transition-duration: 1s;
+  transform: scale(1.0);
+}
+.modal img:hover{
+  transition-duration: 1s;
+  transform: scale(1.1);
+}
+
+button {
+  right: 30px;
+  top: 30px;
+  width: 100px;
+  position: absolute;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  margin: 10px 20px;
+  padding: 15px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 40px 40px rgba(16, 242, 144, 0.2) inset, 0 0 0 0 rgba(186, 176, 173, 0.2);
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: white;
+}
+button:hover {
+  box-shadow: 0 0 10px 0 rgba(16, 242, 144, 0.2) inset, 0 0 10px 4px rgba(186, 176, 173, 0.2);
+  color: white;
+}
+.gallery button{
+  padding: 0px;
 }
 .gone {
   animation: gone 4s ease-out infinite;
@@ -79,22 +143,13 @@ body {
   50% {
     transform: scale(3);
     position: fixed;
-    left:42%;
+    left: 42%;
   }
   75% {
     position: fixed;
-    left:42%;
+    left: 42%;
   }
 }
-.hide{
-    display: none;
-}
-.bigFrame{
-    transition-duration: 1s ;
-    left:20%;
-    display: flex;
-    justify-self: center;
-    position: absolute;
-    transform: scale(1.2);
-    z-index: 3000;
+.hide {
+  display: none;
 }
