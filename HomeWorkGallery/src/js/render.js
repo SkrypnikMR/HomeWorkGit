@@ -1,4 +1,4 @@
-import {renderBigPhoto, renderSmallPhotos}from "./photosRender/photoRender"
+import { renderBigPhoto, renderSmallPhotos } from "./photosRender/photoRender";
 
 export const renderPhotos = (data, bigPhoto, smallPhoto) => {
   renderBigPhoto(data[0], bigPhoto);
