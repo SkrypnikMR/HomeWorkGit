@@ -1,2 +1,3 @@
 import "../../css/style.css";
-import "./app.js"
+import { init } from "./app.js";
+init();

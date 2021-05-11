@@ -3,7 +3,7 @@ import Cleaner from "../Classes/Cleaner";
 import Changer from "../Classes/Changer";
 import DownloadMaster from "../Classes/DownloadMaster";
 
-const init = () => {
+export const init = () => {
   const canvas = document.querySelector("canvas"); // canvas node
   const context = canvas.getContext("2d"); //canvas context
   const clearButton = document.querySelector(".buttons__clear"); // clear button
@@ -46,4 +46,4 @@ const init = () => {
     downloadMaster.downloadCanvasAsJSON(coordsArray);
   });
 };
-init();
+
