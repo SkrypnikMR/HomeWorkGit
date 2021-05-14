@@ -1,5 +1,6 @@
 import * as validate from "./validators/validators.js";
 import { notifKill } from "./listeners.js";
+import * as drowers from "./drowers/drowers.js";
 
 export const click = (buttons) => {
   for (let key in buttons) {
@@ -66,76 +67,22 @@ export const mutateObject = (obj) => {
   return obj;
 };
 
-export const drow = (candidates, canvas, context) => {
-  var box_Height = canvas.height;
-  context.fillStyle = "rgba(94, 144, 252, 1)";
-  context.fillRect(1, 1, canvas.width - 1, box_Height - 1);
-  context.strokeRect(0.5, 0.5, canvas.width - 1, box_Height);
-  const centerX = 100;
-  const radius = 40;
-  const distance_Between = 105;
+export const drowInit = (candidates, canvas, context, distance_Between) => {
+  drowers.drowBackground(canvas, context);
   for (let i = 0; i < candidates.length; i++) {
-    context.beginPath();
-    context.font = " 12px Arial";
-    context.fillStyle = "white";
-    context.fillText(
-      candidates[i].name,
-      92 - candidates[i].name.length * 2,
-      distance_Between * (i + 1) + 2
-    );
-    context.closePath();
-    context.beginPath();
-    context.font = " 12px Arial";
-    context.fillStyle = "white";
-    context.fillText(
-      `check balance`,
-      300 * 1.5,
-      distance_Between * (i + 1) + 2
-    );
-    context.closePath();
-    context.beginPath();
-    context.font = " 12px Arial";
-    context.fillStyle = "white";
-    context.fillText(`check age`, 500 * 1.5, distance_Between * (i + 1) + 2);
-    context.closePath();
-    context.beginPath();
-    context.font = " 12px Arial";
-    context.fillStyle = "white";
-    context.fillText(
-      `check documents`,
-      700 * 1.5,
-      distance_Between * (i + 1) + 2
-    );
-    context.closePath();
-    context.beginPath();
-    context.font = " 12px Arial";
-    context.fillStyle = "white";
-    context.fillText(
-      `check english`,
-      900 * 1.5,
-      distance_Between * (i + 1) + 2
-    );
-    context.closePath();
-    let x = 0;
-    let k = (2 * Math.PI) / 100;
-    const kek = distance_Between * (i + 1) + 2;
-    console.log(kek);
-    drowCircle(context, canvas, x, k, kek);
+    const distance = distance_Between * (i + 1) + 2;
+    const x = 0;
+    const k = (2 * Math.PI) / 100;
+    drowers.drowText(context, candidates[i].name, distance, 92, 'white', 12);
+    drowers.drowText(context, "balance", distance, 292, 'white', 12);
+    drowers.drowText(context, "documents", distance, 492, 'white', 12);
+    drowers.drowText(context, "age", distance, 692, 'white', 12);
+    drowers.drowText(context, "english", distance, 892, 'white', 12);
+    drowers.drowCircle(context, canvas, x, k,100, distance, 100, 0, 'green');
+    candidates[i].distance = distance;
+    candidates[i].balancePoint = 292;
+    candidates[i].documentsPoint = 492;
+    candidates[i].agePoint = 692;
+    candidates[i].englishPoint = 892;
   }
 };
-
-export function drowCircle(context, canvas, x, k, kek) {
-  context.beginPath();
-  context.arc(100, kek, 50, 0, x * k, false);
-  context.lineWidth = 3;
-  context.lineCap = "butt";
-  context.strokeStyle = "green";
-  context.stroke();
-  context.closePath();
-  let timeout;
-  if (x <= 100) {
-    timeout = setTimeout(() => {
-      drowCircle(context, canvas, x + 1, k, kek);
-    }, 50);
-  } else clearTimeout(timeout);
-}

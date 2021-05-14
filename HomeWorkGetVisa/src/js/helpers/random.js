@@ -17,3 +17,8 @@ export const getRndDocuments = () => {
   const photo = Boolean(Math.trunc(0 + Math.random() * (1 + 1 - 0)));
   return [passport, insurance, photo];
 };
+
+
+export const getRndNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}

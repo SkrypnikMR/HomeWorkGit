@@ -86,7 +86,7 @@
             id="nameInpt"
             placeholder="enter your name"
           />
-          <span class="item__button button" id="genName">Generate</span>
+          <button class="item__button button" id="genName">Generate</button>
         </div>
         <div class="inputs__item">
           <p class="item__title">Balance</p>
@@ -96,7 +96,7 @@
             id="cardBalanceInpt"
             placeholder="enter your card balance"
           />
-          <span class="item__button button" id="genBalance">Generate</span>
+          <button class="item__button button" id="genBalance">Generate</button>
         </div>
         <div class="inputs__item">
           <p class="item__title">Age</p>
@@ -106,7 +106,7 @@
             id="ageInpt"
             placeholder="enter your age"
           />
-          <span class="item__button button" id="genAge">Generate</span>
+          <button class="item__button button" id="genAge">Generate</button>
         </div>
         <div class="inputs__item">
           <p class="item__title">Documents</p>
@@ -133,7 +133,7 @@
             />
             <label for="passportCheck">Photo</label>
           </div>
-          <span class="item__button button" id="genDocs">Generate</span>
+          <button class="item__button button" id="genDocs">Generate</button>
         </div>
         <div class="inputs__item">
           <p class="item__title">English</p>
@@ -143,27 +143,31 @@
             id="englishLVLInpt"
             placeholder="enter your english"
           />
-          <span class="item__button button" id="genEngLVL">Generate</span>
+          <button class="item__button button" id="genEngLVL">Generate</button>
         </div>
       </div>
       <div class="root__controll">
         <div class="controll__item">
-          <p class="item__title button" id="genAll">Generate All</p>
+          <button class="item__title button" id="genAll">Generate All</button>
         </div>
         <div class="controll__item">
-          <p class="item__title button" id="addCandidate">Add candidate</p>
+          <button class="item__title button" id="addCandidate">
+            Add candidate
+          </button>
         </div>
         <div class="controll__item">
-          <p class="item__title button" id="initRace">Init race</p>
+          <button class="item__title button" id="initRace">Init race</button>
         </div>
       </div>
     </main>
     <div class="canvas__wrapper hide">
-      <div class="controll__item">
-        <p class="item__title button" id="startRace">Start race</p>
-      </div>
-      <div class="controll__item">
-        <p class="item__title button" id="clearRace">Clear race</p>
+      <div class="wrapper__controll">
+        <div class="controll__item">
+          <button class="item__button button" id="startRace">Start race</button>
+        </div>
+        <div class="controll__item">
+          <button class="item__button button" id="clearRace">Clear race</button>
+        </div>
       </div>
       <canvas id="mainCanvas" width="1550px" height="600px"></canvas>
     </div>
