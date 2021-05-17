@@ -1,6 +1,6 @@
-import * as validate from "./validators/validators.js";
-import { notifKill } from "./listeners.js";
-import * as drowers from "./drowers/drowers.js";
+import * as validate from "../validators/validators.js";
+import { notifKill } from "../listeners/listeners.js";
+import * as drowers from "../drowers/drowers.js";
 
 export const click = (buttons) => {
   for (let key in buttons) {
@@ -59,6 +59,9 @@ export const createNotif = (str) => {
 
   // add event Listener
   notifDeleteBtn.addEventListener("click", notifKill.bind(null, notif));
+
+  // autoDeath after 3s
+  setTimeout(notifKill.bind(null, notif), 2000);
 };
 
 export const mutateObject = (obj) => {
@@ -73,12 +76,12 @@ export const drowInit = (candidates, canvas, context, distance_Between) => {
     const distance = distance_Between * (i + 1) + 2;
     const x = 0;
     const k = (2 * Math.PI) / 100;
-    drowers.drowText(context, candidates[i].name, distance, 92, 'white', 12);
-    drowers.drowText(context, "balance", distance, 292, 'white', 12);
-    drowers.drowText(context, "documents", distance, 492, 'white', 12);
-    drowers.drowText(context, "age", distance, 692, 'white', 12);
-    drowers.drowText(context, "english", distance, 892, 'white', 12);
-    drowers.drowCircle(context, canvas, x, k,100, distance, 100, 0, 'green');
+    drowers.drowText(context, candidates[i].name, distance, 92, "white", 12);
+    drowers.drowText(context, "balance", distance, 292, "white", 12);
+    drowers.drowText(context, "documents", distance, 492, "white", 12);
+    drowers.drowText(context, "age", distance, 692, "white", 12);
+    drowers.drowText(context, "english", distance, 892, "white", 12);
+    drowers.drowCircle(context, canvas, x, k, 100, distance, 100, 0, "green");
     candidates[i].distance = distance;
     candidates[i].balancePoint = 292;
     candidates[i].documentsPoint = 492;
@@ -86,3 +89,6 @@ export const drowInit = (candidates, canvas, context, distance_Between) => {
     candidates[i].englishPoint = 892;
   }
 };
+
+export const sessionStorageSet = (key, value) =>
+  sessionStorage.setItem(key, value);

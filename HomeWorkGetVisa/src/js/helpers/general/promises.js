@@ -1,5 +1,5 @@
 import { getRndNumber } from "./random";
-import { drowCircle, drowText } from "./drowers/drowers";
+import { drowCircle, drowText } from "../drowers/drowers";
 
 export const promiseStart = (candidate, callbacks, promiseAllFunc) => {
   return new Promise((resolve, reject) => {

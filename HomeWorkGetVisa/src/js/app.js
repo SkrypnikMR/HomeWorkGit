@@ -1,8 +1,8 @@
-import * as constants from "./helpers/constants.js";
-import * as random from "./helpers/random.js";
-import * as helpers from "./helpers/helpers.js";
-import * as listeners from "./helpers/listeners.js";
-import * as promises from './helpers/promises.js';
+import * as constants from "./helpers/general/constants.js";
+import * as random from "./helpers/general/random.js";
+import * as helpers from "./helpers/general/helpers.js";
+import * as listeners from "./helpers/listeners/listeners.js";
+import * as promises from './helpers/general/promises.js';
 import * as checks from './helpers/checks/checks.js'
 import * as draw from "./helpers/drowers/drowers.js"
 
@@ -31,7 +31,7 @@ export const init = () => {
   const addCandidateBtn = document.querySelector("#addCandidate");
   const initRaceBtn = document.querySelector("#initRace");
   const startRaceBtn = document.querySelector("#startRace");
-  const clearRaceBtn = document.querySelector("ClearRace");
+  const clearRaceBtn = document.querySelector("#clearRace");
 
   // groups of inputs nodes and generate buttons nodes
   const inputs = {nameInput, cardBalanceInput, ageInput, passportCheckBox, insuranceCheckBox, photoCheckBox,englishInput};
@@ -50,27 +50,9 @@ export const init = () => {
   genAllBtn.addEventListener("click", listeners.generateAll.bind(null,  helpers, generateButtons));
   addCandidateBtn.addEventListener("click", listeners.addCandidate.bind(null,  helpers, inputs));
   initRaceBtn.addEventListener("click", listeners.initRace.bind(null, helpers, canvas));
-  startRaceBtn.addEventListener('click', (e)=>{
-    const candidates = JSON.parse(sessionStorage.getItem('candidates'));
-    const callbacks = [checks.checkBalance, checks.checkAge, checks.checkDocuments, checks.checkEnglish];
-   Promise.any([promises.promiseStart(candidates[0],callbacks, promises.promiseAllFunc, 0),
-    promises.promiseStart(candidates[1],callbacks, promises.promiseAllFunc, 1),
-    promises.promiseStart(candidates[2],callbacks, promises.promiseAllFunc, 2),
-    promises.promiseStart(candidates[3],callbacks, promises.promiseAllFunc, 3),
-    promises.promiseStart(candidates[4],callbacks, promises.promiseAllFunc, 4)
-  ]).then((data)=>{
-
-     draw.drowFillCircle(canvas.getContext('2d'), 1300, 300, 'yellow')
-     draw.drowText(canvas.getContext('2d'), `${data.name}`, 300, 1250, 'blue',30)
-     draw.drowText(canvas.getContext('2d'), `get Visa!`, 330, 1250, 'blue',30)
+  startRaceBtn.addEventListener('click', listeners.startRace.bind(null, Object.values(checks), promises, draw, helpers.createNotif));
+  clearRaceBtn.addEventListener('click', listeners.clearRace.bind(null, draw, canvas, helpers))
  
-   }).catch((e)=>{
-    draw.drowFillCircle(canvas.getContext('2d'), 1300, 300, 'red')
-    draw.drowText(canvas.getContext('2d'), `Nobody got through.`, 300, 1220, 'black',30)
-    draw.drowText(canvas.getContext('2d'), `Come back tomorrow`, 330, 1200, 'black',30)
-
-   });
-  });
 };
 
 
