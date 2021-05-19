@@ -38,3 +38,8 @@ export function drowCircle(context, canvas, x, k,startPoint, distance, percents,
     context.fill();
     context.closePath();
   }
+
+  export function clearRect(canvas){
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }

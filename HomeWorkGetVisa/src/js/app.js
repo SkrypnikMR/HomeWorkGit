@@ -50,7 +50,7 @@ export const init = () => {
   genAllBtn.addEventListener("click", listeners.generateAll.bind(null,  helpers, generateButtons));
   addCandidateBtn.addEventListener("click", listeners.addCandidate.bind(null,  helpers, inputs));
   initRaceBtn.addEventListener("click", listeners.initRace.bind(null, helpers, canvas));
-  startRaceBtn.addEventListener('click', listeners.startRace.bind(null, Object.values(checks), promises, draw, helpers.createNotif));
+  startRaceBtn.addEventListener('click', listeners.startRace.bind(null, Object.values(checks), promises, draw, helpers.createNotif, canvas));
   clearRaceBtn.addEventListener('click', listeners.clearRace.bind(null, draw, canvas, helpers))
  
 };

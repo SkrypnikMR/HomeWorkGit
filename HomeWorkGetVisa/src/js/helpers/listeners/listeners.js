@@ -56,7 +56,7 @@ export function notifKill(notif) {
   }, 2000);
 }
 
-export function startRace(callbacks, promises, draw, showNotification) {
+export function startRace(callbacks, promises, draw, showNotification, canvas) {
   const candidates = JSON.parse(sessionStorage.getItem("candidates"));
   showNotification("Start race!");
   Promise.any([
@@ -109,5 +109,6 @@ export const clearRace = (draw, canvas, helpers) => {
   draw.drowBackground(canvas, canvas.getContext("2d"));
   canvas.parentElement.classList.add("hide");
   helpers.createNotif("You clear racing board!");
-  helpers.sessionStorageSet('candidates', JSON.stringify([]));
+  helpers.removeSessionStorageItem('candidates');
+  draw.clearRect(canvas);
 };

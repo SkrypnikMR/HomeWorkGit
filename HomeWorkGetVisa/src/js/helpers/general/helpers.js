@@ -90,5 +90,4 @@ export const drowInit = (candidates, canvas, context, distance_Between) => {
   }
 };
 
-export const sessionStorageSet = (key, value) =>
-  sessionStorage.setItem(key, value);
+export const removeSessionStorageItem = (key) => sessionStorage.removeItem(key);
