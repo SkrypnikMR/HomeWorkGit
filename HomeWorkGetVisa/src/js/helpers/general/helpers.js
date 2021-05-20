@@ -60,7 +60,7 @@ export const createNotif = (str) => {
   // add event Listener
   notifDeleteBtn.addEventListener("click", notifKill.bind(null, notif));
 
-  // autoDeath after 3s
+  // autoDeath after 2s
   setTimeout(notifKill.bind(null, notif), 2000);
 };
 
