@@ -14,7 +14,7 @@ export const validator = (candidate) => {
   const vAgelikeNumber = validate.validateNumber(candidate.age);
   const VAgeLength = validate.validateLength(candidate.age, 3);
   const vEnglish = validate.validateEnglish(candidate.english);
-  if (vName || !vBalance || !vAgelikeNumber || VAgeLength || !vEnglish) {
+  if (vName || vBalance || vAgelikeNumber || VAgeLength || vEnglish) {
     return false;
   }
   return true;
