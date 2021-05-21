@@ -2,13 +2,14 @@ const HTMLPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: ["@babel/polyfill", "./src/index.js"],
+  entry: ["@babel/polyfill", "./src/js/index.js"],
   output: {
     path: __dirname + "/dist",
     filename: "bundle.js",
   },
   devServer: {
-    contentBase: __dirname + "/public",
+    contentBase: __dirname + "/dist",
+    port: 5246,
   },
   plugins: [
     new HTMLPlugin({
@@ -22,6 +23,7 @@ module.exports = {
   resolve: {
     extensions: [".js"],
   },
+
   module: {
     rules: [
       {
@@ -32,8 +34,34 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        test: /\.less$/i,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                strictMath: true,
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css/,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+          },
+        ],
       },
     ],
   },
