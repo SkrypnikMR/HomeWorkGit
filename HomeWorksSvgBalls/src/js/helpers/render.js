@@ -9,7 +9,7 @@ export const drawCircle = (e) => {
 }
 
 export const smashWatch = () => {
-    allCircles.forEach((el, i, arr) => {
+    allCircles.forEach((el, i, arr) => {    
         const newX = el.x + (el.speed / 16) * el.dx;
         const newY = el.y + (el.speed / 16) * el.dy;
         arr.forEach(next => {

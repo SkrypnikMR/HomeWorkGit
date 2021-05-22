@@ -44,11 +44,6 @@ export default class Circle {
         this.circle.setAttribute('cy', this.y);
     }
 
-    setDx = (dx) => {
-        this.dx = dx;
-    }
-
-    setDy = (dy) => {
-        this.dy = dy;
-    }
+    setDx = (dx) => this.dx = dx;
+    setDy = (dy) => this.dy = dy;
 }

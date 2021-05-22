@@ -5,5 +5,4 @@
  export const MIN_SPEED = 10;
  export const MAX_SPEED = 30;
  export const TIMER = 25;
- export const CIRCLES_NAME = 'circles';
  export let allCircles = [];

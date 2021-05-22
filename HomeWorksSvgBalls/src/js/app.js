@@ -1,6 +1,5 @@
 import helpers from './helpers';
 
-
 export const init = () => {
     const svg = document.querySelector('#root');
     svg.addEventListener('click', (e) => {
