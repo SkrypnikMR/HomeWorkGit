@@ -4,3 +4,5 @@ vs
 .vs
 coverage
 .nyc_output
+.vscode 
+package-lock.json
