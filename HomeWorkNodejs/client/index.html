@@ -12,15 +12,21 @@
 <body>
     <div class="root">
         <div class="root__uploadfield">
-            <input id="fileUpload" name="fileUpload" type="file" multiple>
-            <button id="send" disabled>Upload to AWS</button>
-        </div>
-        <div class="root__links">
-            <ul id="links"></ul>
-            <script src="script.js"></script>
+            <div class="root__links">
+                <ul class="links__master rounded">
+
+                </ul>
+            </div>
+            <div class="root__controll">
+                <label class="custom-file-upload">
+                    <input id="fileUpload" name="fileUpload" type="file" multiple>
+                    Put your file
+                </label>
+                <button id="send" disabled>Give me links</button>
+            </div>
         </div>
     </div>
-
+    <script src="script.js"></script>
 </body>
 
 </html>

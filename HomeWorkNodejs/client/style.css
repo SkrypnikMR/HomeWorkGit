@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+body::-webkit-scrollbar {
+    width: 1em;
+  }
+   
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
+body{
+    background-color: rgb(246, 255, 255);
+    font-family: 'Limelight', cursive;
+}
+.root {
+    margin-top:50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.root__controll{
+    width: 100%;
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    justify-self: center;
+    justify-content: space-between;
+}
+.root__uploadfield{
+    border: 1px solid rgb(113, 233, 98);
+}
+.root__links{
+    width: 800px;
+    height: 600px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+.root__links::-webkit-scrollbar {
+    width: 1em;
+  }
+   
+  .root__links::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(106, 16, 180, 0.3);
+  }
+   
+  .root__links::-webkit-scrollbar-thumb {
+    background-color: rgb(113, 233, 98);
+    outline: 1px solid rgb(113, 233, 98);
+  }
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    width: 100%;
+    cursor:pointer;
+    background-color: rgb(255, 255, 0, 0.8); 
+    border: none;
+    color: black;
+    padding: 15px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100%;
+    transition-duration: 1s;
+}
+label[disabled="disabled"]{
+    background-color: gray;
+    cursor:wait;
+}
+label[disabled="disabled"]:hover{
+    background-color: gray;
+    cursor:wait;
+}
+label:hover{
+    transition-duration: 1s;
+    background-color: #9ae961;
+}
+#send{
+    cursor:pointer;
+    background-color: rgb(86, 77, 240); 
+}
+#send:disabled{
+    cursor:default;
+    background-color: rgb(86, 77, 240, 0.3); 
+}
+.rounded {
+    margin-top:30px;
+    counter-reset: li; 
+    list-style: none; 
+    font-family: 'Limelight', cursive;
+    font-size:14px;
+    padding: 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    }
+    .rounded a {
+    position: relative;
+    display: block;
+    padding: .4em .10em .4em 2em;
+    margin: .3em .3em;
+    background: #9ae961;
+    color: #444;
+    text-decoration: none;
+    border-radius: .3em;
+    opacity: 1;
+    transition: 1s ease-out;
+    }
+    .rounded a:hover {background: #c1f0ec;}
+    .rounded a:hover:before {transform: rotate(360deg);}
+.new a{
+    background-color: #bc61e9;
+    opacity: 0.3;
+    transform: translateY(-10px);
+    transition-duration: 1s;
+}

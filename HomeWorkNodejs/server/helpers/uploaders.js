@@ -13,7 +13,7 @@ const fileUploader = async (req, res) => {
     try {
         const params = {
             Bucket: process.env.AWS_BUCKET_NAME_FILES,
-            Key: `${uuid()}.${fileType}`,
+            Key: `file-${myFile[0]}-${uuid()}.${fileType}`,
             Body: req.file.buffer
         }
         const result = await s3.upload(params).promise().catch((e) => res.status(500).json({ message: 'server error' }));
@@ -27,7 +27,7 @@ const imageUploader = async (req, size, name) => {
         const fileType = myFile[myFile.length - 1];
 
         const sizedImage = await sharp(req.file.buffer).resize({ width: size, height: size }).toBuffer();
-        const params = { Bucket: process.env.AWS_BUCKET_NAME_IMAGES, Key: `${name}${uuid()}.${fileType}`, Body: sizedImage }
+        const params = { Bucket: process.env.AWS_BUCKET_NAME_IMAGES, Key: `${name}${myFile[0]}-${uuid()}.${fileType}`, Body: sizedImage }
         const result = await s3.upload(params).promise();
 
         return result.Location;
