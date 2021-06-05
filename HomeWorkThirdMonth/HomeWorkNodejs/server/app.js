@@ -1,6 +1,5 @@
 require('dotenv/config');
 const cors = require('cors');
-const uuid = require('uuid/v4');
 const multer = require('multer');
 const express = require('express');
 const PORT = process.env.PORT;
