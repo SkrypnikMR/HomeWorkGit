@@ -2,6 +2,7 @@ require('dotenv/config');
 const uuid = require('uuid/v4');
 const AWS = require('aws-sdk');
 const sharp = require('sharp');
+const multer = require('multer');
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ID,
     secretAccessKey: process.env.AWS_SECRET,
@@ -36,5 +37,13 @@ const imageUploader = async (req, size, name) => {
     }
 
 }
+const storage = multer.memoryStorage({ destination: (req, res, cb) => cb(null, '') });
+const upload = multer({ storage, limits: { fileSize: 20971520 } }).single('file');
 
-module.exports = { fileUploader, imageUploader }
+const corsOptions = {
+    methods: ['POST', 'OPTIONS', 'GET'],
+    origins: '*',
+    allowedHeaders: ['Content-Type', 'multipart/form-data']
+}
+
+module.exports = { fileUploader, imageUploader, upload}
