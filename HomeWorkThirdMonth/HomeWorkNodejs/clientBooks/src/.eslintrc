@@ -1,0 +1,17 @@
+{
+    "extends": "react-app",
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "parser": "babel-eslint",
+    "rules": {
+        "semi": "error",
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "no-console": "warn",
+        "no-unused-vars": "warn"
+    }
+}
