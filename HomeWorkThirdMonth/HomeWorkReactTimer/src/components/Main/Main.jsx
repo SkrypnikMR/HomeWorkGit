@@ -4,7 +4,7 @@ import Timer from './Timer';
 
 class Main extends Component {
     render() {
-        return <div className="main"><Timer /></div>
+        return <div className="main"><Timer /></div>;
     }
 }
 export default Main;
