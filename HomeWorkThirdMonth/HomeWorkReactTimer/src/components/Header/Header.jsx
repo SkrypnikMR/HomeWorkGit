@@ -9,7 +9,7 @@ class Header extends Component {
                 <h1>React Timer</h1>
                 <ThemeContext.Consumer>
                     {context => {
-                        const {toggleTheme, bulb} = context;
+                        const { toggleTheme, bulb } = context;
                         return <Button title='kek' onButtonClick={toggleTheme} disabled={false} title={bulb} />
                     }}
                 </ThemeContext.Consumer>
