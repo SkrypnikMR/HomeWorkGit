@@ -1,0 +1,16 @@
+.footer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center ;
+    color: white;
+    background-color: #5C55AE;
+    font-size: 15px;
+    h3{
+        padding-right: 20px;
+        a{
+            text-decoration: none;
+            color: rgb(229, 208, 237);
+            font-style:italic;
+        }
+    }
+}

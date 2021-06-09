@@ -4,8 +4,8 @@ import './Input.scss';
 
 class Input extends Component {
     render() {
-        const { placeholder, onChangeInput } = this.props;
-        return <input type="text" placeholder={placeholder} onChange={onChangeInput} />
+        const { placeholder, onChangeInput, value } = this.props;
+        return <input type="text" placeholder={placeholder} onChange={onChangeInput} value={value}/>
     }
 }
 export default Input;
