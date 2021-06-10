@@ -15,6 +15,7 @@ class Timer extends Component {
             stopButtonDisabled: true,
             resetBtnDisabled: true,
             startTime: '',
+            realTime: 0,
             interval: null,
         };
     }
@@ -49,17 +50,17 @@ class Timer extends Component {
     }
 
     handleOnStart = () => {
-        const { realTime } = this.state;
         const newInterval = setInterval(() => {
-            if (this.realTime) {
+            const { realTime } = this.state;
+            if (realTime === 0) {
                 this.handleOnReset();
                 return NotificationManager.info('Time is over', 'Info', 5000);
             }
-            this.setState({
-                realTime: realTime - 1,
-                time: this.timerCounter(realTime),
+            this.setState((state) => ({
+                realTime: state.realTime - 1,
+                time: this.timerCounter(state.realTime),
                 interval: newInterval,
-            });
+            }));
         }, 1000);
     }
 

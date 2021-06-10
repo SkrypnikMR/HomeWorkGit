@@ -15,4 +15,8 @@ describe('Header', () => {
         const component = mount(<Header />);
         expect(component.find('h1')).toHaveLength(1);
     });
+    it('Should have Button', () => {
+        const component = mount(<Header />);
+        expect(component.find('Button')).toHaveLength(1);
+    });
 });
