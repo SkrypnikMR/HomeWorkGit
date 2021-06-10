@@ -60,6 +60,8 @@ class Timer extends Component {
                 realTime: state.realTime - 1,
                 time: this.timerCounter(state.realTime),
                 interval: newInterval,
+                startBrnDisabled: true,
+
             }));
         }, 1000);
     }
