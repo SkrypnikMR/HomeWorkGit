@@ -61,6 +61,7 @@ class Timer extends Component {
                 time: this.timerCounter(state.realTime),
                 interval: newInterval,
                 startBrnDisabled: true,
+                stopButtonDisabled: false,
 
             }));
         }, 1000);
@@ -69,7 +70,7 @@ class Timer extends Component {
     handleOnStop = () => {
         const { interval } = this.state;
         clearInterval(interval);
-        this.setState({ interval: null });
+        this.setState({ interval: null, startBrnDisabled: false, stopButtonDisabled: true });
     }
 
     handleOnReset = () => {

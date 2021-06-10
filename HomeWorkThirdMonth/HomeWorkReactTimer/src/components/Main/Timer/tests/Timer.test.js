@@ -159,7 +159,7 @@ describe('Main', () => {
         jest.advanceTimersByTime(2001);
         expect(component.state().setBtnDisabled).toBe(true);
         expect(component.state().startBrnDisabled).toBe(true);
-        expect(component.state().stopButtonDisabled).toBe(true);
+        expect(component.state().stopButtonDisabled).toBe(false);
         expect(component.state().resetBtnDisabled).toBe(true);
         expect(component.state().startTime).toBe('');
         expect(component.state().realTime).toBe(2);
