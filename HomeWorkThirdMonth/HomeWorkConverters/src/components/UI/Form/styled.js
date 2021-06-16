@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 export const StFormDiv = styled.div`
-    background-color: rgba(0, 0, 0, 0.4);
-    min-height: 85vh;
+    background-color: #171730;
+    min-height: 75vh;
     display: flex;
     width: 35%;
-    margin: 50px auto;
+    margin: 100px 0 0 0 ;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
     font-family: 'Play', sans-serif;
     border-radius: 20px;
     color: white;
-        p{
-          font-size: 65px;
+        h5{
+          font-size: 35px;
           padding: 0;
           margin: 20px 0 20px 0;
         }

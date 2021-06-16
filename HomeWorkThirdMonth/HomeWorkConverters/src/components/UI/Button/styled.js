@@ -4,7 +4,7 @@ const bgColorDefault = '#5573C1'; // ToDo all colors move to color matrix
 const colorDefault = 'white';
 const focusColorDefault = 'black';
 const disabledColor = '#666666';
-const bgColorDisabled = '#cccccc';
+const bgColorDisabled = 'gray';
 const disabledBorder = '1px solid #999999';
 
 export const StButton = styled.button`
@@ -32,5 +32,6 @@ export const StButton = styled.button`
     border: ${({ border = disabledBorder }) => border};
     background-color: ${({ bgColor = bgColorDisabled }) => bgColor};
     color: ${({ focusColor = disabledColor }) => focusColor};
+    cursor: none;
     }
 `;

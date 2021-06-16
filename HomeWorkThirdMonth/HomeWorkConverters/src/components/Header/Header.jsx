@@ -1,9 +1,14 @@
 import React from 'react';
-import { StHeaderDiv } from './styled';
+import { StHeader } from './styled';
+import ControlPanel from './ControlPanel';
+
 
 function Header() {
     return (
-        <StHeaderDiv><h1>Converter</h1></StHeaderDiv>
+        <StHeader>
+            <h1>Converter</h1>
+            <ControlPanel />
+        </StHeader>
     );
 }
 

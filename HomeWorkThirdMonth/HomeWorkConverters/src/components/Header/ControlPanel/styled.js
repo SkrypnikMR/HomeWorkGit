@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 
-export const StHeader = styled.div`
+export const StControl = styled.div`
 background-color: #171730;
+width:30%;
+color: white;
 min-height: 13vh;
-width: 100%;
 display: flex;
-justify-content: space-evenly;
+justify-content: center;
 align-items: center;
-position: absolute;
-top: 0px;
     h1{
-        font-size: 35px;
+        font-size: 20px;
         margin: 10px;
     }
 `;
