@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StControl } from './styled';
 import Button from '../../UI/Button';
+import { support } from '../../../helpers/support';
 
 class ControlPanel extends Component {
     handleBtnOnclick = (e) => {
         const { setConverterType, converterType, setConverterTo, setConverterFrom } = this.props;
-        setConverterType({ value: e.target.id });
+        setConverterType(e.target.id);
+        support.lsSet('converterType', e.target.id);
         if (converterType !== 'lengths') {
             setConverterFrom('meters');
             setConverterTo('versts');

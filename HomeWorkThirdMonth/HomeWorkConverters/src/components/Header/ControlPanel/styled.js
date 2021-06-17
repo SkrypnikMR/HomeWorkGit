@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StControl = styled.div`
 background-color: #171730;
-width:30%;
+width:70%;
 color: white;
 min-height: 13vh;
 display: flex;

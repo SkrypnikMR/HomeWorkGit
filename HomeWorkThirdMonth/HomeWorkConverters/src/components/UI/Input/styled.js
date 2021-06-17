@@ -6,6 +6,7 @@ const focusColorDefault = 'white';
 const colorDefault = 'black';
 
 export const StLabel = styled.label`
+${({ fontFamily = 'fantasy' }) => fontFamily && `font-family: ${fontFamily}`};
    ${({ margin = '0 0px 10px 0' }) => margin && `margin: ${margin}`};
    ${({ display = 'flex' }) => display && `display: ${display}`}
    padding: 0;
@@ -17,12 +18,12 @@ export const StLabel = styled.label`
 
 export const StInput = styled.input`
     width: 100%;
+    ${({ fontFamily = 'fantasy' }) => fontFamily && `font-family: ${fontFamily}`};
     height: ${({ inputHeight = '100%' }) => inputHeight};
     padding: ${({ padding = '5px' }) => padding};
     ${({ margin }) => margin && `margin: ${margin}`};
     ${({ borderColor }) => borderColor && `border: 1px solid ${borderColor}`};
     box-sizing: border-box;
-     font-family: 'Play', sans-serif;
     ${({ brRadius }) => brRadius && `border-radius: ${brRadius}`};
     background-color: ${({ bgColor = bgInpColorDefault }) => (bgColor)};
     ${({ outlineInput = 'none' }) => outlineInput && `outline: ${outlineInput}`};
@@ -44,6 +45,7 @@ export const StInput = styled.input`
     }
     
     &::placeholder {
+      ${({ fontFamily = 'fantasy' }) => fontFamily && `font-family: ${fontFamily}`};
       color: ${({ color = colorDefault }) => color};
       font-size: ${({ fontSizeInp = '14px' }) => fontSizeInp};
     }

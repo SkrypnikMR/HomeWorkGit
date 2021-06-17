@@ -13,8 +13,8 @@ class MySelect extends Component {
         const { converterType, setConverterFrom, setConverterTo, from } = this.props;
         if (converterType === 'lengths' && from) setConverterFrom('meters');
         else if (converterType === 'lengths' && !from) setConverterTo('meters');
-        else if (converterType !== 'lengths' && from) setConverterFrom('UAH');
-        else if (converterType !== 'lengths' && !from) setConverterTo('UER');
+        else if (converterType !== 'lengths' && from) setConverterFrom('uah');
+        else if (converterType !== 'lengths' && !from) setConverterTo('uer');
     }
 
     render() {

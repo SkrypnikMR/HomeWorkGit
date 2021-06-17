@@ -1,27 +1,27 @@
 export const lengthOptions = [{
-    id: 'Meters',
-    value: 'Meters',
-    name: 'Meters',
+    id: 'METERS',
+    value: 'METERS',
+    name: 'METERS',
 },
 {
-    id: 'Versts',
-    value: 'Versts',
-    name: 'Versts',
+    id: 'VERSTS',
+    value: 'VERSTS',
+    name: 'VERSTS',
 },
 {
-    id: 'Miles',
-    value: 'Miles',
-    name: 'Miles',
+    id: 'MILES',
+    value: 'MILES',
+    name: 'MILES',
 },
 {
-    id: 'Foots',
-    value: 'Foots',
-    name: 'Foots',
+    id: 'FOOTS',
+    value: 'FOOTS',
+    name: 'FOOTS',
 },
 {
-    id: 'Yards',
-    value: 'Yards',
-    name: 'Yards',
+    id: 'YARDS',
+    value: 'YARDS',
+    name: 'YARDS',
 }];
 export const currencyOptions = [{
     id: 'EUR',
@@ -34,8 +34,8 @@ export const currencyOptions = [{
     name: 'USD',
 },
 {
-    id: 'RUR',
-    value: 'RUR',
-    name: 'RUR',
+    id: 'RUB',
+    value: 'RUB',
+    name: 'RUB',
 }];
 export const currencyUAH = [{ id: 'UAH', value: 'UAH', name: 'UAH' }];

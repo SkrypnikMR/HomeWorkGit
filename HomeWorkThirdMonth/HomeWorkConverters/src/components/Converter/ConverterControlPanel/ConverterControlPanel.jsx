@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StConvertControl, StDropDownsControl } from './styled';
+import { StConvertControl, StDropDownsControl, StSpan } from './styled';
 import Button from '../../UI/Button';
 import Input from '../../UI/Input';
 import Select from '../../UI/Select';
 import { lengthOptions, currencyOptions, currencyUAH } from '../../../constants/UICONSTANTS';
+import { support } from '../../../helpers/support';
 
 class ConverterControlPanel extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: '',
+        };
+    }
+
     handleClick = () => {
-        const { quantity, setConverterTablo, from, to } = this.props;
-        setConverterTablo({ quantity, from, to });
+        const {
+            quantity,
+            setConverterTablo,
+            from,
+            to,
+            converterType,
+            currency,
+            setConverterQuantity } = this.props;
+        const { inValid, newQuantity } = support.validateInput(quantity);
+        if (inValid) return this.setState(state => ({ ...state, error: 'Only numbers' }));
+        if (newQuantity === '') return this.setState(state => ({ ...state, error: 'Please enter value' }));
+        const tablo = converterType === 'lengths'
+            ? support.convertLengths(newQuantity, from, to)
+            : support.convertCurrency(newQuantity, currency, to);
+        setConverterTablo(tablo);
+        setConverterQuantity('');
     }
 
     handleOnChange = (e) => {
@@ -18,12 +40,22 @@ class ConverterControlPanel extends Component {
         setConverterQuantity(value);
     }
 
+    componentDidMount() {
+        const { getCurrency, converterType } = this.props;
+        if (converterType === 'curency') getCurrency();
+    }
+
+    componentDidUpdate(prevProps) {
+        const { getCurrency, converterType } = this.props;
+        if (converterType === 'curency' && prevProps.converterType !== converterType) getCurrency();
+    }
+
     render() {
-        const { converterType, setConverterFrom, setConverterTo } = this.props;
+        const { converterType, setConverterFrom, setConverterTo, quantity } = this.props;
+        const { error } = this.state;
         return (
             <StConvertControl >
                 <StDropDownsControl>
-                    <p>FROM</p>
                     <Select
                         width="60%"
                         options={converterType === 'lengths' ? lengthOptions : currencyUAH}
@@ -48,10 +80,11 @@ class ConverterControlPanel extends Component {
                 <Input
                     id="convertControlPanelInput"
                     placeholder="Enter your param"
-                    width="40%"
+                    width="90%"
                     onChange={this.handleOnChange}
-                    label='Only Numbers'
+                    value={quantity}
                 />
+                <StSpan>{error}</StSpan>
                 <Button
                     content="Convert"
                     id="controllButton"
@@ -70,6 +103,8 @@ ConverterControlPanel.propTypes = {
     setConverterTablo: PropTypes.func,
     from: PropTypes.string,
     to: PropTypes.string,
+    getCurrency: PropTypes.func,
+    currency: PropTypes.objectOf(PropTypes.string),
 };
 
 export default ConverterControlPanel;

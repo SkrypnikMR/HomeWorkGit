@@ -1,9 +1,13 @@
 import * as actions from './actions';
 
-export const getMovies = () => async (dispatch) => {
-    try {
-        dispatch(actions.getMoviesRequest());
-        const data = await fetch('http://localhost:5246/app/movies');
-        dispatch(actions.getMoviesSuccess(await data.json()));
-    } catch (e) { actions.getMoviesError(e); }
+export const getCurrency = () => async (dispatch) => {
+    const responce = await fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5');
+    const data = await responce.json();
+    const [USD, UER, RUB] = data;
+    const newCurrency = {
+        usd: USD.buy.substring(0, 6),
+        uer: UER.buy.substring(0, 6),
+        rub: RUB.buy.substring(0, 6),
+    };
+    dispatch(actions.loadCurrency(newCurrency));
 };

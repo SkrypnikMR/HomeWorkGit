@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StConvertControl = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
     height: 60vh;
@@ -19,4 +19,7 @@ export const StDropDownsControl = styled.div`
     p{
         margin:10px;
     }
+`;
+export const StSpan = styled.span`
+color: red;
 `;

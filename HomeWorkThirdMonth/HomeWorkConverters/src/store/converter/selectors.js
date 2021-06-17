@@ -1,20 +1,7 @@
 import { createSelector } from 'reselect';
 
-const getMoviesStore = state => state.movies;
-
-export const getMoviesStoreList = state => state.movies.movies;
-
-export const getMoviesList = createSelector(
-    getMoviesStore,
-    moviesStore => moviesStore.movies,
-);
-export const getMovieById = createSelector(
-    getMoviesList,
-    (_state, { id }) => id,
-    (movies, id) => movies.find(movie => movie.id === id),
-);
-
-export const getIsLoading = createSelector(
-    getMoviesStore,
-    moviesStore => moviesStore.isLoading,
-);
+export const getState = state => state;
+export const getTablo = createSelector(getState, state => state.tablo);
+export const getFrom = createSelector(getState, state => state.from);
+export const getTo = createSelector(getState, state => state.to);
+export const getNotes = createSelector(getState, state => state.notes);

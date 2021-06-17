@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 export const StFormDiv = styled.div`
     background-color: #171730;
-    min-height: 75vh;
+    height: 80vh;
     display: flex;
     width: 35%;
     margin: 100px 0 0 0 ;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    font-family: 'Play', sans-serif;
+    ${({ fontFamily = 'fantasy' }) => fontFamily && `font-family: ${fontFamily}`};
     border-radius: 20px;
     color: white;
         h5{
