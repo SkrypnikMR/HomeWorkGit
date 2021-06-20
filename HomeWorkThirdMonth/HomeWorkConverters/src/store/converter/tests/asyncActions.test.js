@@ -6,11 +6,10 @@ jest.mock('../actions', () => ({
 }));
 
 global.fetch = jest.fn().mockReturnValue({
-    json: jest.fn().mockReturnValue({
-        USD: { buy: '123123' },
-        UER: { buy: '123123' },
-        RUB: { buy: '123123' },
-    }),
+    json: jest.fn().mockReturnValue([{ buy: '123123' },
+    { buy: '123123' },
+    { buy: '123123' }],
+    ),
 });
 
 describe('getCurrency', () => {
