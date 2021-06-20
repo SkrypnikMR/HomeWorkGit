@@ -3,13 +3,13 @@ import { StHeader } from './styled';
 import ControlPanel from './ControlPanel';
 
 
-function Header() {
+const Header = () => {
     return (
         <StHeader>
             <h1>Converter</h1>
             <ControlPanel />
         </StHeader>
     );
-}
+};
 
 export default Header;

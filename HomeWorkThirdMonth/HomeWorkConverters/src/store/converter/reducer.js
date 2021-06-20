@@ -3,7 +3,7 @@ import { support } from '../../helpers/support';
 
 const { lsGet } = support;
 
-const initialState = {
+export const initialState = {
     isLoading: false,
     converterType: lsGet('converterType') ? lsGet('converterType') : 'lengths',
     from: '',

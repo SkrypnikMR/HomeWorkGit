@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Should match snapshot 1`] = `"<div class=\\"styled__StControl-sc-13jhp11-0 hMnvOa\\"><h1>Change converter to</h1><button id=\\"lengths\\" name=\\"converter_Lengths\\" type=\\"button\\" height=\\"50px\\" width=\\"100px\\" class=\\"styled__StButton-sc-1a6hck8-0 kBWHlo\\">Length</button><h1>Or</h1><button id=\\"curency\\" name=\\"converter_Currency\\" type=\\"button\\" disabled=\\"\\" height=\\"50px\\" width=\\"100px\\" class=\\"styled__StButton-sc-1a6hck8-0 kBWHlo\\">Currency</button><button id=\\"modal_btn\\" name=\\"modal_btn\\" type=\\"button\\" height=\\"50px\\" width=\\"100px\\" class=\\"styled__StButton-sc-1a6hck8-0 kBWHlo\\">Show All Results</button></div>"`;

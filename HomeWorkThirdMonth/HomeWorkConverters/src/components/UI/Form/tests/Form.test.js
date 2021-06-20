@@ -7,7 +7,7 @@ describe('Form', () => {
     let props;
     beforeEach(() => {
         props = {
-            children: [<Button id={1} onClick={jest.fn()} />],
+            children: [<Button id='1' onClick={jest.fn()} key="1" />],
         };
     });
     it('Should match snapshot', () => {

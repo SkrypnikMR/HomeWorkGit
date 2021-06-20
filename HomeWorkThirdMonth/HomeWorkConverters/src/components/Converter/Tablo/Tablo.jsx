@@ -42,10 +42,10 @@ class Tablo extends Component {
 }
 
 Tablo.propTypes = {
-    tablo: PropTypes.string.isRequired,
-    from: PropTypes.string.isRequired,
-    to: PropTypes.string.isRequired,
-    setNotes: PropTypes.func.isRequired,
+    tablo: PropTypes.string,
+    from: PropTypes.string,
+    to: PropTypes.string,
+    setNotes: PropTypes.func,
     notes: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
 
