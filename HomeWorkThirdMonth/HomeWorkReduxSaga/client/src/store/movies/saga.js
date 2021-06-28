@@ -9,6 +9,7 @@ import {
     postMovieSuccess,
     postMovieError,
     deleteMovieSuccess,
+    deleteMovieError,
     updateMovieSuccess,
     updateMovieError,
 } from './actions';
@@ -18,7 +19,6 @@ export function* getMoviesSaga() {
     try {
         yield put(startMoviesRequest())
         const data = yield call(fetch, 'http://localhost:5246/app/movies');
-        console.log(data);
         const parsedData = yield call([data, data.json]);
         yield put(getMoviesSuccess(parsedData));
     } catch (e) {
@@ -60,12 +60,14 @@ export function* deleteMovieSaga({ payload }) {
         }
         else {
             yield put(deleteMovieError());
-            yield call([NotificationManager, NotificationManager.error], 'Server Error, try later...', 'SERVER ERROR', 2000);
+            yield call([NotificationManager, NotificationManager.error],
+                'Server Error, try later...', 'SERVER ERROR', 2000);
         }
     }
     catch (e) {
         yield put(deleteMovieError());
-        yield call([NotificationManager, NotificationManager.error], 'Server Error, try later...', 'SERVER ERROR', 2000);
+        yield call([NotificationManager, NotificationManager.error],
+            'Server Error, try later...', 'SERVER ERROR', 2000);
     }
 }
 export function* updateMovieSaga({ payload }) {
@@ -81,12 +83,14 @@ export function* updateMovieSaga({ payload }) {
         }
         else {
             yield put((updateMovieError()));
-            yield call([NotificationManager, NotificationManager.error], 'Server Error, try later...', 'SERVER ERROR', 2000);
+            yield call([NotificationManager, NotificationManager.error],
+                'Server Error, try later...', 'SERVER ERROR', 2000);
         }
     }
     catch (e) {
         yield put(updateMovieError());
-        yield call([NotificationManager, NotificationManager.error], 'Server Error, try later...', 'SERVER ERROR', 2000);
+        yield call([NotificationManager, NotificationManager.error],
+            'Server Error, try later...', 'SERVER ERROR', 2000);
     }
 }
 export function* watcher() {
