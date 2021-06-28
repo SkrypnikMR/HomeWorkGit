@@ -1,7 +1,7 @@
 import React from 'react';
 import './Loader.scss';
 
-function Loader() {
+const Loader = () => {
     return (
         <div className="loader">
             <div className="loading">

@@ -1,106 +1,93 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import propTypes from 'prop-types';
 import './Movie.scss';
 import Button from '../../Button';
 import Input from '../../Input';
 import { defaultImage } from '../../../constants/uiConstants'
+import Loader from '../../Loader';
+import { NotificationManager } from 'react-notifications';
 
-class Movie extends Component {
-    constructor(props) {
-        super(props);
-        const { cover } = props.movie;
-        this.state = {
-            src: cover,
-            errored: false,
-            fallBackSrc: defaultImage,
-            title: { isWaitForChange: false },
-            cover: { isWaitForChange: false },
-            description: { isWaitForChange: false },
-            changeParam: '',
-            newData: '',
-        };
-    }
-    componentDidUpdate(prevProps) {
-        if (prevProps.movie.cover !== this.props.movie.cover) this.setState((state) => ({ ...state, src: this.props.movie.cover }))
-    }
-    handleDeleteItem = () => {
-        const { deleteItem, movie } = this.props;
-        deleteItem(movie.id);
-    }
+const Movie = ({ movie, deleteMovie, updateMovie, isLoading }) => {
+    const { cover, title, description } = movie;
+    const [state, setState] = useState({
+        src: cover,
+        errored: false,
+        fallBackSrc: defaultImage,
+        title: { isWaitForChange: false },
+        cover: { isWaitForChange: false },
+        description: { isWaitForChange: false },
+        changeParam: '',
+        newData: '',
+    });
+    useEffect(() => {
+        setState({ ...state, src: cover })
+    }, [cover]);
 
-    onError = () => {
-        const { fallBackSrc } = this.state;
-        this.setState({ src: fallBackSrc, errored: true });
+    const handleDeleteItem = () => deleteMovie(movie.id);
+    const onError = () => {
+        const { fallBackSrc } = state;
+        setState({ ...state, src: fallBackSrc, errored: true })
     }
-
-    handleOnDoubleClick = (e) => {
+    const handleOnDoubleClick = (e) => {
         const key = e.target.getAttribute('name');
-        this.setState((state) => ({ [key]: { isWaitForChange: !state[key].isWaitForChange, value: '' } }));
+        setState((state) => ({ ...state, [key]: { isWaitForChange: !state[key].isWaitForChange } }));
     }
+    const handleOnChange = (e) => setState({ ...state, changeParam: e.target.name, newData: e.target.value });
 
-    handleOnChange = (e) => this.setState({ changeParam: e.target.name, newData: e.target.value });
-
-    handleOnBlur = (e) => {
-        if (e.target.value === '') return;
-        const { changeParam, newData } = this.state;
-        const { updateItem, movie } = this.props;
-        updateItem({ changeParam, newData, id: movie.id });
-        this.setState(() => ({ [e.target.name]: { isWaitForChange: false, value: '' } }));
+    const handleOnBlur = (e) => {
+        if (e.target.value === '') return NotificationManager.error('Please Enter newData for field', 'INPUT ERROR', 2000);
+        const { changeParam, newData } = state;
+        updateMovie({ changeParam, newData, id: movie.id });
+        setState({ ...state, [e.target.name]: { isWaitForChange: false } });
     }
-
-    render() {
-        const { movie } = this.props;
-        const {
-            src,
-            title, cover, description } = this.state;
-        return (
-            <div className="movie" >
-                <div className="movie__header">
-                    {
-                        title.isWaitForChange ? (
-                            <Input
-                                name='title'
-                                onBlurInput={this.handleOnBlur}
-                                onChangeInput={this.handleOnChange}
-                                placeholder='enter new title'
-                            />
+    return isLoading ? <Loader /> : (
+        <div className="movie" >
+            <div className="movie__header">
+                {
+                    state.title.isWaitForChange ? (
+                        <Input
+                            name='title'
+                            onBlurInput={handleOnBlur}
+                            onChangeInput={handleOnChange}
+                            placeholder='enter new title'
+                        />
+                    )
+                        : (
+                            <h5 name="title" onDoubleClick={handleOnDoubleClick}>
+                                {title}
+                            </h5>
                         )
-                            : (
-                                <h5 name="title" onDoubleClick={this.handleOnDoubleClick}>
-                                    {movie.title}
-                                </h5>
-                            )
-                    }
-                    <Button onButtonClick={this.handleDeleteItem} title="X" />
-                </div>
-                {cover.isWaitForChange ? (
-                    <div className="cover__change">
-                        <Input
-                            name='cover'
-                            onBlurInput={this.handleOnBlur}
-                            onChangeInput={this.handleOnChange}
-                            placeholder='enter new cover'
-                        />
-                    </div>
-                )
-                    : <img src={src} onError={this.onError} onDoubleClick={this.handleOnDoubleClick} name="cover" />}
-                {description.isWaitForChange ? (
-                    <div className="description__change">
-                        <Input
-                            name='description'
-                            onBlurInput={this.handleOnBlur}
-                            onChangeInput={this.handleOnChange}
-                            placeholder='enter new description'
-                        />
-                    </div>
-                ) : <p onDoubleClick={this.handleOnDoubleClick} name="description">{movie.description}</p>}
+                }
+                <Button onButtonClick={handleDeleteItem} title="X" />
             </div>
-        );
-    }
+            {state.cover.isWaitForChange ? (
+                <div className="cover__change">
+                    <Input
+                        name='cover'
+                        onBlurInput={handleOnBlur}
+                        onChangeInput={handleOnChange}
+                        placeholder='enter new cover'
+                    />
+                </div>
+            )
+                : <img src={state.src} onError={onError} onDoubleClick={handleOnDoubleClick} name="cover" />}
+            {state.description.isWaitForChange ? (
+                <div className="description__change">
+                    <Input
+                        name='description'
+                        onBlurInput={handleOnBlur}
+                        onChangeInput={handleOnChange}
+                        placeholder='enter new description'
+                    />
+                </div>
+            ) : <p onDoubleClick={handleOnDoubleClick} name="description">{description}</p>}
+        </div>
+    );
 }
 Movie.propTypes = {
     movie: propTypes.object,
-    deleteItem: propTypes.func,
-    updateItem: propTypes.func,
+    deleteMovie: propTypes.func,
+    updateMovie: propTypes.func,
+    isLoading: propTypes.bool,
 };
 export default Movie;

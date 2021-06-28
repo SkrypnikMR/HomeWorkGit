@@ -1,12 +1,10 @@
 import { createSelector } from 'reselect';
 
-const getMoviesStore = (state) => state.movies;
-
-export const getMoviesStoreList = (state) => state.movies.movies;
+const getMoviesStore = (state) => state;
 
 export const getMoviesList = createSelector(
     getMoviesStore,
-    (moviesStore) => moviesStore.movies,
+    ({ movies }) => movies,
 );
 export const getMovieById = createSelector(
     getMoviesList,
@@ -16,5 +14,5 @@ export const getMovieById = createSelector(
 
 export const getIsLoading = createSelector(
     getMoviesStore,
-    (moviesStore) => moviesStore.isLoading,
+    ({ isLoading }) => isLoading
 );

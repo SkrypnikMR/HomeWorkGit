@@ -3,7 +3,6 @@ const uuid = require('uuid').v4;
 
 class MovieExpert {
     constructor(path) { this.path = path };
-    // deleteMovie, updateMovie
     getMovies = (_req, res) => {
         try {
             const serverAnswer = this.#getArrayFromFile(this.path);
@@ -27,10 +26,8 @@ class MovieExpert {
     deleteMovie = (req, res) => {
         try {
             if (!req.body.id) return res.status(400).json({ message: 'bad request' })
-            console.log(req.body);
             let movies = this.#getArrayFromFile(this.path);
             movies = movies.filter(movie => movie.id !== req.body.id);
-            console.log(movies);
             fs.writeFileSync(this.path, JSON.stringify(movies));
             res.status(200).json({ message: 'done' });
 

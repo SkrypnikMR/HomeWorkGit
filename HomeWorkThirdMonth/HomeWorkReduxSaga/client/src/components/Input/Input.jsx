@@ -1,22 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Input.scss';
 
-class Input extends Component {
-    render() {
-        const { placeholder, onChangeInput, value, name, onBlurInput } = this.props;
-        return (
-            <input
-                type="text"
-                autoComplete="off"
-                placeholder={placeholder}
-                onChange={onChangeInput}
-                value={value}
-                name={name}
-                onBlur={onBlurInput}
-            />
-        );
-    }
+const Input = ({ placeholder, onChangeInput, value, name, onBlurInput }) => {
+    return (
+        <input
+            type="text"
+            autoComplete="off"
+            placeholder={placeholder}
+            onChange={onChangeInput}
+            value={value}
+            name={name}
+            onBlur={onBlurInput}
+        />
+    );
 }
 Input.propTypes = {
     placeholder: PropTypes.string,
