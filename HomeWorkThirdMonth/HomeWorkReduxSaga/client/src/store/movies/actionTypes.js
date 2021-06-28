@@ -10,9 +10,9 @@ export const POST_MOVIE_ERROR = '@@movies/POST_MOVIE_ERROR';
 
 export const DELETE_MOVIE = '@@movies/DELETE_MOVIE';
 export const DELETE_MOVIE_SUCCESS = '@@movies/DELETE_MOVIE_SUCCESS';
-export const DELETE_MOVIE_EROR = '@@movies/DELETE_MOVIE_EROR';
+export const DELETE_MOVIE_ERROR = '@@movies/DELETE_MOVIE_EROR';
 
 export const UPDATE_MOVIE = '@@movies/UPDATE_MOVIE';
 export const UPDATE_MOVIE_SUCCESS = '@@movies/UPDATE_MOVIE_SUCCESS';
-export const UPDATE_MOVIE_EROR = '@@movies/UPDATE_MOVIE_EROR';
+export const UPDATE_MOVIE_ERROR = '@@movies/UPDATE_MOVIE_EROR';
 

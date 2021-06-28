@@ -12,8 +12,8 @@ export const postMovieError = () => ({ type: AT.POST_MOVIE_ERROR });
 
 export const deleteMovie = (payload) => ({ type: AT.DELETE_MOVIE, payload });
 export const deleteMovieSuccess = (payload) => ({ type: AT.DELETE_MOVIE_SUCCESS, payload });
-export const deleteMovieError = () => ({ type: AT.DELETE_MOVIE.ERROR });
+export const deleteMovieError = () => ({ type: AT.DELETE_MOVIE_ERROR });
 
 export const updateMovie = (payload) => ({ type: AT.UPDATE_MOVIE, payload });
 export const updateMovieSuccess = (payload) => ({ type: AT.UPDATE_MOVIE_SUCCESS, payload });
-export const updateMovieError = () => ({ type: AT.UPDATE_MOVIE_EROR });
+export const updateMovieError = () => ({ type: AT.UPDATE_MOVIE_ERROR });

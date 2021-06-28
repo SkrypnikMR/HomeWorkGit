@@ -1,6 +1,6 @@
 import * as AT from './actionTypes';
 
-const initialState = {
+export const initialState = {
     movies: [],
     moviesIds: [],
     isLoading: false,
@@ -19,7 +19,7 @@ export const reducer = (state = initialState, action) => {
             movies: state.movies.filter((movie) => movie.id !== action.payload.id),
             isLoading: false
         };
-        case AT.DELETE_MOVIE_EROR: return { ...state, isLoading: false };
+        case AT.DELETE_MOVIE_ERROR: return { ...state, isLoading: false };
         case AT.UPDATE_MOVIE_SUCCESS: return {
             ...state,
             movies: state.movies.map((movie) => {
@@ -31,7 +31,7 @@ export const reducer = (state = initialState, action) => {
             }),
             isLoading: false
         };
-        case AT.UPDATE_MOVIE_EROR: return { ...state, isLoading: false };
+        case AT.UPDATE_MOVIE_ERROR: return { ...state, isLoading: false };
         default: return { ...state };
     }
 };

@@ -29,4 +29,5 @@ module.exports = {
         '^.+\\.(css|scss)$': 'identity-obj-proxy',
     },
     testEnvironment: 'jsdom',
+    /*     testPathIgnorePatterns: ['other/file/path', '/node_modules/'] */
 };

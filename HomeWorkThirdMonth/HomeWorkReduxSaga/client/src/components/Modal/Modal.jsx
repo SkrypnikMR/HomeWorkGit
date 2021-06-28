@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import './Modal.scss';
@@ -61,9 +60,9 @@ const Modal = ({ postMovies, onButtonClick, title: propsTitle, myClassName: prop
     );
 }
 Modal.propTypes = {
-    myClassName: propTypes.bool.isRequired,
+    myClassName: propTypes.bool,
     onButtonClick: propTypes.func,
-    title: propTypes.string.isRequired,
+    title: propTypes.string,
     postMovies: propTypes.func,
 };
 export default Modal;

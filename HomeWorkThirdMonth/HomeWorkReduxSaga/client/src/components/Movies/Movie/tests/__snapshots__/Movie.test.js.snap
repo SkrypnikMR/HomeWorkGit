@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Movie Should match snapshot 1`] = `"<div class=\\"movie\\"><div class=\\"movie__header\\"><h5 name=\\"title\\">title</h5><button class=\\"custom__button\\">X</button></div><img src=\\"cover\\" name=\\"cover\\"/><p name=\\"description\\">desc</p></div>"`;

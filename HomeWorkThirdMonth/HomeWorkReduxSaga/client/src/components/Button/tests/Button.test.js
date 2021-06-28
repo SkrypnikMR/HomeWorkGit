@@ -19,6 +19,6 @@ describe('Button', () => {
         component.simulate('click');
 
         expect(btnOnClick).toHaveBeenCalled();
-        expect(component.html()).toBe(`<button>${title}</button>`);
+        expect(component.html()).toBe(`<button class="custom__button">${title}</button>`);
     });
 });
