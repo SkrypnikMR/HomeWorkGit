@@ -46,4 +46,4 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'multipart/form-data']
 }
 
-module.exports = { fileUploader, imageUploader, upload}
+module.exports = { fileUploader, imageUploader, upload }

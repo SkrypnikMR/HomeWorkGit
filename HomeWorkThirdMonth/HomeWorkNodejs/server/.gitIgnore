@@ -1,0 +1,6 @@
+.env
+PORT=6687
+AWS_ID="AKIAYDKYZV4QEYD7YJEF"
+AWS_SECRET="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"
+AWS_BUCKET_NAME_IMAGES="skripnik-bucket-image"
+AWS_BUCKET_NAME_FILES="skripnik-bucket-file"
