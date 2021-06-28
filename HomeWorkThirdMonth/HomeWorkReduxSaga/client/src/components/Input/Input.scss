@@ -1,0 +1,8 @@
+input {
+    width: 100%;
+    outline: none;
+    text-align:center;
+    &:placeholder{
+        text-align:center;
+    }
+}

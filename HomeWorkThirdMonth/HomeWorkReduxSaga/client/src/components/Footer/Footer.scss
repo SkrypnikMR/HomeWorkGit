@@ -1,0 +1,19 @@
+.footer{
+    margin-top: auto ;
+    width: 100%;
+    display: flex;
+    bottom: 0px;
+    justify-content: flex-end;
+    align-items: center ;
+    color: white;
+    background-color: #f5da0b;
+    font-size: 15px;
+    h3{
+        padding-right: 20px;
+        a{
+            text-decoration: none;
+            color: rgb(229, 208, 237);
+            font-style:italic;
+        }
+    }
+}

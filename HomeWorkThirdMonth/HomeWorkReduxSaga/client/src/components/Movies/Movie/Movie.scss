@@ -1,0 +1,123 @@
+.movie{
+    width: 400px;
+    height: 500px;
+    justify-self: center;
+    margin:10px;
+    display: flex;
+    align-items: center;
+    overflow-y: hidden auto;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition-duration: .5s;
+    color: white;
+    &__header{
+        border-radius: 10px 10px 0 0;
+        position: relative;
+        top:-10px;
+        background-color: #f5da0b;
+        width: 100%;
+        z-index: 100;
+        padding: 0;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    
+        input {
+            height: 40px;
+            width: 90%;
+            margin: 15px;
+            z-index: 1000;
+            position: relative;
+            overflow-x: hidden;
+            background-color: #f5da0b;
+            border: none;
+            color: white;
+            &::placeholder{
+                color:white;
+                font-weight: bold;
+            }
+        }
+        button {
+              font-weight: bold;
+            position: absolute;
+            top:0px;
+            right: 10px;
+            padding-right: 10px;
+            width: 50px;
+            transition-duration: .5s;
+            &:hover{
+                font-weight: bold;
+                transition-duration: .5s;
+                font-size: 20px;
+                right:15px;
+                color: #1B264F;
+    font-family: 'Play', sans-serif;
+            }
+        }
+    }
+    img{
+        margin-top: -10px;
+        height: 70%;
+        width: 100%;
+    }
+    h5, p {
+        width: 100%;
+        text-align: center;
+
+
+    }
+    p {
+           font-size: 20px;
+    }
+    h5 {
+        font-size: 17px;
+        z-index: 1000;
+    }
+    .cover__change{
+             margin-top: -10px;
+             height: 70%;
+             width: 100%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+              input {
+            height: 40px;
+            width: 90%;
+            margin: 15px;
+            z-index: 1000;
+            position: relative;
+            overflow-x: hidden;
+            border: none;
+            color: #f5da0b;
+            &::placeholder{
+                color:#f5da0b;
+                font-weight: bold;
+            }
+        }
+    }
+     .description__change{
+             margin-top: 5px;
+             height: 10%;
+             width: 100%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+              input {
+            height: 40px;
+            width: 90%;
+            margin: 15px;
+            z-index: 1000;
+            position: relative;
+            overflow-x: hidden;
+            border: none;
+            color: #f5da0b;
+            &::placeholder{
+                color:#f5da0b;
+                font-weight: bold;
+            }
+        }
+    }
+}
