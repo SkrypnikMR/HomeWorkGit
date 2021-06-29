@@ -12,6 +12,8 @@ module.exports = {
     testMatch: [
         '**/*.(test|spec).(js)',
         '**/*.(test|spec).(jsx)',
+        '**\\*.(test|spec).(js)',
+        '**\\*.(test|spec).(jsx)',
     ],
     coverageReporters: [
         'json',
@@ -28,6 +30,5 @@ module.exports = {
     moduleNameMapper: {
         '^.+\\.(css|scss)$': 'identity-obj-proxy',
     },
-    testEnvironment: 'jsdom',
-    /*     testPathIgnorePatterns: ['other/file/path', '/node_modules/'] */
+    testEnvironment: 'jsdom'
 };

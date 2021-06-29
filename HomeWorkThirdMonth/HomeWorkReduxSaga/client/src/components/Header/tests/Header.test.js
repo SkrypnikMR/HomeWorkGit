@@ -2,6 +2,7 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import { shallowSmart, mountSmart } from '../../../../__tests__/helper';
 import Header from '../Header';
+import { act } from 'react-dom/test-utils';
 
 const mockStore = configureStore();
 const store = mockStore({
@@ -32,12 +33,12 @@ describe('Header', () => {
         const component = mountSmart(<Header />, store);
         expect(component.find('Modal')).toHaveLength(1);
     });
-    it('Should have Button ', () => {
-        const setModalState = jest.fn();
+    it('Should click Button ', () => {
         const component = mountSmart(<Header />, store);
-        component.find('Button').at(0).props().onButtonClick();
-        const handleClick = jest.spyOn(React, "useState");
-        handleClick.mockImplementation(modalState => [modalState, setModalState]);
-        expect(setModalState).toBeTruthy();
+        act(() => {
+            component.find('Button').at(0).props().onButtonClick();
+        })
+        component.update();
+        expect(component.find('Modal').props().myClassName).toBe(true);
     });
 });

@@ -12,7 +12,6 @@ const Movie = ({ movie, deleteMovie, updateMovie, isLoading }) => {
     const [state, setState] = useState({
         src: cover,
         errored: false,
-        fallBackSrc: defaultImage,
         title: { isWaitForChange: false },
         cover: { isWaitForChange: false },
         description: { isWaitForChange: false },
@@ -24,10 +23,7 @@ const Movie = ({ movie, deleteMovie, updateMovie, isLoading }) => {
     }, [cover]);
 
     const handleDeleteItem = () => deleteMovie(movie.id);
-    const onError = () => {
-        const { fallBackSrc } = state;
-        setState({ ...state, src: fallBackSrc, errored: true })
-    }
+    const onError = () => setState({ ...state, src: defaultImage, errored: true })
     const handleOnDoubleClick = (e) => {
         const key = e.target.getAttribute('name');
         setState((state) => ({ ...state, [key]: { isWaitForChange: !state[key].isWaitForChange } }));

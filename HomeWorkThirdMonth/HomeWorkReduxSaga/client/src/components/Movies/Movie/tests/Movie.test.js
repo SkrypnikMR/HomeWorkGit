@@ -1,6 +1,15 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Movie from '../Movie';
+import { act } from 'react-dom/test-utils';
+import { defaultImage } from '../../../../constants/uiConstants';
+import { NotificationManager } from 'react-notifications';
+
+jest.mock('react-notifications', () => ({
+    NotificationManager: {
+        error: jest.fn()
+    }
+}));
 
 describe('Movie', () => {
     let props;
@@ -144,7 +153,11 @@ describe('Movie', () => {
             isLoading: false
         }
         const component = mount(<Movie {...props} />);
-        component.find('img').props().onError();
+        act(() => {
+            component.find('img').props().onError();
+        })
+        component.update();
+        expect(component.find('img').props().src).toBe(defaultImage)
     });
     it('Should call handleOnChange', () => {
         props = {
@@ -160,7 +173,20 @@ describe('Movie', () => {
         }
         const component = mount(<Movie {...props} />);
         component.find('img').simulate('dblclick');
-        component.find('Input').simulate('change', { taget: { name: 'cover', value: 'new Cover' } })
+        act(() => {
+            component.find('Input').props()
+                .onChangeInput({ target: { name: 'cover', value: 'new Cover' } })
+        })
+        component.update();
+        act(() => {
+            component.find('Input').props()
+                .onBlurInput({ target: { name: 'cover', value: 'new Cover' } })
+        })
+        expect(props.updateMovie).toHaveBeenCalledWith({
+            changeParam: 'cover',
+            newData: 'new Cover',
+            id: props.movie.id
+        })
     });
     it('Should call handleOnBlur but value ="" ', () => {
         props = {
@@ -176,8 +202,16 @@ describe('Movie', () => {
         }
         const component = mount(<Movie {...props} />);
         component.find('img').simulate('dblclick');
-        component.find('Input').simulate('change', { taget: { name: 'cover', value: 'new Cover' } })
-        component.find('Input').simulate('blur', { taget: { name: 'cover', value: '' } })
+        act(() => {
+            component.find('Input').props()
+                .onChangeInput({ target: { name: 'cover', value: '' } })
+        })
+        component.update();
+        act(() => {
+            component.find('Input').props()
+                .onBlurInput({ target: { name: 'cover', value: '' } })
+        });
+        expect(NotificationManager.error).toHaveBeenCalledWith('Please Enter newData for field', 'INPUT ERROR', 2000);
     });
     it('Should call handleOnBlur value = someValue ', () => {
         props = {
@@ -194,7 +228,9 @@ describe('Movie', () => {
         const component = mount(<Movie {...props} />);
         component.find('img').simulate('dblclick');
         component.find('Input').simulate('change', { taget: { name: 'cover', value: 'new Cover' } })
-        component.find('Input').props().onBlurInput({ target: { value: '12321' } })
+        act(() => {
+            component.find('Input').props().onBlurInput({ target: { value: '12321' } })
+        })
         expect(props.updateMovie).toHaveBeenCalledWith({ changeParam: 'cover', id: 1, newData: "" });
     });
 });
