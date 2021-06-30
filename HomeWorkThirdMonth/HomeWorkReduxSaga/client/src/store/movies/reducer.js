@@ -20,17 +20,19 @@ export const reducer = (state = initialState, action) => {
             isLoading: false
         };
         case AT.DELETE_MOVIE_ERROR: return { ...state, isLoading: false };
-        case AT.UPDATE_MOVIE_SUCCESS: return {
-            ...state,
-            movies: state.movies.map((movie) => {
-                const { changeParam, id, newData } = action.payload;
-                if (movie.id === id) {
-                    movie[changeParam] = newData;
-                }
-                return movie;
-            }),
-            isLoading: false
-        };
+        case AT.UPDATE_MOVIE_SUCCESS: {
+            return {
+                ...state,
+                movies: state.movies.map((movie) => {
+                    const { changeParam, id, newData } = action.payload;
+                    if (movie.id === id) {
+                        movie[changeParam] = newData;
+                    }
+                    return movie;
+                }),
+                isLoading: false
+            };
+        }
         case AT.UPDATE_MOVIE_ERROR: return { ...state, isLoading: false };
         default: return { ...state };
     }

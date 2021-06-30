@@ -11,6 +11,7 @@ const Input = ({ placeholder, onChangeInput, value, name, onBlurInput }) => {
             onChange={onChangeInput}
             value={value}
             name={name}
+            autoFocus
             onBlur={onBlurInput}
         />
     );

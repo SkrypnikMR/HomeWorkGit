@@ -16,3 +16,9 @@ export const getIsLoading = createSelector(
     getMoviesStore,
     ({ isLoading }) => isLoading
 );
+
+export const getMovieField = createSelector(
+    getMovieById,
+    (_state, { name }) => name,
+    (movie, name) => movie[name]
+);

@@ -32,10 +32,10 @@ describe('Movies', () => {
     });
     it('Should have Movies', () => {
         const component = mountSmart(<Movies
-            isLoading={true}
+            isLoading={false}
             getMovies={getMovies}
-            movies={[{ id: 1 }, { id: 2 }]}
+            movies={[{ id: 1, cover: 'cover', title: 'title', description: 'desc' }, { id: 2, cover: 'cover', title: 'title', description: 'desc' }]}
         />, store);
-        expect(component.find('Movie')).toHaveLength(2);
+        expect(component.find('Memo(Movie)')).toHaveLength(2);
     });
 });

@@ -1,0 +1,22 @@
+.movie__description{
+             margin-top: 5px;
+             height: 10%;
+             width: 100%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+              input {
+            height: 40px;
+            width: 90%;
+            margin: 15px;
+            z-index: 1000;
+            position: relative;
+            overflow-x: hidden;
+            border: none;
+            color: #f5da0b;
+            &::placeholder{
+                color:#f5da0b;
+                font-weight: bold;
+            }
+        }
+    }
