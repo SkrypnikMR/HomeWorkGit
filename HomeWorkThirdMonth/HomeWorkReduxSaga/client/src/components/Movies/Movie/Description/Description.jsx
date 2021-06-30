@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { NotificationManager } from 'react-notifications';
 import PropTypes from 'prop-types';
 import Input from '../../../Input';
 import './Description.scss';
-import { NotificationManager } from 'react-notification';
+
 
 
 const Description = ({ name, id, description, updateMovie }) => {

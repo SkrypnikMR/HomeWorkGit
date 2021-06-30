@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../../../Input';
 import './Cover.scss';
-import { NotificationManager } from 'react-notification';
+import { NotificationManager } from 'react-notifications';
 import { defaultImage } from '../../../../constants/uiConstants';
 
 
