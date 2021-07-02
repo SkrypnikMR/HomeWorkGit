@@ -1,3 +1,4 @@
 import App from './App';
+import { withTheme } from '../hoc/withTheme.jsx';
 
-export default App;
+export default withTheme(App);

@@ -50,7 +50,7 @@ const Title = ({ name, id, title, updateMovie, deleteMovie }) => {
 
 Title.propTypes = {
     name: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     updateMovie: PropTypes.func.isRequired,
     title: PropTypes.string
 }

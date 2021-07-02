@@ -1,4 +1,11 @@
+.movie__description-wrapper{
+    background-color: #f5da0b;
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 .movie__description{
+            background-color: #f5da0b;
              margin-top: 5px;
              height: 10%;
              width: 100%;
@@ -20,3 +27,4 @@
             }
         }
     }
+}

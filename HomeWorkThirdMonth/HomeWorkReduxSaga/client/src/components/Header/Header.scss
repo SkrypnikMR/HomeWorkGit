@@ -12,12 +12,14 @@
         text-align: left;
         padding-left:20px;
     }
-    button {
-        width: 250px;
-        height: 50px;
-        text-align: center;
-        font-size: 25px;
-        font-weight: bold;
+    &__controll{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 50px;
+        button{
+            font-size: 25px;
+        }
         &:hover{
             background-color: #f5da0b;
         }

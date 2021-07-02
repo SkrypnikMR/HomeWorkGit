@@ -50,7 +50,7 @@ const Cover = ({ name, id, cover, updateMovie }) => {
 Cover.propTypes = {
     name: PropTypes.string.isRequired,
     cover: PropTypes.string,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     updateMovie: PropTypes.func.isRequired
 }
 

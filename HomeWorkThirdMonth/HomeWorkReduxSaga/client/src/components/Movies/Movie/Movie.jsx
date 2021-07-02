@@ -15,7 +15,7 @@ const Movie = ({ id }) => {
     );
 }
 Movie.propTypes = {
-    id: PropTypes.number.isRequired
+    id: PropTypes.string.isRequired
 };
 
 export default React.memo(Movie);

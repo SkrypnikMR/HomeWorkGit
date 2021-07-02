@@ -5,14 +5,20 @@ import './App.scss';
 import Footer from '../Footer';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import { useTheme } from '../hoc/withTheme.jsx';
 
-const App = () => (
-    <div className='app'>
-        <Header />
-        <Movies />
-        <Footer />
-        <NotificationContainer />
-    </div>
-);
+const App = () => {
+    const { theme } = useTheme();
+    return (
+        <div className={theme ? 'app' : 'app__dark'}>
+            <Header />
+            <Movies />
+            <Footer />
+            <NotificationContainer />
+        </div>
+    );
+}
+
+
 
 export default App;

@@ -25,7 +25,7 @@ const Description = ({ name, id, description, updateMovie }) => {
     }
 
     return (
-        <>
+        <div className="movie__description-wrapper">
             {
                 state.isWaitForChange ? (
                     <div className="movie__description">
@@ -40,15 +40,15 @@ const Description = ({ name, id, description, updateMovie }) => {
                 )
                     : <p onDoubleClick={handleOnDoubleClick} name="description">{description}</p>
             }
-        </>
+        </div>
     );
 
 }
 
 Description.propTypes = {
     name: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    id: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     updateMovie: PropTypes.func.isRequired
 }
 
