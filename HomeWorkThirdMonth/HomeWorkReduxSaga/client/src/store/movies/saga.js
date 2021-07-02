@@ -23,14 +23,16 @@ export function* getMoviesSaga() {
         yield put(getMoviesSuccess(parsedData));
     } catch (e) {
         yield put(getMoviesError());
-        yield call([NotificationManager, NotificationManager.error], 'Server Error, try later...', 'SERVER ERROR', 2000);
+        yield call([NotificationManager, NotificationManager.error],
+            'Server Error, try later...', 'SERVER ERROR', 2000);
     }
 }
 export function* postMovieSaga({ payload }) {
     try {
         yield put(startMoviesRequest());
         const body = yield call([JSON, JSON.stringify], payload)
-        const serverAnswer = yield call(fetch, 'http://localhost:5246/app/movies', { method: 'POST', body, headers: { 'Content-Type': 'application/json' } })
+        const serverAnswer = yield call(fetch, 'http://localhost:5246/app/movies',
+            { method: 'POST', body, headers: { 'Content-Type': 'application/json' } })
         const parsedAnswer = yield call([serverAnswer, serverAnswer.json]);
         if (parsedAnswer.message === 'accept') {
             yield put(postMovieSuccess());
@@ -38,12 +40,14 @@ export function* postMovieSaga({ payload }) {
         }
         else {
             yield put(postMovieError());
-            yield call([NotificationManager, NotificationManager.error], 'Server Error, try later...', 'SERVER ERROR', 2000);
+            yield call([NotificationManager, NotificationManager.error],
+                'Server Error, try later...', 'SERVER ERROR', 2000);
         }
     }
     catch (e) {
         yield put(postMovieError());
-        yield call([NotificationManager, NotificationManager.error], 'Server Error, try later...', 'SERVER ERROR', 2000);
+        yield call([NotificationManager, NotificationManager.error],
+            'Server Error, try later...', 'SERVER ERROR', 2000);
     }
 }
 export function* deleteMovieSaga({ payload }) {
