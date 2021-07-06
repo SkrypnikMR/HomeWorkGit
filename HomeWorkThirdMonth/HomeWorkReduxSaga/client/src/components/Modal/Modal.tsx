@@ -1,11 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import propTypes from 'prop-types';
 import './Modal.scss';
 import Button from '../Button';
 import Input from '../Input';
 
-const Modal = ({ postMovies, onButtonClick, title: propsTitle, myClassName: propsShow }) => {
-    const [state, setState] = useState({
+interface IModal{
+    postMovies: (obj: IpostMovies) => void;
+    onButtonClick: () => void;
+    title: string;
+    myClassName: boolean;
+}
+
+interface IpostMovies {
+    title: string;
+    cover: string;
+    description: string;
+}
+
+interface IState {
+    [key: string]: any;
+    title: string;
+    cover: string;
+    description: string;
+    show: boolean;
+    inputs: { placeholder: string; name: string }[];
+};
+
+const Modal = ({ postMovies, onButtonClick, title: propsTitle, myClassName: propsShow }: IModal) => {
+    const [state, setState] = useState<IState>({
         title: '',
         cover: '',
         description: '',
@@ -16,7 +37,7 @@ const Modal = ({ postMovies, onButtonClick, title: propsTitle, myClassName: prop
     });
     useEffect(() => setState({ ...state, show: propsShow }), [propsShow]);
 
-    const handleOnChange = (e) => setState({ ...state, [`${e.target.name}`]: e.target.value });
+    const handleOnChange = (e :React.ChangeEvent<HTMLInputElement> ) => setState({ ...state, [`${e.target.name}`]: e.target.value });
     const handleClean = () => setState({ ...state, title: '', cover: '', description: '' })
     const handleAddMovie = () => {
         const { title, cover, description } = state;
@@ -25,7 +46,7 @@ const Modal = ({ postMovies, onButtonClick, title: propsTitle, myClassName: prop
         onButtonClick();
         handleClean();
     }
-    const handleBtnHeaderClick = (e) => {
+    const handleBtnHeaderClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         if (e.target.classList.contains('modal') || e.target.classList.contains('custom__button')) {
             onButtonClick();
             handleClean();
@@ -59,10 +80,5 @@ const Modal = ({ postMovies, onButtonClick, title: propsTitle, myClassName: prop
         </div>
     );
 }
-Modal.propTypes = {
-    myClassName: propTypes.bool,
-    onButtonClick: propTypes.func,
-    title: propTypes.string,
-    postMovies: propTypes.func,
-};
+
 export default Modal;

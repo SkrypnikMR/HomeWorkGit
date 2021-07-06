@@ -8,6 +8,8 @@ import { reducer } from './store/movies/reducer';
 import { watcher } from './store/movies/saga';
 import './index.scss';
 
+//@ts-ignore 
+
 const devTools = window?.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const sagaMidleWare = createSagaMiddleware();
 const store = createStore(reducer, compose(applyMiddleware(sagaMidleWare), devTools));

@@ -7,9 +7,9 @@ import { useTheme } from '../hoc/withTheme.jsx';
 
 const Header = () => {
     const [modalState, setModalState] = useState(false);
-    const handleBtnClick = () => setModalState(!modalState);
+    const handleBtnClick = () :void => setModalState(!modalState);
     const { theme, setTheme } = useTheme();
-    const handleThemeClick = () => { setTheme(!theme) }
+    const handleThemeClick = ():void => setTheme(!theme);
     return (
         <header className="header">
             <h1>Movies</h1>

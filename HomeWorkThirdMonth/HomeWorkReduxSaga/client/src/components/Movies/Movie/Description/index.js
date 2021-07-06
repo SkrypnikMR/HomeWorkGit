@@ -1,4 +1,4 @@
-import Description from './Description.jsx';
+import Description from './Description';
 import { connect } from 'react-redux';
 import { updateMovie } from '../../../../store/movies/actions';
 import { getMovieField } from '../../../../store/movies/selectors';

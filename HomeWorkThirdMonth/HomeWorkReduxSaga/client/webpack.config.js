@@ -27,7 +27,7 @@ const getPath = (url) => path.resolve(__dirname, `src/${url}`);
 
 module.exports = {
     entry: {
-        bundle: getPath('index.js'),
+        bundle: getPath('index.tsx'),
     },
     module: {
         rules: [
@@ -52,6 +52,16 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-react', '@babel/preset-env'],
+                    },
+                },
+            },
+            {
+                test: /\.(tsx|ts)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-react', '@babel/preset-env', '@babel/preset-typescript'],
                     },
                 },
             },
@@ -90,5 +100,8 @@ module.exports = {
     },
     devServer: {
         port: 7777,
+    },
+    resolve: {
+        extensions: ['.js', '.json', '.ts', '.tsx', '.jsx'],
     },
 };

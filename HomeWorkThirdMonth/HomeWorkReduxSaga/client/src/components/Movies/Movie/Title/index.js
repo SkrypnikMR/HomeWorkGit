@@ -1,4 +1,4 @@
-import Title from './Title.jsx';
+import Title from './Title';
 import { connect } from 'react-redux';
 import { deleteMovie, updateMovie } from '../../../../store/movies/actions';
 import { getMovieField } from '../../../../store/movies/selectors';

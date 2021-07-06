@@ -1,3 +1,3 @@
-import Movie from './Movie.jsx';
+import Movie from './Movie';
 
 export default Movie;

@@ -1,8 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Input.scss';
 
-const Input = ({ placeholder, onChangeInput, value, name, onBlurInput }) => {
+interface IInput{
+    placeholder: string;
+    value: string;
+    name: string;
+    onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlurInput?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Input = ({ placeholder, onChangeInput, value, name, onBlurInput }: IInput) => {
     return (
         <input
             type="text"
@@ -16,12 +23,6 @@ const Input = ({ placeholder, onChangeInput, value, name, onBlurInput }) => {
         />
     );
 }
-Input.propTypes = {
-    placeholder: PropTypes.string,
-    onChangeInput: PropTypes.func,
-    value: PropTypes.string,
-    name: PropTypes.string,
-    onBlurInput: PropTypes.func,
-};
+
 
 export default Input;

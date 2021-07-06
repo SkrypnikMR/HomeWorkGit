@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Input from '../../../Input';
-import './Cover.scss';
 import { NotificationManager } from 'react-notifications';
-import { defaultImage } from '../../../../constants/uiConstants';
+import Input from '../../../Input';
+import './Description.scss';
 
+interface IDescription {
+    name: string;
+    id: string;
+    description: string;
+    updateMovie: (id: IpdateMovie) => void;
+}
 
-const Cover = ({ name, id, cover, updateMovie }) => {
+interface IpdateMovie {
+    id: string;
+    changeParam: string;
+    newData: string;
+}
+
+const Description = ({ name, id, description, updateMovie }: IDescription) => {
     const [state, setState] = useState({
         isWaitForChange: false,
-        changeParam: 'cover',
+        changeParam: 'description',
         newData: '',
-        error: false,
     });
-    const handleOnChange = (e) => setState({ ...state, newData: e.target.value });
-    const onError = () => setState({ ...state, error: true })
+    const handleOnChange = (e : React.ChangeEvent<HTMLInputElement>) => setState({ ...state, newData: e.target.value });
     const handleOnDoubleClick = () => setState((state) => ({ ...state, isWaitForChange: !state.isWaitForChange }));
-    const handleOnBlur = async (e) => {
+    const handleOnBlur = async (e : React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value === '') {
             setState({ ...state, isWaitForChange: false });
             return NotificationManager.error('Please Enter newData for field', 'INPUT ERROR', 2000);
@@ -27,31 +35,24 @@ const Cover = ({ name, id, cover, updateMovie }) => {
     }
 
     return (
-        <>
+        <div className="movie__description-wrapper">
             {
                 state.isWaitForChange ? (
-                    <div className="movie__cover">
+                    <div className="movie__description">
                         <Input
                             name={name}
                             onBlurInput={handleOnBlur}
                             onChangeInput={handleOnChange}
-                            placeholder='enter new cover'
+                            placeholder='enter new description'
                             value={state.newData}
                         />
                     </div>
                 )
-                    : <img src={state.error ? defaultImage : cover} onError={onError} onDoubleClick={handleOnDoubleClick} name={name} />
+                    : <p onDoubleClick={handleOnDoubleClick} >{description}</p>
             }
-        </>
+        </div>
     );
 
 }
 
-Cover.propTypes = {
-    name: PropTypes.string.isRequired,
-    cover: PropTypes.string,
-    id: PropTypes.string.isRequired,
-    updateMovie: PropTypes.func.isRequired
-}
-
-export default Cover;
+export default Description;

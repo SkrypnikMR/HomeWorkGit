@@ -1,11 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Title from './Title';
 import Cover from './Cover';
 import Description from './Description';
 import './Movie.scss';
 
-const Movie = ({ id }) => {
+interface IMovie { id: string;}
+
+const Movie = ({ id }: IMovie) => {
     return (
         <div className="movie" >
             <Title name='title' id={id} />
@@ -14,8 +15,6 @@ const Movie = ({ id }) => {
         </div>
     );
 }
-Movie.propTypes = {
-    id: PropTypes.string.isRequired
-};
+
 
 export default React.memo(Movie);

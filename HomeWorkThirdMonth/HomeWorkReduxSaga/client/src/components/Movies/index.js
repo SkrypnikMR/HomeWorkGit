@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Movies from './Movies.jsx';
+import Movies from './Movies';
 import { getMovies } from '../../store/movies/actions';
 import { getMoviesList, getIsLoading } from '../../store/movies/selectors';
 

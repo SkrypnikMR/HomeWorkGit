@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/react-notification-system": "^0.2.40",
+    "@types/react-notifications-component": "^3.1.0"
+  }
+}

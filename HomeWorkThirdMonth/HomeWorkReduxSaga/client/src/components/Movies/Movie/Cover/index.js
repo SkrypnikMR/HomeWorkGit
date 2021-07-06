@@ -1,4 +1,4 @@
-import Cover from './Cover.jsx';
+import Cover from './Cover';
 import { connect } from 'react-redux';
 import { updateMovie } from '../../../../store/movies/actions';
 import { getMovieField } from '../../../../store/movies/selectors';
