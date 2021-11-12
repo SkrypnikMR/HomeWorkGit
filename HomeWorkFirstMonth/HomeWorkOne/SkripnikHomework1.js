@@ -1,6 +1,15 @@
 //Условные операторы
 
 //1. Если а  - четное посчитать а*б, иначе а+б
+
+function getProductOrSumm(a, b) {
+  if (typeof a !== "number" || typeof b !== "number") {
+    return false;
+  }
+  if (a % 2 === 0) {
+    return a * b;
+  } else return a + b;
+}
 //2. Определить какой четверти принадлежит точка с координатами (x,y)
 
 function getPointPosition(x, y) {
